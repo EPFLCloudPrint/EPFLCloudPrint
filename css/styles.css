@@ -1,0 +1,126 @@
+@charset "UTF-8";
+@font-face
+{
+ font-family: OpenSans;
+ src: url('../font/OpenSans-Light.ttf');
+}
+@font-face
+{
+  font-family: OpenSans;
+  src: url('../font/OpenSans-Regular.ttf');
+  font-weight: bold;
+}
+
+body
+{
+  margin:0px;
+  background-color: white;
+  font-family: OpenSans,'Helvetica','sans-serif';
+  font-size: 15px;
+}
+
+#bigcontainer
+{
+  background-color:#959595;
+  padding: 10px;
+  margin: 10px auto;
+  max-width: 800px;
+  text-align: center;
+  border: 1px solid black;
+  border-radius:25px;
+}
+
+#logo
+{
+  font-size: 42px;
+}
+
+#cloud
+{
+  margin: 5px auto;
+  width: 400px;
+  height: 263px;
+  position: relative;
+}
+
+#fileElem
+{
+
+  visibility: hidden;
+  width: 0;
+  height: 0;
+}
+
+#fileSelect
+{
+  background: url(../img/cloud.png) no-repeat;
+  width: 400px;
+  height: 263px;
+  cursor:pointer;
+  border: none;
+}
+
+
+#cloud-foreground
+{
+  position: absolute;
+  z-index: 4;
+}
+
+#cloud-text-container
+{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+}
+
+#cloud-bar
+{
+  background-color: #D65A5A;
+  position: absolute;
+  width: 0%;
+  height: 100%;
+  z-index: 2;
+}
+
+#cloud-background
+{
+  background-color: white;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+#cloud-text
+{
+  font-size: 32px;
+  margin: 124px auto;
+}
+
+#container
+{
+  text-align: left;
+  margin: 10px auto;
+  width: 400px;
+}
+
+@media (max-width: 800px) {
+  body {
+    background-color: #959595;
+  }
+
+  #bigcontainer
+  {
+
+    background-color:#959595;
+    padding: 10px;
+    margin: 10px auto;
+    max-width: 800px;
+    min-width: 400px;
+    text-align: center;
+    border: none;
+    border-radius: 0px;
+  }
+}
