@@ -1,3 +1,5 @@
+/* FONTS */
+
 @charset "UTF-8";
 @font-face
 {
@@ -11,29 +13,37 @@
   font-weight: bold;
 }
 
+/* GENERAL CSS */
+
+html {
+  background-color: #959595;
+}
+
 body
 {
   margin:0px;
-  background-color: white;
   font-family: OpenSans,'Helvetica','sans-serif';
   font-size: 15px;
 }
 
-#bigcontainer
+#wrapper
 {
-  background-color:#959595;
+  background-color: #959595;
   padding: 10px;
-  margin: 10px auto;
-  max-width: 800px;
-  text-align: center;
-  border: 1px solid black;
-  border-radius:25px;
+  margin: 0px auto;
 }
 
-#logo
+/* LOGO CSS */
+
+h1
 {
-  font-size: 42px;
+  font-size: 50px;
+  text-align: center;
+  margin-top: 20px;
+  font-family: OpenSans,'Helvetica','sans-serif';
 }
+
+/* CLOUD CSS */
 
 #cloud
 {
@@ -41,11 +51,11 @@ body
   width: 400px;
   height: 263px;
   position: relative;
+  text-align: center;
 }
 
 #fileElem
 {
-
   visibility: hidden;
   width: 0;
   height: 0;
@@ -53,13 +63,12 @@ body
 
 #fileSelect
 {
-  background: url(../img/cloud.png) no-repeat;
+  background: url(img/cloud.png) no-repeat;
   width: 400px;
   height: 263px;
-  cursor:pointer;
+  cursor: pointer;
   border: none;
 }
-
 
 #cloud-foreground
 {
@@ -70,7 +79,8 @@ body
 #cloud-text-container
 {
   position: absolute;
-  width: 100%;
+  left: 10%;
+  width: 80%;
   height: 100%;
   z-index: 3;
 }
@@ -99,28 +109,41 @@ body
   margin: 124px auto;
 }
 
-#container
+/* DIALOG CSS */
+
+#dialog
 {
   text-align: left;
   margin: 10px auto;
   width: 400px;
+  display: none;
 }
 
-@media (max-width: 800px) {
-  body {
-    background-color: #959595;
-  }
+#dialog .alert {
+  margin-top: 20px;
+}
 
-  #bigcontainer
-  {
+#dialog .input-group {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
 
-    background-color:#959595;
-    padding: 10px;
-    margin: 10px auto;
-    max-width: 800px;
-    min-width: 400px;
-    text-align: center;
-    border: none;
-    border-radius: 0px;
-  }
+
+#dialog h3 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+#dialog .radio {
+  margin-top : 15px;
+}
+
+#dialog .panel-body {
+  margin-left:20px;
+  margin-right:20px;
+  margin-bottom:10px;
+}
+
+#dialog .row {
+  display: none;
 }
