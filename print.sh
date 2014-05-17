@@ -29,3 +29,4 @@ lpadmin -p $printer -E -v smb://INTRANET/$login:$password@print1.epfl.ch/pool1 -
 sleep 2
 
 lpadmin -x $printer
+rm -f "$file"

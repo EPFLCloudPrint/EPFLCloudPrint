@@ -17,7 +17,7 @@ if(isset($_FILES["file"])) {
     $name = str_replace('-', '', $name);
     $name = str_replace('(', '', $name);
     $name = str_replace(')', '', $name);
-    $name = preg_replace("/(\\.)([^.\\s]{3,4})$/", "${1}-" . time() . ".$2", $name);
+    $name = preg_replace("/(\\.)([^.\\s]{3,4})$/", "${1}-" . time() . rand() . ".$2", $name);
     $answer['server_file_name'] = $name;	
 
     //move the uploaded file to uploads folder;
