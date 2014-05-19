@@ -1,6 +1,38 @@
 var globalFile = "";
 
+function preventDefault(e){
+	e.stopPropagation();
+	e.preventDefault();
+}
+
 $(document).ready(function(){
+
+/*===============================================================
+**************************DRAG AND DROP**************************
+=================================================================*/
+	//block drag and drop on others part
+	$(document).on('drop',preventDefault);
+	$(document).on('dragenter',preventDefault);
+	$(document).on('dragover', preventDefault);
+
+	var obj = $("#fileSelect");
+	obj.on('dragenter', preventDefault);
+	obj.on('dragover', preventDefault);
+	obj.on('drop', function (e)
+	{
+		//e.preventDefault();
+		alert("test");
+		var files = e.originalEvent.dataTransfer.files;
+
+		$("#fileElem")[0].files = files;
+		$('#fileSelect').click();
+		console.log($("#fileElem"));
+	});
+
+/*===============================================================
+************************END DRAG AND DROP************************
+=================================================================*/
+
 
 	// Radio buttons : page selection
   $('#selection_all').on('click', function() {

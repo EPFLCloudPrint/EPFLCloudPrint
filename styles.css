@@ -147,3 +147,13 @@ h1
 #dialog .row {
   display: none;
 }
+
+#footer {
+   position:absolute;
+   bottom:0;
+   right: 20px;
+   height:25px;   /* Height of the footer */
+   background:#959595;
+   clear:both;
+   color: white;
+}
