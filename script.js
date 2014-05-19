@@ -20,18 +20,21 @@ function success(e){
 
 
 function complete(e){
-	var rep = JSON.parse(e.currentTarget.responseText);
-	//console.log(e);
-	$("#cloud-bar").width("100%");
-	$('#hiden_field_file').val(rep.file_name);
-	$('#cloud-text').css('color', 'white');
-	$('#cloud-text').css("font-size", "18px");
-	$('#cloud-text').text("You uploaded " + rep.file_name);
+ 	var rep = JSON.parse(e.currentTarget.responseText);
+ 	$('#cloud-text').css('color', 'white');
+   	$('#cloud-text').css("font-size", "18px");
+  	if(rep.error_code != 0) {
+  	  $('#cloud-text').text("An error occured while uploading the file...");
+  	} else {
+   	  $('#server_file_name').val(rep.server_file_name);
+   	  $('#cloud-text').text("You uploaded " + rep.file_name);
+   	  $('#cloud-text-container').fadeIn(500);
+  	}
 	str = $('#cloud-text').text();
-  if(str.length > 40)
- 				{
-					$('#cloud-text').text(str.substr(0,38) + "...");
- 				}
+  	if(str.length > 40)
+ 	{
+		$('#cloud-text').text(str.substr(0,38) + "...");
+	}
 	$('#cloud-text-container').fadeIn(1000);
 }
 
