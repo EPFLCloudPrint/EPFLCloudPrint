@@ -4,19 +4,20 @@
 @font-face
 {
  font-family: OpenSans;
- src: url('../font/OpenSans-Light.ttf');
+ src: url('font/OpenSans-Light.ttf');
 }
 @font-face
 {
   font-family: OpenSans;
-  src: url('../font/OpenSans-Regular.ttf');
+  src: url('font/OpenSans-Regular.ttf');
   font-weight: bold;
 }
 
 /* GENERAL CSS */
 
 html {
-  background-color: #959595;
+  background-color: #B3B3B3;
+
 }
 
 body
@@ -28,7 +29,7 @@ body
 
 #wrapper
 {
-  background-color: #959595;
+  background-color: #B3B3B3;
   padding: 10px;
   margin: 0px auto;
 }
@@ -49,7 +50,7 @@ h1
 {
   margin: 5px auto;
   width: 400px;
-  height: 263px;
+  height: 300px;
   position: relative;
   text-align: center;
 }
@@ -63,11 +64,13 @@ h1
 
 #fileSelect
 {
-  background: url(img/cloud.png) no-repeat;
+  background-image: url(img/cloud.png);
+  background-image: url(img/cloud-clean.svg), none;
+  background-size: 100% 100%;
+  border: 0px;
   width: 400px;
-  height: 263px;
+  height: 300px;
   cursor: pointer;
-  border: none;
 }
 
 #cloud-foreground
@@ -106,7 +109,7 @@ h1
 #cloud-text
 {
   font-size: 32px;
-  margin: 124px auto;
+  margin: 150px auto;
 }
 
 /* DIALOG CSS */
