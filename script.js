@@ -20,8 +20,6 @@ $(document).ready(function(){
 	obj.on('dragover', preventDefault);
 	obj.on('drop', function (e)
 	{
-		//e.preventDefault();
-		alert("test");
 		var files = e.originalEvent.dataTransfer.files;
 
 		$("#fileElem")[0].files = files;
