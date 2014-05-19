@@ -5,6 +5,46 @@ function preventDefault(e){
 	e.preventDefault();
 }
 
+function beforeSubmit(e){
+	$('#cloud-text-container').hide();
+	$('#dialog').slideDown(1500);
+}
+
+function uploadProgress(e){
+	$("#cloud-bar").width(parseInt(100*(e.loaded/ e.total)) + "%");
+}
+
+function success(e){
+
+}
+
+function complete(e){
+	var rep = JSON.parse(e.currentTarget.responseText);
+	//console.log(e);
+	$("#cloud-bar").width("100%");
+
+	 $('#fileElem').click(); 
+		//Warning copie cole
+	$('#cloud-text-container').hide();
+	$('#dialog').slideDown(1500);
+
+	$('#hiden_field_file').val(rep.file_name);
+	$('#cloud-text').css('color', 'white');
+	$('#cloud-text').css("font-size", "18px");
+	$('#cloud-text').text("You uploaded " + rep.file_name);
+	$('#cloud-text-container').fadeIn(1000);
+}
+
+function uploadFile(file){
+	var fd = new FormData();    
+	fd.append( 'file', file );
+	var xhr = new XMLHttpRequest();
+	xhr.upload.addEventListener("progress", uploadProgress);
+	xhr.addEventListener("loadend", complete);
+	xhr.open("POST", "upload_file.php");
+	xhr.send(fd);
+}
+
 $(document).ready(function(){
 
 /*===============================================================
@@ -21,10 +61,7 @@ $(document).ready(function(){
 	obj.on('drop', function (e)
 	{
 		var files = e.originalEvent.dataTransfer.files;
-
-		$("#fileElem")[0].files = files;
-		$('#fileSelect').click();
-		console.log($("#fileElem"));
+		uploadFile(files[0]);
 	});
 
 /*===============================================================
@@ -66,42 +103,7 @@ $(document).ready(function(){
   });
 
 	$("#formUpload").change(function(e) {
-		$("#formUpload").submit();
-	});
-
-	// submit settings
-  var options_upload = {
-  	beforeSubmit: function(arr, $form, options) { 
-		  $('#cloud-text-container').hide();
-		  $('#dialog').slideDown(1500);
-  	},
-
-	  uploadProgress: function(event, position, total, percentComplete) {
-		  $("#cloud-bar").width(percentComplete + "%");
-	  },
-  
-	  success: function() {
-	  	$("#cloud-bar").width("100%");
-	  },
-
-	  complete: function(response) {
-	  	var rep = JSON.parse(response.responseText);
-	  	$('#cloud-text').css('color', 'white');
-	  	$('#cloud-text').css("font-size", "18px");
-	  	if(rep.error_code != 0) {
-	  	  $('#cloud-text').text("An error occured while uploading the file...");
-	  	} else {
-	  	  $('#server_file_name').val(rep.server_file_name);
-	  	  $('#cloud-text').text("You uploaded " + rep.file_name);
-	  	  $('#cloud-text-container').fadeIn(500);
-	  	}
-	  }
-  };
-
-  // bind actions to send form
-	$("#formUpload").submit(function(event){ 
-		$(this).ajaxSubmit(options_upload);
-		event.preventDefault();
+		uploadFile($("#fileElem")[0].files[0]);
 	});
 
   /*
