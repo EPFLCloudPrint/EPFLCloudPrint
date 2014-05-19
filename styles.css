@@ -157,6 +157,11 @@ h1
   color: white;
 }
 
+#footer p {
+  font-size: 0.8em;
+  color: #505050;
+}
+
 #body{
   background:#959595;
 }
