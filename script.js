@@ -5,7 +5,7 @@ function preventDefault(e){
 	e.preventDefault();
 }
 
-function beforeSubmit(e){
+function beforeSubmit(){
 	$('#cloud-text-container').hide();
 	$('#dialog').slideDown(1500);
 }
@@ -18,16 +18,11 @@ function success(e){
 
 }
 
+
 function complete(e){
 	var rep = JSON.parse(e.currentTarget.responseText);
 	//console.log(e);
 	$("#cloud-bar").width("100%");
-
-	 $('#fileElem').click(); 
-		//Warning copie cole
-	$('#cloud-text-container').hide();
-	$('#dialog').slideDown(1500);
-
 	$('#hiden_field_file').val(rep.file_name);
 	$('#cloud-text').css('color', 'white');
 	$('#cloud-text').css("font-size", "18px");
@@ -43,6 +38,7 @@ function uploadFile(file){
 	xhr.addEventListener("loadend", complete);
 	xhr.open("POST", "upload_file.php");
 	xhr.send(fd);
+	beforeSubmit();
 }
 
 $(document).ready(function(){

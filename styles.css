@@ -149,11 +149,14 @@ h1
 }
 
 #footer {
-   position:absolute;
-   margin:auto;
-   margin-top: 5px;
-   height:25px;   /* Height of the footer */
-   background:#959595;
-   clear:both;
-   color: white;
+  width: 500px;
+  text-align: center;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top: 5px;
+  color: white;
+}
+
+#body{
+  background:#959595;
 }
