@@ -1,6 +1,6 @@
 <?php
 
-$SCRIPT="script.sh";
+$SCRIPT="print.sh";
 $answer = array("error_code" => 0);
 $name = $_POST["server_file_name"];
 
