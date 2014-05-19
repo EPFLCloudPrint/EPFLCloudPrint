@@ -27,11 +27,16 @@ function complete(e){
 	$('#cloud-text').css('color', 'white');
 	$('#cloud-text').css("font-size", "18px");
 	$('#cloud-text').text("You uploaded " + rep.file_name);
+	str = $('#cloud-text').text();
+  if(str.length > 40)
+ 				{
+					$('#cloud-text').text(str.substr(0,38) + "...");
+ 				}
 	$('#cloud-text-container').fadeIn(1000);
 }
 
 function uploadFile(file){
-	var fd = new FormData();    
+	var fd = new FormData();
 	fd.append( 'file', file );
 	var xhr = new XMLHttpRequest();
 	xhr.upload.addEventListener("progress", uploadProgress);
@@ -93,7 +98,7 @@ $(document).ready(function(){
 
 	// cloud reactions
 	$('#fileSelect').click(function(e) {
-	  $('#fileElem').click(); 
+	  $('#fileElem').click();
 	  $('#dialog').slideUp(250);
 	  $('.alert').hide(0);
   });
@@ -107,7 +112,7 @@ $(document).ready(function(){
   */
 
 	var options_dialog = {
-		beforeSubmit: function(arr, $form, options) { 
+		beforeSubmit: function(arr, $form, options) {
 			$("#error").hide(0);
 		  $("#error").html("Form could not be validated :<br/><ul></ul>");
 
@@ -117,18 +122,18 @@ $(document).ready(function(){
 			  $("#error ul").append('<li>User field is empty</li>');
 		  	error = true;
 		  }
-		
-	  	if($("#password").val() === "") {			
+
+	  	if($("#password").val() === "") {
 	  		$("#error ul").append('<li>Password field is empty</li>');
 	  		error = true;
 	  	}
 
-		  if(parseInt($("#from").val()) > parseInt($("#to").val())) {			
+		  if(parseInt($("#from").val()) > parseInt($("#to").val())) {
 		  	$("#error ul").append('<li>Wrong page numbers</li>');
 			  error = true;
 		  }
 
-		  if(error) {		
+		  if(error) {
 		  	$("#error").show(0);
 		  }
 
