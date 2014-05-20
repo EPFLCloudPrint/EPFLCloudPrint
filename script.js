@@ -22,18 +22,19 @@ function success(e){
 function complete(e){
  	var rep = JSON.parse(e.currentTarget.responseText);
  	$('#cloud-text').css('color', 'white');
-   	$('#cloud-text').css("font-size", "18px");
-  	if(rep.error_code != 0) {
-  	  $('#cloud-text').text("An error occured while uploading the file...");
-  	} else {
-   	  $('#server_file_name').val(rep.server_file_name);
-   	  $('#cloud-text').text("You uploaded " + rep.file_name);
-   	  $('#cloud-text-container').fadeIn(500);
-  	}
+  $('#cloud-text').css("font-size", "18px");
+  if(rep.error_code != 0) {
+    $('#cloud-text').text("An error occured while uploading the file...");
+  } else {
+    $('#server_file_name').val(rep.server_file_name);
+    $('#cloud-text').text("You uploaded " + rep.file_name);
+    $('#cloud-text-container').fadeIn(500);
+  }
+
 	str = $('#cloud-text').text();
-  	if(str.length > 40)
+  if(str.length > 70)
  	{
-		$('#cloud-text').text(str.substr(0,38) + "...");
+		$('#cloud-text').text(str.substr(0,30) + "..." + str.substr(str.length - 30, str.length - 1));
 	}
 	$('#cloud-text-container').fadeIn(1000);
 }
@@ -54,6 +55,7 @@ $(document).ready(function(){
 /*===============================================================
 **************************DRAG AND DROP**************************
 =================================================================*/
+
 	//block drag and drop on others part
 	$(document).on('drop',preventDefault);
 	$(document).on('dragenter',preventDefault);
@@ -102,8 +104,6 @@ $(document).ready(function(){
 	// cloud reactions
 	$('#fileSelect').click(function(e) {
 	  $('#fileElem').click();
-	  $('#dialog').slideUp(250);
-	  $('.alert').hide(0);
   });
 
 	$("#formUpload").change(function(e) {
