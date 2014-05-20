@@ -8,7 +8,7 @@ fi
 login="$1"; shift
 password="$1"; shift
 file="$1"; shift
-options="$1";
+options="$@";
 
 printer="Pool1-$login-$RANDOM";
 

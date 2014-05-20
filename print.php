@@ -2,7 +2,7 @@
 
 $SCRIPT="print.sh";
 $answer = array("error_code" => 0);
-$name = $_POST["server_file_name"];
+$_POST["server_file_name"] = $_POST["server_file_name"];
 
 $options = array();
 
@@ -16,7 +16,9 @@ if($_POST["double_sided"] === "on"){
   array_push($options, "-o sides=two-sided-long-edge");  
 }
 
-$cmd = "./" . $SCRIPT . " '" . $_POST["user"] . "' '" . $_POST["password"] . "' 'uploads/" . $name . "' '" . join(" ", $options) . "'";
+array_push($options, "-t " . $_POST["server_file_name"]);
+
+$cmd = "./" . $SCRIPT . " '" . $_POST["user"] . "' '" . $_POST["password"] . "' 'uploads/" . $_POST["server_file_name"] . "' '" . join(" ", $options) . "'";
 $answer["command"] = $cmd;
 shell_exec($cmd." >stdout.log 2>stderr.log");
 
