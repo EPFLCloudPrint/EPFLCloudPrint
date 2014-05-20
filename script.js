@@ -8,6 +8,7 @@ function preventDefault(e){
 function beforeSubmit(){
 	$('#cloud-text-container').hide();
 	$('#dialog').slideDown(1500);
+  $('#submit').prop("disabled",true);
 }
 
 function uploadProgress(e){
@@ -25,10 +26,12 @@ function complete(e){
   $('#cloud-text').css("font-size", "18px");
   if(rep.error_code != 0) {
     $('#cloud-text').text("An error occured while uploading the file...");
+    $('#submit').prop("disabled",true);
   } else {
     $('#server_file_name').val(rep.server_file_name);
     $('#cloud-text').text("You uploaded " + rep.file_name);
     $('#cloud-text-container').fadeIn(500);
+    $('#submit').prop("disabled",false);
   }
 
 	str = $('#cloud-text').text();
