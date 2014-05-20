@@ -16,8 +16,7 @@ if($_POST["double_sided"] === "on"){
   array_push($options, "-o sides=two-sided-long-edge");  
 }
 
-$cmd = "./".$SCRIPT . " '" . $_POST["user"] . "' '" . $_POST["password"] . "' 'uploads/" .  $name . "' ' " . join(" ", $options) . " ' ";
-
+$cmd = "./" . $SCRIPT . " '" . $_POST["user"] . "' '" . $_POST["password"] . "' 'uploads/" .  $name . "' '" . join(" ", $options) . "'";
 $answer["command"] = $cmd;
 shell_exec($cmd." >stdout.log 2>stderr.log");
 

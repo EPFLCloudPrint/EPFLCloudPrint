@@ -1,103 +1,70 @@
-var globalFile = "";
-
-function preventDefault(e){
-	e.stopPropagation();
-	e.preventDefault();
-}
-
-function beforeSubmit(){
-	$('#cloud-text-container').hide();
-	$('#dialog').slideDown(1500);
-  $('#submit').prop("disabled",true);
-}
-
-function uploadProgress(e){
-	$("#cloud-bar").width(parseInt(100*(e.loaded/ e.total)) + "%");
-}
-
-function success(e){
-
-}
-
-
-function complete(e){
- 	var rep = JSON.parse(e.currentTarget.responseText);
- 	$('#cloud-text').css('color', 'white');
-  $('#cloud-text').css("font-size", "18px");
-  if(rep.error_code != 0) {
-    $('#cloud-text').text("An error occured while uploading the file...");
-    $('#submit').prop("disabled",true);
-  } else {
-    $('#server_file_name').val(rep.server_file_name);
-    $('#cloud-text').text("You uploaded " + rep.file_name);
-    $('#cloud-text-container').fadeIn(500);
-    $('#submit').prop("disabled",false);
-  }
-
-	str = $('#cloud-text').text();
-  if(str.length > 70)
- 	{
-		$('#cloud-text').text(str.substr(0,30) + "..." + str.substr(str.length - 30, str.length - 1));
-	}
-	$('#cloud-text-container').fadeIn(1000);
-}
-
-function uploadFile(file){
-	var fd = new FormData();
-	fd.append( 'file', file );
-	var xhr = new XMLHttpRequest();
-	xhr.upload.addEventListener("progress", uploadProgress);
-	xhr.addEventListener("loadend", complete);
-	xhr.open("POST", "upload_file.php");
-	xhr.send(fd);
-	beforeSubmit();
-}
 
 $(document).ready(function(){
 
-/*===============================================================
-**************************DRAG AND DROP**************************
-=================================================================*/
+  /* 
+    UPLOAD FILE FUNCTIONS
+  */
+
+  var preventDefault = function(e) {
+    e.stopPropagation();
+    e.preventDefault();
+  }
+
+  var beforeSubmit = function() {
+    $('#cloud-text-container').hide();
+    $('#dialog').slideDown(1500);
+    $('#submit').prop("disabled",true);
+  }
+
+  var uploadProgress = function(e) {
+    $("#cloud-bar").width(parseInt(100*(e.loaded/ e.total)) + "%");
+  }
+
+  var complete = function(e) {
+    var rep = JSON.parse(e.currentTarget.responseText);
+    $('#cloud-text').css('color', 'white');
+    $('#cloud-text').css("font-size", "18px");
+    if(rep.error_code != 0) {
+      $('#cloud-text').text("An error occured while uploading the file...");
+      $('#submit').prop("disabled",true);
+    } else {
+      $('#server_file_name').val(rep.server_file_name);
+      $('#cloud-text').text("You uploaded " + rep.file_name);
+      $('#submit').prop("disabled",false);
+    }
+
+    str = $('#cloud-text').text();
+    if(str.length > 70) {
+      $('#cloud-text').text(str.substr(0,30) + "..." + str.substr(str.length - 30, str.length - 1));
+    }
+    $('#cloud-text-container').fadeIn(1000);
+  }
+
+  var uploadFile = function(file) {
+    beforeSubmit();
+    var fd = new FormData();
+    fd.append('file', file );
+    var xhr = new XMLHttpRequest();
+    xhr.upload.addEventListener("progress", uploadProgress);
+    xhr.addEventListener("loadend", complete);
+    xhr.open("POST", "upload_file.php");
+    xhr.send(fd);
+  }
+
+  /*
+    DRAG AND DROP
+  */
 
 	//block drag and drop on others part
 	$(document).on('drop',preventDefault);
 	$(document).on('dragenter',preventDefault);
 	$(document).on('dragover', preventDefault);
 
-	var obj = $("#fileSelect");
-	obj.on('dragenter', preventDefault);
-	obj.on('dragover', preventDefault);
-	obj.on('drop', function (e)
-	{
+	$("#fileSelect").on('dragenter', preventDefault);
+	$("#fileSelect").on('dragover', preventDefault);
+	$("#fileSelect").on('drop', function (e){
 		var files = e.originalEvent.dataTransfer.files;
 		uploadFile(files[0]);
-	});
-
-/*===============================================================
-************************END DRAG AND DROP************************
-=================================================================*/
-
-
-	// Radio buttons : page selection
-  $('#selection_all').on('click', function() {
-    $('.from_to').slideUp('slow');
-		$('#selection_selected').prop("checked", false);
-	});
-
-	$('#selection_selected').on('click', function() {
-		$('.from_to').slideDown('slow');
-		$('#selection_all').prop("checked", false);
-	});
-
-	// Fields : From and to
-	$("#from").on("change", function() {
-		var v = $("#from").val();
-		if(v !== parseInt(v)) {
-			$("#to").prop("min", v);
-			if($("#to").val() < v) {
-				$("#to").val(v);
-			}
-		}
 	});
 
 	/*
@@ -109,6 +76,7 @@ $(document).ready(function(){
 	  $('#fileElem').click();
   });
 
+  // form submission
 	$("#formUpload").change(function(e) {
 		uploadFile($("#fileElem")[0].files[0]);
 	});
@@ -116,6 +84,30 @@ $(document).ready(function(){
   /*
   	DIALOG FORM
   */
+
+  // Form reactions
+
+  $('#selection_all').on('click', function() {
+    $('.from_to').slideUp('slow');
+    $('#selection_selected').prop("checked", false);
+  });
+
+  $('#selection_selected').on('click', function() {
+    $('.from_to').slideDown('slow');
+    $('#selection_all').prop("checked", false);
+  });
+
+  $("#from").on("change", function() {
+    var v = $("#from").val();
+    if(v !== parseInt(v)) {
+      $("#to").prop("min", v);
+      if($("#to").val() < v) {
+        $("#to").val(v);
+      }
+    }
+  });
+
+  // Form submission
 
 	var options_dialog = {
 		beforeSubmit: function(arr, $form, options) {
@@ -161,9 +153,9 @@ $(document).ready(function(){
 	  }
 	}
 
-	// submit dialog results
 	$("#dialog-form").submit(function(event) {
 		event.preventDefault();
 		$(this).ajaxSubmit(options_dialog);
 	});
+
 });
