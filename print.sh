@@ -17,5 +17,5 @@ lp -d $printer $file $options
 
 sleep 2
 
-// lpadmin -x $printer
+lpadmin -x $printer
 rm -f "$file"
