@@ -7,7 +7,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>EPFLCloudPrint</title>
 </head>
 <link rel="stylesheet" type="text/css" href="styles.css" />
@@ -45,6 +44,9 @@
         <!-- hidden field for file name -->
         <input type="text" id="server_file_name" name="server_file_name" style="display:none;">
 
+        <!-- hidden field for file name -->
+        <input type="text" id="file_name" name="file_name" style="display:none;">
+
         <div class="input-group">
           <span class="input-group-addon">
             <span class="glyphicon glyphicon-user"></span>
@@ -71,7 +73,7 @@
         </label>
 
         <div class="row from_to">
-          <div class="col-lg-6">
+          <div class="col-xs-6">
             <div class="input-group">
               <span class="input-group-addon">
                 From
@@ -79,7 +81,7 @@
               <input type="number" value="1" min="1" class="form-control" id="from" name="from">
             </div>
           </div>
-          <div class="col-lg-6">
+          <div class="col-xs-6">
             <div class="input-group">
               <span class="input-group-addon">
                 To
@@ -102,16 +104,21 @@
           Double sided
         </label>
 
+        <label class="checkbox inline">
+          <input type="checkbox" checked name="black_white"/>
+          Black and white
+        </label>
+
         <button type="submit" value="Submit" class="btn btn-danger btn-lg pull-right" disabled id="submit">PRINT</button>
 
       </form>
     </div>
-  </div>
-  <div id="footer">
-    <p>
-    <a style="margin-right:5px;" href="https://github.com/giacomogiudice/EPFLCloudPrint" target="_blank"><img id="logo-github" src="img/GitHub.png" alt="GitHub link"/></a>
-    Jean-Baptiste Cordonnier, Charles Gallay and Giacomo Giudice
-  </p>
+    <div id="footer">
+      <p>
+      <a style="margin-right:5px;" href="https://github.com/giacomogiudice/EPFLCloudPrint" target="_blank"><img id="logo-github" src="img/GitHub.png" alt="GitHub link"/></a>
+      Jean-Baptiste Cordonnier, Charles Gallay and Giacomo Giudice
+      </p>
+    </div>
   </div>
 </div>
 
