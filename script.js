@@ -116,6 +116,7 @@ $(document).ready(function(){
 		beforeSubmit: function(arr, $form, options) {
 			$("#error").hide(0);
 		  $("#error").html("Form could not be validated :<br/><ul></ul>");
+      $("#print-result").hide(0);
 
 		  var error = false;
 
@@ -149,7 +150,11 @@ $(document).ready(function(){
 	  		$("#print-result").show(0);
 	  		setTimeout("location.reload()", 2000);
 	  	} else {
-	  		$("#print-result").text("An error occured while printing the document...");
+        if(rep.error_code == 1000) {
+          $("#print-result").text("Please verify your credentials...");
+        } else {
+          $("#print-result").text("An error occured while printing the document...");
+        }
 	  		$("#print-result").removeClass("alert-success").addClass("alert-danger");
 	  		$("#print-result").show(0);
 	  	}

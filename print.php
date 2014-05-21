@@ -1,12 +1,11 @@
 <?php
-function isCredentialCorrect($user,$passwd){
+
+function isCredentialCorrect($user,$passwd) {
 	$url = 'https://tequila.epfl.ch/cgi-bin/tequila/login';
 	$data = array('username' => $user, 'password' => $passwd);
 	
-	// use key 'http' even if you send the request to https://...
 	$options = array(
 	    'http' => array(
-	        //'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
 	        'method'  => 'POST',
 	        'content' => http_build_query($data),
 	    ),
@@ -16,9 +15,7 @@ function isCredentialCorrect($user,$passwd){
 	
 	$DOM = new DOMDocument;
 	$DOM->loadHTML($result);
-	//$titre = $DOM->getElementsByTagName('title');
-	//echo $titre->item(0)->nodeValue;
-	return getElementsByTagName('title')->item(0)->nodeValue==="Tequila";
+	return ($DOM->getElementsByTagName('title')->item(0)->nodeValue) === "Tequila";
 }
 
 $SCRIPT="print.sh";
@@ -44,8 +41,6 @@ if(!isCredentialCorrect($_POST["user"],$_POST["password"])){
 	}
 
 	array_push($options, "-t " . $_POST["file_name"]);
-
-	array_push($options, "-t " . $_POST["server_file_name"]);
 
 	$cmd = "./" . $SCRIPT . " '" . $_POST["user"] . "' '" . $_POST["password"] . "' 'uploads/" . $_POST["server_file_name"] . "' '" . join(" ", $options) . "'";
 	$answer["command"] = $cmd;
