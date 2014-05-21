@@ -9,9 +9,10 @@ Its uses aren't limited to our university but can be ported to any company or un
 ## Apache Server configuration
 
 - enable php on the server : uncomment `LoadModule php5...` line in configuration file `/etc/apache2/httpd.conf`,
-- fix the `max_upload_size` option in `/etc/php.ini`,
+- fix the `upload_max_filesize` option in `/etc/php.ini`,
 - fix the rights for `uploads/` : `chown _www uploads/` or `chown var_www uploads/`
-- give rights to amin the printers to the web server user : `sudo dseditgroup -o edit -a _www -t user lpadmin` for OS X.
+- give rights to amin the printers to the web server user : `sudo dseditgroup -o edit -a _www -t user lpadmin` for OS X,
+- change CUPS configuration (on `localhost:631/admin`) and toggle "Use Kerberos authentification" feature.
 
 ======
 This project was originally developed during Facebook Hackathon 2014 organized by Hackers@EPFL (http://hackersatepfl.com).

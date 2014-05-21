@@ -12,10 +12,10 @@ options="$@";
 
 printer="Pool1-$login-$RANDOM";
 
-lpadmin -p $printer -E -v smb://INTRANET/$login:$password@print1.epfl.ch/pool1 -P /usr/share/cups/model/xr_WorkCentre7655R.ppd.gz 2>&1
+lpadmin -p $printer -E -v smb://$login:$password@print1.epfl.ch/pool1 -P /usr/share/cups/model/xr_WorkCentre7655R.ppd 2>&1
 lp -d $printer $file $options
 
 sleep 2
 
-lpadmin -x $printer
+// lpadmin -x $printer
 rm -f "$file"
