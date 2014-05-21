@@ -21,16 +21,14 @@ html {
 
 body
 {
-  margin:0px;
   font-family: OpenSans,'Helvetica','sans-serif';
   font-size: 15px;
 }
 
 #wrapper
 {
-  background-color: none;
-  padding: 10px;
-  margin: 0px auto;
+  margin: auto;
+  width: 410px;
 }
 
 /* LOGO CSS */
@@ -154,10 +152,7 @@ h1
 /* FOOTER */
 
 #footer {
-  width: 500px;
   text-align: center;
-  margin-left: auto;
-  margin-right: auto;
   margin-top: 5px;
   color: white;
 }
