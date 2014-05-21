@@ -19,7 +19,7 @@ if(isset($_FILES["file"])) {
     $answer['server_file_name'] = $name;	
 
     //move the uploaded file to uploads folder and check if success
-    $ok = move_uploaded_file($_FILES["file"]["tmp_name"], $_SERVER["DOCUMENT_ROOT"] . "/" . $output_dir . $name);
+    $ok = move_uploaded_file($_FILES["file"]["tmp_name"], . $output_dir . $name);
     if(! $ok) {
       $answer['error_code'] = 2;
     }
