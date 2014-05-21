@@ -15,7 +15,7 @@ if($_POST["double_sided"] === "on"){
   array_push($options, "-o sides=two-sided-long-edge");  
 }
 
-array_push($options, "-t " . $_POST["server_file_name"]);
+array_push($options, "-t " . $_POST["file_name"]);
 
 $cmd = "./" . $SCRIPT . " '" . $_POST["user"] . "' '" . $_POST["password"] . "' 'uploads/" . $_POST["server_file_name"] . "' '" . join(" ", $options) . "'";
 $answer["command"] = $cmd;

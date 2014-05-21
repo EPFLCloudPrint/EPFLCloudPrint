@@ -25,10 +25,13 @@ $(document).ready(function(){
     $('#cloud-text').css('color', 'white');
     $('#cloud-text').css("font-size", "18px");
     if(rep.error_code != 0) {
+      $('#server_file_name').val("");
+      $('#file_name').val("");
       $('#cloud-text').text("An error occured while uploading the file...");
       $('#submit').prop("disabled",true);
     } else {
       $('#server_file_name').val(rep.server_file_name);
+      $('#file_name').val(rep.file_name);
       $('#cloud-text').text("You uploaded " + rep.file_name);
       $('#submit').prop("disabled",false);
     }
