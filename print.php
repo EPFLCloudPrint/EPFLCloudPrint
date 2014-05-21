@@ -2,7 +2,6 @@
 
 $SCRIPT="print.sh";
 $answer = array("error_code" => 0);
-$_POST["server_file_name"] = $_POST["server_file_name"];
 
 $options = array();
 
