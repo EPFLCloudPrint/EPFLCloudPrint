@@ -12,8 +12,8 @@
 </head>
 <link rel="stylesheet" type="text/css" href="styles.css" />
 <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
-<script src="http://malsup.github.com/jquery.form.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+<script src="jquery.form.js"></script>
 <script src="script.js"></script>
 
 <body id="body">
