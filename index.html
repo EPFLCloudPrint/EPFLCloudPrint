@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta name="viewport" content="width=device-width">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>EPFLCloudPrint</title>
+</head>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="skeleton/base.css" />
+<link rel="stylesheet" type="text/css" href="skeleton/skeleton.css" />
+<link rel="stylesheet" type="text/css" href="skeleton/layout.css" />
+<link rel="stylesheet" type="text/css" href="styles.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="script.js"></script>
+
+<body>
+
+  <div class="container">
+    <div class="two columns alpha cloud">
+      <span style="visibility: hidden">Empty</span>
+    </div>
+    <div class="six columns  cloud">
+      <svg class="foreground" height="170" width="250">
+        <defs>
+          <linearGradient id="progression" x1="0" y1="0" x2="100%" y2="35%">
+          <stop offset="0%" stop-color="#2ecc71" />
+          <stop offset="0%" stop-color="#FFFFFF" />
+          </linearGradient>
+        </defs>
+        <path id="cloud_path" d="m 186.35781,8.876732 c 15.78232,10.231975 33.93546,29.879452 27.03438,64.610972 21.31603,5.820368 37.18487,24.800538 37.18487,47.750986 0,27.30733 -22.31413,49.42895 -49.84801,49.42895 H 50.425072 C 22.891196,170.66852 0.57706205,148.54691 0.57706205,121.23869 0.57706205,98.707512 14.444346,80.642672 36.585439,73.778105 34.670404,63.578788 35.565038,46.040023 52.492633,33.806139 c 9.4396,-6.832792 29.225922,-13.223363 48.329007,1.452002 22.80292,-44.705755 69.06972,-37.066198 85.53617,-26.381409 z" fill="url(#progression)" />
+        <path id="tick_path" d="m 81.691766,105.38213 29.471174,25.12269 55.748,-64.444933" fill="none" stroke="#2ecc71" stroke-width="14.29999999" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" display="none">
+      </svg>
+      <p style="display:none;">Uploading your file...</p>
+    </div>
+    <div class="eight columns omega dialog">
+      <h1><span class="colored">EPFL</span>CloudPrint</h1>
+
+      <div class="upload _button empty" id="upload_button">
+        UPLOAD YOUR FILE
+      </div>
+      
+      <div class="options" style="display: none;">
+        <!-- Credentials -->
+        <div class="five columns alpha omega">
+          <input type="text" id="gaspar" placeholder="Gaspar"/>
+          <input type="password" id="password" placeholder="Password"/>
+        </div>
+        <br class="clear"/>
+
+        <!-- Options -->
+        <div class="six columds alpha omega">
+
+          <h3>Options</h3>
+
+          <div class="three columns alpha copies">
+            <h5>Number of copies</h5>
+            <input type="text" id="numberCopies" value="1"/>
+          </div>
+
+          <div class="three columns omega printingOptions">
+            <h5>Printing Options</h5>
+
+            <div class="doublesided checkbox checked"></div>
+            <span class="label" for="doublesided"> Double sided </span><br/>
+
+            <div class="blackwhite checkbox checked"></div>
+            <span class="label" for="blackwhite"> Black & white </span>
+          </div>
+
+          <br class="clear" />
+
+          <h5>Pages</h5>
+
+          <div class="radioGroup selection">
+            <div class="all radiobox checked"></div>
+            <span class="label" for="all"> All </span><br/>
+
+            <div class="selectedonly radiobox unchecked"></div>
+            <span class="label" for="selectedonly"> Selected only </span><br/>
+            <div id="fromto" style="display: none">
+              <div class="two columns" >
+                <input type="text" class="numberField" id="from" placeholder="From"/>
+              </div>
+              <div class="two columns omega">
+                <input type="text" class="numberField" id="to" placeholder="To"/>
+              </div>
+              <br class="clear"/>
+            </div>
+
+          </div>
+
+          <div class="five columns alpha omega">
+            <div class="_button full print">PRINT</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br class="clear"/>
+    <div class="footer sixteen columns">
+      <p>
+        <a  href="https://github.com/giacomogiudice/EPFLCloudPrint" target="_blank">
+          <img class="logo-github" src="images/GitHub.svg" alt="GitHub link"/>
+        </a>
+        Jean-Baptiste Cordonnier, Charles Gallay and Giacomo Giudice
+      </p>
+    </div>
+  </div>
+</body>
+</html>
