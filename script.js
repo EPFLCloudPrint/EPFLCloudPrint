@@ -63,36 +63,22 @@ $(document).ready(function() {
   $('.dialog').css('padding-bottom', h);
   $('.footer').css('height', h);
 
-  /* CLOUD PROGRESSION */
-  var setProgression = function(percentage) {
-    $("#tick_path").hide();
-    $('stop').attr('offset', percentage+'%');
-  }
-
-  var endUpload = function() {
-    setProgression(0);
-    $("#tick_path").show();
-    $(".cloud p").hide();
-  }
-
-  var printed = function() {
-    $('.options').hide();
-    $('#upload_button').html("UPLOAD NEW FILE");
-    $('#upload_button').show();
-    $('.dialog').trigger("heightChange");
-  }
 
   /* PAGE REACTIONS */
 
   /* upload button reaction */
   $('#upload_button').on("click", function() {
-    $('h1').attr('style', 'margin-bottom: 40px;');
-    $('#upload_button').hide();
-    $('.options').slideDown(1000);
-    $('.cloud p').fadeIn(1000);
-    $('.dialog').trigger('heightChange');
+    viewOptions();
     uploadFile();
   });
+
+  /* dropbox button reaction */
+  if(Dropbox.isBrowserSupported()){
+
+  $('#dropbox_button').show().on("click", function() {
+    Dropbox.choose(dbox_options);
+  });
+}
 
   /* page selection hide/show */
   $('.selectedonly').on("classChanged", function() {
@@ -106,24 +92,68 @@ $(document).ready(function() {
     $('.dialog').trigger('heightChange');
   });
 
-  /* FUNCTIONNALITIES */
-
-  var uploadFile = function() {
-    progressing();
-  }
-
-  /* DEMO */
-
-  $(".print").on("click", printed);
-
-  var progressing = function() {
-    var p = parseInt($('stop').attr('offset').replace('%', ''));
-    if(p < 100) {
-      setProgression(p + 1);
-      setTimeout(progressing, 50);
-    } else {
-      setTimeout(endUpload, 500);
-    }
-  }
-
 });
+
+/* CLOUD PROGRESSION */
+function setProgression(percentage) {
+  $("#tick_path").hide();
+  $('stop').attr('offset', percentage+'%');
+}
+
+function endUpload() {
+  setProgression(0);
+  $("#tick_path").show();
+  $(".cloud p").hide();
+}
+
+/* FUNCTIONNALITIES */
+function uploadFile() {
+  progressing();
+}
+
+function printed() {
+  $('.options').hide();
+  $('#upload_button').html("UPLOAD NEW FILE");
+  $('#upload_button').show();
+  $('.dialog').trigger("heightChange");
+}
+
+function viewOptions() {
+  $('#upload_button').hide();
+  $('#dropbox_button').hide();
+  $('h1').attr('style', 'margin-bottom: 40px;');
+  $('.options').slideDown(1000);
+  $('.cloud p').fadeIn(1000);
+  $('.dialog').trigger('heightChange');
+}
+
+/* DEMO */
+
+$(".print").on("click", printed);
+
+function progressing(){
+  var p = parseInt($('stop').attr('offset').replace('%', ''));
+  if(p < 100) {
+    setProgression(p + 1);
+    setTimeout(progressing, 50);
+  } else {
+    setTimeout(endUpload, 500);
+  }
+}
+
+/*  DROPBOX HANDLING OPTIONS  */
+
+var dbox_options = {
+    success: function(files) {
+      uploadFile();
+      viewOptions();
+    },
+
+    cancel: function() { },
+
+    linkType: "direct", // or "preview"
+
+    multiselect: false, // or true
+
+    extensions: ['.pdf'],
+};

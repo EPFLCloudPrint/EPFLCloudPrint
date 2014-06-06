@@ -105,17 +105,17 @@ h5 {
 .checkbox, .radiobox {
   width: 20px;
   height: 20px;
-  float: left;  
+  float: left;
   margin-right: 5px;
 }
 
 .checked {
-  background: url(images/checked.svg); 
+  background: url(images/checked.svg);
   background-repeat: no-repeat;
 }
 
 .unchecked {
-  background: url(images/unchecked.svg); 
+  background: url(images/unchecked.svg);
   background-repeat: no-repeat;
 }
 
@@ -227,6 +227,6 @@ span.no_selection {
 .footer img {
   width: 24px;
   margin-right: 5px;
-  vertical-align: middle;  
+  vertical-align: middle;
   margin-right: 10px;
 }

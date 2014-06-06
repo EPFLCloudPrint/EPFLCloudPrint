@@ -13,8 +13,8 @@
 <link rel="stylesheet" type="text/css" href="skeleton/layout.css" />
 <link rel="stylesheet" type="text/css" href="styles.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="gv048u7pj3hnrec"></script>
 <script src="script.js"></script>
-
 <body>
 
   <div class="container">
@@ -36,11 +36,14 @@
     </div>
     <div class="eight columns omega dialog">
       <h1><span class="colored">EPFL</span>CloudPrint</h1>
-
+      <div id="button_wrapper">
       <div class="upload _button empty" id="upload_button">
         UPLOAD YOUR FILE
       </div>
-
+      <div class="upload _button empty" id="dropbox_button" style="display: none;">
+        LOOK IN DROPBOX
+      </div>
+    </div>
       <div class="options" style="display: none;">
         <!-- Credentials -->
         <div class="five columns alpha omega">
