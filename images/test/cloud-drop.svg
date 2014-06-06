@@ -14,32 +14,37 @@
    id="Calque_1"
    x="0px"
    y="0px"
-   viewBox="0 0 280.282 192.597"
+   viewBox="0 0 250 170"
    enable-background="new 0 0 280.282 192.597"
    xml:space="preserve"
    inkscape:version="0.48.2 r9819"
    width="100%"
    height="100%"
    sodipodi:docname="cloud.svg"><sodipodi:namedview
-   pagecolor="#ffffff"
+   pagecolor="#34495e"
    bordercolor="#666666"
    borderopacity="1"
    objecttolerance="10"
    gridtolerance="10"
    guidetolerance="10"
-   inkscape:pageopacity="0"
+   inkscape:pageopacity="1"
    inkscape:pageshadow="2"
    inkscape:window-width="1280"
    inkscape:window-height="752"
    id="namedview12"
    showgrid="false"
-   inkscape:zoom="2.4507132"
-   inkscape:cx="126.36922"
-   inkscape:cy="102.85389"
+   inkscape:zoom="1.1105736"
+   inkscape:cx="120.09102"
+   inkscape:cy="79.125681"
    inkscape:window-x="0"
    inkscape:window-y="0"
    inkscape:window-maximized="1"
-   inkscape:current-layer="Calque_1" />
+   inkscape:current-layer="Calque_1"
+   fit-margin-top="0"
+   fit-margin-left="0"
+   fit-margin-right="0"
+   fit-margin-bottom="0"
+   inkscape:snap-grids="true" />
   <metadata
    id="metadata16">
     <rdf:RDF>
@@ -71,16 +76,7 @@
    y1="0"
    x2="280.28201"
    y2="130"
-   gradientTransform="matrix(0.89195881,0,0,0.88267562,0.57706205,0.66784796)" /><linearGradient
-   inkscape:collect="always"
-   xlink:href="#progression"
-   id="linearGradient2987"
-   gradientUnits="userSpaceOnUse"
-   gradientTransform="matrix(0.89195881,0,0,0.88267562,0.57706205,0.66784796)"
-   x1="0"
-   y1="0"
-   x2="576.5899"
-   y2="290.82608" /></defs>
+   gradientTransform="matrix(0.89195881,0,0,0.88267562,0.57706205,0.66784796)" /></defs>
   <linearGradient
    id="progression">
     <stop
@@ -93,20 +89,19 @@
    id="stop9" />
   </linearGradient>
   <path
-   d="m 186.35781,8.876732 c 15.78232,10.231975 33.93546,29.879452 27.03438,64.610972 21.31603,5.820368 37.18487,24.800538 37.18487,47.750986 0,27.30733 -22.31413,49.42895 -49.84801,49.42895 H 50.425072 C 22.891196,170.66852 0.57706205,148.54691 0.57706205,121.23869 0.57706205,98.707512 14.444346,80.642672 36.585439,73.778105 34.670404,63.578788 35.565038,46.040023 52.492633,33.806139 c 9.4396,-6.832792 29.225922,-13.223363 48.329007,1.452002 22.80292,-44.705755 69.06972,-37.066198 85.53617,-26.381409 z"
+   d="M 185.78074,8.2090898 C 201.56306,18.441065 219.7162,38.088542 212.81512,72.820062 234.13115,78.64043 249.99999,97.6206 249.99999,120.57105 249.99999,147.87838 227.68586,170 200.15198,170 H 49.848004 C 22.314128,170.00088 -6.3809035e-6,147.87927 -6.3809035e-6,120.57105 -6.3809035e-6,98.03987 13.867278,79.97503 36.008371,73.110463 34.093336,62.911146 34.98797,45.372381 51.915565,33.138497 c 9.4396,-6.832792 29.225922,-13.223363 48.329005,1.452002 22.80292,-44.705755 69.06972,-37.0661982 85.53617,-26.3814092 z"
    id="path10"
-   style="fill:url(#linearGradient2987);fill-opacity:1"
+   style="fill:#ffffff;fill-opacity:1"
    inkscape:connector-curvature="0"
    inkscape:transform-center-x="-19.62011"
    inkscape:transform-center-y="-4.0394348" />
 <path
    style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0"
-   d="m 73.28688,105.46063 25.39073,30.58429 58.86033,-57.706206"
+   d="m 72.709805,104.79299 25.39073,30.58429 58.860335,-57.706208"
    id="path2989"
+   inkscape:connector-curvature="0" /><path
+   style="fill:#34495e;fill-opacity:1;stroke:#34495f;stroke-width:6.2381897;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+   d="m 111.92478,62.972017 0,50.340483 -25.281248,0 38.781248,38.78125 38.78125,-38.78125 -25.28125,0 0,-50.340483 z"
+   id="path3770"
    inkscape:connector-curvature="0"
-   transform="translate(-6.3809035e-6,0)" /><path
-   style="fill:none;stroke:#000000;stroke-width:14.29999999;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-   d="m 81.691766,105.38213 29.471174,25.12269 55.748,-64.444933"
-   id="path3763"
-   inkscape:connector-curvature="0"
-   sodipodi:nodetypes="ccc" /></svg>
+   sodipodi:nodetypes="cccccccc" /></svg>
