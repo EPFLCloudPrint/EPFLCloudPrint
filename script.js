@@ -153,10 +153,18 @@ $(document).ready(function() {
   }
 
   var centerUploadButton = function() {
-    if($('.container').width() < 768) {
+    var w = $('.container').width();
+    if(w == 300) {
       $('.upload._button').css('margin-left', ($('.dialog').width() - $('.upload._button').width())/2);
-    } else {
+      $('.dropbox._button').css('margin-left', ($('.dialog').width() - $('.dropbox._button').width())/2);
+    } 
+    if(w == 420 || w == 960 ){
       $('.upload._button').css('margin-left', 0);
+      $('.dropbox._button').css('margin-left', "10px");
+    } 
+    if(w == 768){
+      $('.upload._button').css('margin-left', 0);
+      $('.dropbox._button').css('margin-left', 0);
     }
   };
 
@@ -204,12 +212,12 @@ $(document).ready(function() {
   var toggleTheUploadMode = function(buttonName) {
     $('.options').hide();
     $('.upload._button').html(buttonName);
-    $('.upload._button').show(0, centerDialog);
+    $('._empty._button').show(0, centerDialog);
   }
 
   var toggleThePrintMode = function() {
     startCentering();
-    $('.upload._button').hide();
+    $('._empty._button').hide();
     $('.options').slideDown(1000, stopCentering);
   }
 
@@ -255,8 +263,8 @@ $(document).ready(function() {
         $('.print._button').removeClass('_disabled');
       } else {
         showTick(false);
-        showMessageProgression('An error occured, click here to retry...');
-        $('.print._button').addClass('_disabled');
+        showMessageProgression('An error occured, please retry...');
+        toggleTheUploadMode("UPLOAD YOUR FILE");
       }
     });
     xhr.open("POST", "upload_file.php");
@@ -347,5 +355,20 @@ $(document).ready(function() {
 
   $('.print._button').on('click', sendPrint);
 
+  /* DROPBOX */
+  if(Dropbox.isBrowserSupported()){
+    $('.dropbox._button').show().on("click", function() {
+      Dropbox.choose({
+        success: function(file) {
+          uploadFile(file);
+        },
+        error: function() {},
+        linkType: "direct", // or "preview"
+        multiselect: false, // or true
+        extensions: ['.pdf']
+      });
+    });
+  }
 
 });
+
