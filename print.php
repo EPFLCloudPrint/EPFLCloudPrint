@@ -20,9 +20,28 @@ function isCredentialCorrect($user,$passwd) {
 
 $SCRIPT="print.sh";
 $answer = array("error_code" => 0);
+
 if(!isCredentialCorrect($_POST["gaspar"],$_POST["password"])){
 	$answer = array("error_code" => 1000);
 } else {
+
+	if(isset($_POST['dropbox_url'])) {
+		// create file name
+    $name = str_replace(' ', '', $_POST[file_name]);
+    $name = str_replace('-', '', $name);
+    $name = str_replace('(', '', $name);
+    $name = str_replace(')', '', $name);
+		$name = preg_replace("/(\\.)([^.\\s]{3,4})$/", "${1}-" . time() . "-" . rand() . ".$2", $name);
+
+		// fetch content
+		$content = file_get_contents($_POST['dropbox_url']);
+		$success = file_put_contents("uploads/" . $name, $content);
+		$_POST['server_file_name'] = $name;
+
+		if(! $content || ! $success) {
+			$answer = array("error_code" => 3);
+		}
+	}
 
 	$options = array();
 
@@ -46,6 +65,7 @@ if(!isCredentialCorrect($_POST["gaspar"],$_POST["password"])){
 	$answer["command"] = $cmd;
 	shell_exec($cmd." >stdout.log 2>stderr.log");
 }
+
 echo json_encode($answer);
 
 ?>

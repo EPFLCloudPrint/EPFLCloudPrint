@@ -131,6 +131,10 @@ input[type="text"]._error:-ms-input-placeholder, input[type="password"]._error:-
   margin: auto;
 }
 
+#cloud_path {
+  cursor: pointer;
+}
+
 /* TITLE */
 
 h1 {

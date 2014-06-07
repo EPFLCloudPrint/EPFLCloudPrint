@@ -1,4 +1,3 @@
-
 $(document).ready(function() {
 
   /* MY FRAMEWORK */
@@ -244,6 +243,7 @@ $(document).ready(function() {
   });
 
   var uploadFile = function(file) {
+    upload_information = {};
     toggleThePrintMode();
     showMessageProgression('Uploading your file...');
     $('.print._button').addClass('_disabled');
@@ -258,8 +258,10 @@ $(document).ready(function() {
       if(rep['error_code'] == 0) {
         showTick(true);
         showMessageProgression('You have uploaded "' + rep['file_name'] + '"');
-        $('.server_file_name').val(rep['server_file_name']);
-        $('.file_name').val(rep['file_name']);
+        upload_information = {
+          'server_file_name' : rep['server_file_name'],
+          'file_name' : rep['file_name']
+        };
         $('.print._button').removeClass('_disabled');
       } else {
         showTick(false);
@@ -328,6 +330,8 @@ $(document).ready(function() {
   var sendPrint = function() {
     var form = $('#printForm').validate();
     if(! form['error']) {
+      for (var info in upload_information) { form[info] = upload_information[info]; }
+      $('.print._button').addClass('_disabled');
       $.ajax('print.php', {
         type: "POST",
         data: form,
@@ -348,6 +352,9 @@ $(document).ready(function() {
         },
         error: function() {
           showMessageProgression('An error occured while printing the document...');
+        },
+        complete: function() {
+          $('.print._button').removeClass('_disabled');
         }
       });
     }
@@ -358,9 +365,17 @@ $(document).ready(function() {
   /* DROPBOX */
   if(Dropbox.isBrowserSupported()){
     $('.dropbox._button').show().on("click", function() {
+      upload_information = {};
       Dropbox.choose({
-        success: function(file) {
-          uploadFile(file);
+        success: function(files) {
+          upload_information = {
+            'dropbox_url' : files[0].link,
+            'file_name' : files[0].name
+          };
+          showTick(true);
+          showMessageProgression('You chose "' + files[0].name + '"');
+          toggleThePrintMode();
+          $('.print._button').removeClass('_disabled');
         },
         error: function() {},
         linkType: "direct", // or "preview"
@@ -372,3 +387,4 @@ $(document).ready(function() {
 
 });
 
+var upload_information = {};
