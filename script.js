@@ -124,11 +124,13 @@ $(document).ready(function() {
   }
 
   var showMessageProgression = function(message) {
-    $(".cloud .message").html(message).fadeIn(1000);
+    startCentering();
+    $(".cloud .message").html(message).fadeIn(1000, stopCentering);
   }
 
   var hideMessageProgression = function(message) {
-    $(".cloud .message").fadeOut(1000);
+    startCentering();
+    $(".cloud .message").fadeOut(1000, stopCentering);
   }
 
   /* PAGE DISPOSITION */
@@ -211,7 +213,10 @@ $(document).ready(function() {
   var toggleTheUploadMode = function(buttonName) {
     $('.options').hide();
     $('.upload._button').html(buttonName);
-    $('._empty._button').show(0, centerDialog);
+    $('._empty._button').show(0, function() {
+      centerDialog();
+      centerCloud();
+    });
   }
 
   var toggleThePrintMode = function() {
@@ -338,13 +343,14 @@ $(document).ready(function() {
         success: function(response) {
           try {
             var rep = JSON.parse(response);
+            console.log(rep);
           } catch(e) {
             var rep = {'error_code' : -1};
           }
           if(rep['error_code'] == 0) {
             showMessageProgression('The document was successfully printed');
             toggleTheUploadMode("UPLOAD NEW FILE");
-          } else if(rep['error_code'] == 1000) {
+          } else if(rep['error_code'] == 2) {
             showError($('.gaspar, .password'));
           } else {
             showMessageProgression('An error occured while printing the document...');
