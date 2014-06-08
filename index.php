@@ -23,21 +23,7 @@
     <div class="desktop ghost two columns alpha" style="visibility: hidden">hidden</div>
 
     <div class="cloud six columns omega" >
-      <svg class="foreground" height="170" width="250">
-        <defs>
-          <linearGradient id="progression" x1="0" y1="0" x2="100%" y2="35%">
-            <stop offset="0%" stop-color="#2ecc71" />
-            <stop offset="0%" stop-color="#FFFFFF" />
-          </linearGradient>
-        </defs>
-        <path id="cloud_path" d="m 186.35781,8.876732 c 15.78232,10.231975 33.93546,29.879452 27.03438,64.610972 21.31603,5.820368 37.18487,24.800538 37.18487,47.750986 0,27.30733 -22.31413,49.42895 -49.84801,49.42895 H 50.425072 C 22.891196,170.66852 0.57706205,148.54691 0.57706205,121.23869 0.57706205,98.707512 14.444346,80.642672 36.585439,73.778105 34.670404,63.578788 35.565038,46.040023 52.492633,33.806139 c 9.4396,-6.832792 29.225922,-13.223363 48.329007,1.452002 22.80292,-44.705755 69.06972,-37.066198 85.53617,-26.381409 z" fill="url(#progression)" />
-        <path id="tick_path" d="m 81.691766,105.38213 29.471174,25.12269 55.748,-64.444933" fill="none" stroke="#2ecc71" stroke-width="14.29999999" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" display="none" />
-        <path id="arrow_path"
-        style="fill:none;fill-opacity:1;stroke:none;stroke-width:6.2381897;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-        d="m 111.92478,62.972017 0,50.340483 -25.281248,0 38.781248,38.78125 38.78125,-38.78125 -25.28125,0 0,-50.340483 z"
-        inkscape:connector-curvature="0"
-        sodipodi:nodetypes="cccccccc" />
-      </svg>
+      <?php include("images/cloud.svg") ?>
       <p class="message" style="display:none;">Uploading your file...</p>
     </div>
 
