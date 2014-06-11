@@ -141,6 +141,10 @@ input[type="text"]._error:-ms-input-placeholder, input[type="password"]._error:-
   text-align: center;
 }
 
+.cloud p .filename {
+  word-break: break-all;
+}
+
 .cloud .foreground {
   display:block;
   margin: auto;
