@@ -20,7 +20,7 @@
   <div class="container">
     <h1 class="sixteen columns alpha mobile" style="display:none;" ><span class="colored">EPFL</span>CloudPrint</h1>
 
-    <div class="desktop ghost two columns alpha" style="visibility: hidden">hidden</div>
+    <div class="desktop ghost one columns alpha" style="visibility: hidden">hidden</div>
 
     <div class="cloud six columns omega" >
       <?php include("images/cloud.svg") ?>
