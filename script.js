@@ -233,7 +233,6 @@ $(document).ready(function() {
   });
 
   $('.upload._button').on('click', function() {
-    alert('tsss');
     $('.fileInput').click();
   });
 
@@ -264,7 +263,10 @@ $(document).ready(function() {
       var rep = JSON.parse(e.currentTarget.responseText);
       if(rep['error_code'] == 0) {
         showTick(true);
-        showMessageProgression('You have uploaded <span class="filename">' + rep['file_name'] + '</span>"');
+        showMessageProgression('You have uploaded "<span class="filename">' + rep['file_name'] + '</span>"');
+        if(rep['file_name'].length > 37) {
+          $('.cloud p .filename').addClass('wrap');
+        }
         upload_information = {
           'server_file_name' : rep['server_file_name'],
           'file_name' : rep['file_name']
