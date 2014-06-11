@@ -212,6 +212,7 @@ $(document).ready(function() {
 
   var toggleTheUploadMode = function(buttonName) {
     $('.options').hide();
+    $('.formUpload')[0].reset();
     $('.upload._button').html(buttonName);
     $('._empty._button').show(0, function() {
       centerDialog();
@@ -232,6 +233,7 @@ $(document).ready(function() {
   });
 
   $('.upload._button').on('click', function() {
+    alert('tsss');
     $('.fileInput').click();
   });
 
@@ -343,15 +345,17 @@ $(document).ready(function() {
         success: function(response) {
           try {
             var rep = JSON.parse(response);
-            console.log(rep);
           } catch(e) {
             var rep = {'error_code' : -1};
           }
           if(rep['error_code'] == 0) {
-            showMessageProgression('The document was successfully printed');
+            showMessageProgression('The document was sent to the printer');
             toggleTheUploadMode("UPLOAD NEW FILE");
           } else if(rep['error_code'] == 2) {
+            showMessageProgression('A problem occured with dropbox');
+          } else if(rep['error_code'] == 3) {
             showError($('.gaspar, .password'));
+            showMessageProgression('Please check your credentials');
           } else {
             showMessageProgression('An error occured while printing the document...');
           }

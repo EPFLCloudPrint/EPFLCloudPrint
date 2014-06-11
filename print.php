@@ -1,5 +1,12 @@
 <?php
 
+/*
+	ERROR_CODE :
+		* 1 -> printing problem
+		* 2 -> dropbox fetching problem
+		* 3 -> incorrect credentials
+*/
+
 function areCredentialsCorrect($user, $passwd) {
 	$url = 'https://tequila.epfl.ch/cgi-bin/tequila/login';
 	$data = array('username' => $user, 'password' => $passwd);
@@ -22,7 +29,7 @@ $answer = array("error_code" => 0);
 
 // CREDENTIAL CHECK
 if( !areCredentialsCorrect($_POST["gaspar"],$_POST["password"]) ){
-	$answer = array("error_code" => 1);
+	$answer = array("error_code" => 3);
 	goto end;
 } 
 

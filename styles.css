@@ -70,8 +70,21 @@ div._button {
   margin-top: 40px;
 }
 
-._full:active {
-  background-color: #c0392b;
+._full:hover {
+  background-color: #E95E50;
+}
+
+._button._full:active {
+  background-color: #B93D30;
+}
+
+._full._button._disabled {
+  background-color: #bdc3c7;
+  pointer-events: none;
+}
+
+._full_button._disabled:hover {
+  background-color: #bdc3c7;
 }
 
 ._empty {
@@ -81,16 +94,18 @@ div._button {
   border: 1px white solid;
   padding-top:8px;
   padding-bottom:8px;
-}
-
-._full._button._disabled {
-  background-color: #bdc3c7;
-  pointer-events: none;
+  transition: color 0.5s;
+  transition: background-color 0.5s;
 }
 
 ._empty:active {
   background-color: #ecf0f1;
   color: black;
+}
+
+._empty._button:hover {
+  background-color: white;
+  color: #2c3e50;
 }
 
 input[type="text"]._error, input[type="password"]._error {
@@ -99,18 +114,18 @@ input[type="text"]._error, input[type="password"]._error {
 }
 
 input[type="text"]._error::-webkit-input-placeholder, input[type="password"]._error::-webkit-input-placeholder { /* WebKit browsers */
-    color:    #e74c3c;
+  color:    #e74c3c;
 }
 input[type="text"]._error:-moz-placeholder, input[type="password"]._error:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-    color:    #e74c3c;
-    opacity:  1;
+  color:    #e74c3c;
+  opacity:  1;
 }
 input[type="text"]._error::-moz-placeholder, input[type="password"]._error::-moz-placeholder { /* Mozilla Firefox 19+ */
-    color:    #e74c3c;
-    opacity:  1;
+  color:    #e74c3c;
+  opacity:  1;
 }
 input[type="text"]._error:-ms-input-placeholder, input[type="password"]._error:-ms-input-placeholder { /* Internet Explorer 10+ */
-    color:    #e74c3c;
+  color:    #e74c3c;
 }
 
 /* CLOUD */
@@ -170,6 +185,26 @@ h5 {
 
 ._label {
   font-size: 0.8em;
+}
+
+input {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+input.gaspar.five.columns.alpha.nonempty {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 16px 12px;
+}
+
+input.password.five.columns.alpha.nonempty {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 16px 12px;
 }
 
 input.gaspar, input.password {

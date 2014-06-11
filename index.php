@@ -42,8 +42,8 @@
       <div class="options six columns alpha" style="display: none;">
         <form id="printForm">
           <!-- Credentials -->
-          <input type="text" class="gaspar four columns alpha nonempty" placeholder="Gaspar" name="gaspar" />
-          <input type="password" class="password four columns alpha nonempty" placeholder="Password" name="password" />
+          <input type="text" class="gaspar five columns alpha nonempty" placeholder="Gaspar" name="gaspar" />
+          <input type="password" class="password five columns alpha nonempty" placeholder="Password" name="password" />
 
           <!-- Options -->
           <div class="six columns alpha omega">
@@ -52,7 +52,7 @@
 
             <div class="three columns alpha">
               <h5 class="three columns alpha">Number of copies</h5>
-              <input type="text" class="_numberField one columns alpha" value="1" min="1" name="numbercopies"/>
+              <input type="text" class="_numberField two columns alpha" value="1" min="1" name="numbercopies"/>
             </div>
 
             <div class="three columns omega">
