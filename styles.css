@@ -17,6 +17,10 @@ p, h1, h3, h5, .dialog {
   color: white;
 }
 
+a, a:visited {
+  color: #ffffff;
+}
+
 .container {
   margin: auto;
   min-height:100%;
@@ -32,12 +36,12 @@ p, h1, h3, h5, .dialog {
 }
 
 ._checked {
-  background: url(images/checked.svg); 
+  background: url(images/checked.svg);
   background-repeat: no-repeat;
 }
 
 ._unchecked {
-  background: url(images/unchecked.svg); 
+  background: url(images/unchecked.svg);
   background-repeat: no-repeat;
 }
 
@@ -226,7 +230,7 @@ input.from, input.to {
   border: 1px white dashed;
 }
 
-path {  
+path {
   pointer-events: none;
 }
 

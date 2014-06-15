@@ -1,5 +1,13 @@
 $(document).ready(function() {
 
+  /* CHECK INPUT FILE SUPPORT */
+
+  if($('[name="file"]').disabled)
+  {
+    $(".cloud .message").html("Error: Your browser doesn't seem to support file uploading").show();
+    return;
+  }
+
   /* MY FRAMEWORK */
 
   $('._checkbox').on("click", function() {
@@ -83,8 +91,8 @@ $(document).ready(function() {
     form.find('._numberField').each(function() {
       if($(this).val() !== "") {
         var value = parseInt($(this).val())
-        if(value != NaN 
-          && (! $(this).attr('min') || value >= parseInt($(this).attr('min'))) 
+        if(value != NaN
+          && (! $(this).attr('min') || value >= parseInt($(this).attr('min')))
           && (! $(this).attr('max') || value <= parseInt($(this).attr('max')))) {
 
           result[$(this).attr('name')] = value;
@@ -158,11 +166,11 @@ $(document).ready(function() {
     if(w == 300) {
       $('.upload._button').css('margin-left', ($('.dialog').width() - $('.upload._button').width())/2);
       $('.dropbox._button').css('margin-left', ($('.dialog').width() - $('.dropbox._button').width())/2);
-    } 
+    }
     if(w == 420 || w == 960 ){
       $('.upload._button').css('margin-left', 0);
       $('.dropbox._button').css('margin-left', "10px");
-    } 
+    }
     if(w == 768){
       $('.upload._button').css('margin-left', 0);
       $('.dropbox._button').css('margin-left', 0);
@@ -188,7 +196,7 @@ $(document).ready(function() {
     }, 10);
     centeringProcessing.push(proc);
   }
-  
+
   var stopCentering = function() {
     if(centeringProcessing.length > 0) {
       var proc = centeringProcessing.shift();
@@ -304,17 +312,17 @@ $(document).ready(function() {
     $('#arrow_path').css('stroke', '#34495e');
   });
 
-  $('#cloud_path').bind("dragleave", function(e) { 
+  $('#cloud_path').bind("dragleave", function(e) {
     if(ticked) {
       showTick(true);
     }
     $('#arrow_path').css('fill', 'none');
-    $('#arrow_path').css('stroke', 'none');  
+    $('#arrow_path').css('stroke', 'none');
   });
 
   $('#cloud_path').bind("drop", function(e){
     $('#arrow_path').css('fill', 'none');
-    $('#arrow_path').css('stroke', 'none');  
+    $('#arrow_path').css('stroke', 'none');
     var files = e.originalEvent.dataTransfer.files;
     uploadFile(files[0]);
   });
@@ -323,15 +331,15 @@ $(document).ready(function() {
     $('#cloud_path').attr('fill', 'url(#progression)')
     var files = e.originalEvent.dataTransfer.files;
     uploadFile(files[0]);
-    $(this).removeClass('drop');   
+    $(this).removeClass('drop');
   });
 
   $('.upload._button').bind("dragenter", function(e) {
     $(this).addClass('drop');
   });
 
-  $('.upload._button').bind("dragleave", function(e) { 
-    $(this).removeClass('drop');   
+  $('.upload._button').bind("dragleave", function(e) {
+    $(this).removeClass('drop');
   });
 
   /* PRINT SUBMISSION */
@@ -353,6 +361,7 @@ $(document).ready(function() {
           if(rep['error_code'] == 0) {
             showMessageProgression('The document was sent to the printer');
             toggleTheUploadMode("UPLOAD NEW FILE");
+            showTick(false);
           } else if(rep['error_code'] == 2) {
             showMessageProgression('A problem occured with dropbox');
           } else if(rep['error_code'] == 3) {

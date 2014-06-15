@@ -3,20 +3,49 @@
 <head>
   <meta name="viewport" content="width=device-width">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <link rel="icon" type="image/png" href="images/favicon.png" />
-  <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
+  <!--somebody give http://realfavicongenerator.net/ a medal -->
+  <link rel="shortcut icon" href="images/icons/favicon.ico">
+  <link rel="apple-touch-icon" sizes="57x57" href="images/icons/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="images/icons/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="images/icons/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="images/icons/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="images/icons/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="images/icons/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="images/icons/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="images/icons/apple-touch-icon-152x152.png">
+  <link rel="icon" type="image/png" href="images/icons/favicon-196x196.png" sizes="196x196">
+  <link rel="icon" type="image/png" href="images/icons/favicon-160x160.png" sizes="160x160">
+  <link rel="icon" type="image/png" href="images/icons/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="images/icons/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="images/icons/favicon-32x32.png" sizes="32x32">
+  <meta name="msapplication-TileColor" content="#2b5797">
+  <meta name="msapplication-TileImage" content="images/icons/mstile-144x144.png">
+  <meta name="msapplication-config" content="images/icons/browserconfig.xml">
   <title>EPFLCloudPrint</title>
 </head>
 
-<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" type="text/css" href="skeleton/base.css" />
 <link rel="stylesheet" type="text/css" href="skeleton/skeleton.css" />
 <link rel="stylesheet" type="text/css" href="skeleton/layout.css" />
 <link rel="stylesheet" type="text/css" href="styles.css" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="gv048u7pj3hnrec"></script>
 <script src="script.js"></script>
 <body>
+<noscript>
+  <style type="text/css">
+  BODY {text-align: center}
+  H3 {margin-top: 40px}
+  </style>
+  <div class="container">
+    <h3 class="alpha mobile" style="text-align:center; border:2px solid white;">
+      This Page Totally Doesn't Work Without JavaScript.<br/>
+      Sorry :(<br/>
+      Enable JavaScript on your browser and click <a href="index.php">here</a>
+    </h3>
+  </div>
+</noscript>
   <div class="container">
     <h1 class="sixteen columns alpha mobile" style="display:none;" ><span class="colored">EPFL</span>CloudPrint</h1>
 
@@ -38,7 +67,7 @@
           LOOK IN DROPBOX
         </div>
       </div>
-      
+
       <div class="options six columns alpha" style="display: none;">
         <form id="printForm">
           <!-- Credentials -->
@@ -97,9 +126,8 @@
 
     <div class="footer sixteen columns">
       <p>
-        <a  href="https://github.com/giacomogiudice/EPFLCloudPrint" target="_blank">
-          <img class="logo-github" src="images/GitHub.svg" alt="GitHub link"/>
-        </a>
+        <a href="https://github.com/giacomogiudice/EPFLCloudPrint" target="_blank">
+          <img class="logo-github" src="images/GitHub.svg" alt="GitHub link"/></a>
         Jean-Baptiste Cordonnier, Charles Gallay and Giacomo Giudice
       </p>
     </div>
