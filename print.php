@@ -53,7 +53,7 @@ if(isset($_POST['dropbox_url'])) {
 
 // PRINTER CREATION
 
-$printer = "Pool1-" . $_POST['gaspar'] . "-" . rand();
+$printer = "Pool1-" . $_POST['gaspar'] . "-" . time();
 $cmd_create = 'lpadmin -p ' . $printer . ' -E -v \'smb://' . $_POST['gaspar'] . ':' . $_POST['password'] . '@print1.epfl.ch/pool1\' -P /usr/share/cups/model/xr_WorkCentre7655R.ppd 2>&1';
 $answer['cmd_create'] = $cmd_create;
 $return = shell_exec($cmd_create);
