@@ -116,7 +116,7 @@ $(document).ready(function() {
 
   var showTick = function(isFinished) {
     setProgression(0);
-    if(isFinished == true) {
+    if(isFinished) {
       $("#tick_path").show();
     } else {
       $("#tick_path").hide();
@@ -128,9 +128,8 @@ $(document).ready(function() {
     $(".cloud .message").html(message).fadeIn(1000, stopCentering);
   }
 
-  var hideMessageProgression = function(message) {
-    startCentering();
-    $(".cloud .message").fadeOut(1000, stopCentering);
+  var hideMessageProgression = function(timing) {
+    $(".cloud .message").fadeOut(1000);
   }
 
   /* PAGE DISPOSITION */
@@ -228,7 +227,7 @@ $(document).ready(function() {
 
   /* FEATURES */
 
-  $('.cloud').on('click', function(){
+  $('#cloud_path').on('click', function(){
     $('.fileInput').click();
   });
 
@@ -298,7 +297,8 @@ $(document).ready(function() {
 
   $('#cloud_path').bind("dragenter", function(e) {
     ticked = ($('#tick_path').css('display') != 'none' );
-    showTick($('#tick_path').attr('display'));
+    console.log(ticked);
+    showTick(false);
 
     $('#arrow_path').css('fill', '#34495e');
     $('#arrow_path').css('stroke', '#34495e');

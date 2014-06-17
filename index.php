@@ -17,10 +17,15 @@
 <script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="gv048u7pj3hnrec"></script>
 <script src="script.js"></script>
 <body>
+  <div class="header">
+    <img src="images/logout.svg"/>
+    <p>Jean-Baptiste Cordonnier</p>
+  </div>
+
   <div class="container">
     <h1 class="sixteen columns alpha mobile" style="display:none;" ><span class="colored">EPFL</span>CloudPrint</h1>
 
-    <div class="desktop ghost one columns alpha" style="visibility: hidden">hidden</div>
+    <div class="desktop ghost two columns alpha" style="visibility: hidden">hidden</div>
 
     <div class="cloud six columns omega" >
       <?php include("images/cloud.svg") ?>
@@ -41,14 +46,9 @@
       
       <div class="options six columns alpha" style="display: none;">
         <form id="printForm">
-          <!-- Credentials -->
-          <input type="text" class="gaspar five columns alpha nonempty" placeholder="Gaspar" name="gaspar" />
-          <input type="password" class="password five columns alpha nonempty" placeholder="Password" name="password" />
 
           <!-- Options -->
           <div class="six columns alpha omega">
-
-            <h3>Options</h3>
 
             <div class="three columns alpha">
               <h5 class="three columns alpha">Number of copies</h5>
