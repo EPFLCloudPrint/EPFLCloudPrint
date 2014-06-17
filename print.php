@@ -51,27 +51,15 @@ if(isset($_POST['dropbox_url'])) {
 	}
 }
 
-// PRINTER CREATION
-
-$printer = "Pool1-" . $_POST['gaspar'] . "-" . time();
-$cmd_create = 'lpadmin -p ' . $printer . ' -E -v \'smb://' . $_POST['gaspar'] . ':' . $_POST['password'] . '@print1.epfl.ch/pool1\' -P /usr/share/cups/model/xr_WorkCentre7655R.ppd 2>&1';
-$answer['cmd_create'] = $cmd_create;
-$return = shell_exec($cmd_create);
-if($return !== NULL) {
-	$answer["error_code"] = 1;
-	$answer['error_status'] = $return;
-	goto end;
-}
-
 // PRINT
 
 $options = array();
 
 if($_POST["selection"] === "selectedonly"){
-	array_push($options, "-P " . $_POST["from"] . "-" . $_POST["to"]);
+	array_push($options, "-o page-ranges=" . $_POST["from"] . "-" . $_POST["to"]);
 }
 
-array_push($options, "-n " . $_POST["numbercopies"]);
+array_push($options, "-#" . $_POST["numbercopies"]);
 
 if($_POST["doublesided"]){
 	array_push($options, "-o sides=two-sided-long-edge");  
@@ -81,9 +69,10 @@ if($_POST["blackwhite"]) {
 	array_push($options, "-o JCLColorCorrection=BlackWhite");
 }
 
-array_push($options, "-t '" . $_POST["file_name"] . "'");
+array_push($options, "-T '" . $_POST["file_name"] . "'");
 
-$cmd_print = 'lp -d ' . $printer . ' ' . join(" ", $options) . " 'uploads/" . $_POST["server_file_name"] . "' 2>&1";
+$printer='mainPrinter';
+$cmd_print = 'lpr -P ' . $printer . ' -U '. $_POST['gaspar'] .' ' . join(" ", $options) . " '/tmp/" . $_POST["server_file_name"] . "' 2>&1";
 $answer['cmd_print'] = $cmd_print;
 $return = shell_exec($cmd_print);
 

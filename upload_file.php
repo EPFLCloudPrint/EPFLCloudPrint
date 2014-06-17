@@ -1,6 +1,6 @@
 <?php
 
-$output_dir = "uploads/";
+$output_dir = "/tmp/";
 $answer = array();
 $answer['error_code'] = 0;
 
