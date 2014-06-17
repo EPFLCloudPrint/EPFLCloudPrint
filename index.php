@@ -30,6 +30,8 @@ include("tequila/login.php");
 <script type="text/javascript" src="script.js"></script>
 
 <body>
+  <noscript><?php include("noscript.html") ?></noscript>
+
   <div class="header">
     <img class="logout" src="images/logout.png"/>
     <p><?php echo $name; ?></p>
