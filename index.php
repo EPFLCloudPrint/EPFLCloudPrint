@@ -33,19 +33,9 @@
 <script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="gv048u7pj3hnrec"></script>
 <script src="script.js"></script>
 <body>
-<noscript>
-  <style type="text/css">
-  BODY {text-align: center}
-  H3 {margin-top: 40px}
-  </style>
-  <div class="container">
-    <h3 class="alpha mobile" style="text-align:center; border:2px solid white;">
-      This Page Totally Doesn't Work Without JavaScript.<br/>
-      Sorry :(<br/>
-      Enable JavaScript on your browser and click <a href="index.php">here</a>
-    </h3>
-  </div>
-</noscript>
+  <noscript>
+    <?php include=("noscript.html") ?>
+  </noscript>
   <div class="container">
     <h1 class="sixteen columns alpha mobile" style="display:none;" ><span class="colored">EPFL</span>CloudPrint</h1>
 
