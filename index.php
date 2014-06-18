@@ -1,17 +1,5 @@
 <?php
-  // getInfosFromCookie return an array { gaspar, name } if cookie still valid, NULL otherwise
-  if(isset($_COOKIE['remember_me']) && ($infos = getInfosFromCookie($_COOKIE['remember_me']))) {
-    list ($gaspar, $name) = $infos;
-  } else {
-    // connection with tequila and set $gaspar and $name
-
-
-    // creation og the 'remember_me' cookie in client and DB
-    $hash = hash("sha256", microtime() . rand());
-    $expiration = time() + 7 * 24 * 3600;
-    setcookie('remember_me', $hash, $expiration);
-    storeCookieInfos($gaspar, $name, $hash, $expiration);
-  }
+  include("tequila/login.php");
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -34,7 +22,7 @@
 <script src="script.js"></script>
 <body>
   <div class="header">
-    <img src="images/logout.svg"/>
+    <img class="logout" src="images/logout.svg"/>
     <p><?php echo $name; ?></p>
   </div>
 

@@ -7,31 +7,7 @@
 		* 3 -> incorrect credentials
 */
 
-function areCredentialsCorrect($user, $passwd) {
-	$url = 'https://tequila.epfl.ch/cgi-bin/tequila/login';
-	$data = array('username' => $user, 'password' => $passwd);
-	
-	$options = array(
-		'http' => array(
-			'method'  => 'POST',
-			'content' => http_build_query($data),
-			)
-		);
-	$context  = stream_context_create($options);
-	$result = file_get_contents($url, false, $context);
-	
-	$DOM = new DOMDocument;
-	$DOM->loadHTML($result);
-	return ($DOM->getElementsByTagName('title')->item(0)->nodeValue) === "Tequila";
-}
-
 $answer = array("error_code" => 0);
-
-// CREDENTIAL CHECK
-if( !areCredentialsCorrect($_POST["gaspar"],$_POST["password"]) ){
-	$answer = array("error_code" => 3);
-	goto end;
-} 
 
 // DROPBOX FETCHING
 if(isset($_POST['dropbox_url'])) {

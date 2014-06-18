@@ -268,7 +268,8 @@ $(document).ready(function() {
         }
         upload_information = {
           'server_file_name' : rep['server_file_name'],
-          'file_name' : rep['file_name']
+          'file_name' : rep['file_name'],
+          'gaspar' : gaspar
         };
         $('.print._button').removeClass('_disabled');
       } else {
@@ -396,6 +397,11 @@ $(document).ready(function() {
       });
     });
   }
+
+  /* LOGOUT */
+  $('.logout').click(function() {
+    location.replace('tequila/logout.php');
+  });
 
 });
 
