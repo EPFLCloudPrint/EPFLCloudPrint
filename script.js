@@ -124,19 +124,18 @@ $(document).ready(function() {
   }
 
   var showMessageProgression = function(message) {
-    startCentering();
-    $(".cloud .message").html(message).fadeIn(1000, stopCentering);
+    $(".cloud .message").html(message).fadeIn(1000, centerCloud);
   }
 
-  var hideMessageProgression = function(timing) {
-    $(".cloud .message").fadeOut(1000);
+  var hideMessageProgression = function() {
+    $(".cloud .message").fadeOut(1000, centerCloud);
   }
 
   /* PAGE DISPOSITION */
 
   var centerCloud = function() {
     if($('div.container').width() >=  768) {
-      var h = Math.max(0, ($('.container').height() - 45 - $('.foreground').height()) / 2);
+      var h = Math.max(0, ($('.container').height() - 45 - $('.cloud').height()) / 2);
       $('.cloud').css('margin-top', h);
     } else {
       $('.cloud').css('margin-top', 0);
@@ -236,9 +235,9 @@ $(document).ready(function() {
   });
 
   $("form.formUpload").on("change", function(e) {
-    var file = $(".fileInput")[0].files[0];
-    if(file) {
-      uploadFile(file);
+    var files = $(".fileInput")[0].files;
+    for(var i = 0; i < files.length; i++) {
+      uploadFile(files[i]);
     }
   });
 
@@ -247,10 +246,32 @@ $(document).ready(function() {
     $(".to").check();
   });
 
+  /* UPLOAD */
+
+  var files = [];
+
+  var updateFilesList = function() {
+    $('.message').html("<ul id='files'></ul>");
+    files.forEach(function(file) {
+      var name = file['file_name'];
+      if(name.length > 30) {
+        name = name.substring(0, 13) + "..." + name.substring(name.length - 14, name.length);
+      }
+      $('#files').append("<li><span class='removeFile'>" + name + "</span></li>");
+    });
+    $('span.removeFile').click(function() {
+      files.splice($(this).index(), 1);
+      if(files.length == 0) {
+        toggleTheUploadMode();
+        showTick(false);
+      }
+      updateFilesList();
+    });
+    centerCloud();
+  }
+
   var uploadFile = function(file) {
-    upload_information = {};
     toggleThePrintMode();
-    showMessageProgression('Uploading your file...');
     $('.print._button').addClass('_disabled');
     var fd = new FormData();
     fd.append('file', file );
@@ -262,20 +283,13 @@ $(document).ready(function() {
       var rep = JSON.parse(e.currentTarget.responseText);
       if(rep['error_code'] == 0) {
         showTick(true);
-        showMessageProgression('You have uploaded "<span class="filename">' + rep['file_name'] + '</span>"');
-        if(rep['file_name'].length > 37) {
-          $('.cloud p .filename').addClass('wrap');
-        }
-        upload_information = {
-          'server_file_name' : rep['server_file_name'],
-          'file_name' : rep['file_name'],
-          'gaspar' : gaspar
-        };
+        files.push({'file_name': rep['file_name'], 'server_file_name' : rep['server_file_name']});
+        updateFilesList();
         $('.print._button').removeClass('_disabled');
       } else {
         showTick(false);
         showMessageProgression('An error occured, please retry...');
-        toggleTheUploadMode("UPLOAD YOUR FILE");
+        toggleTheUploadMode("UPLOAD YOUR FILES");
       }
     });
     xhr.open("POST", "upload_file.php");
@@ -298,7 +312,6 @@ $(document).ready(function() {
 
   $('#cloud_path').bind("dragenter", function(e) {
     ticked = ($('#tick_path').css('display') != 'none' );
-    console.log(ticked);
     showTick(false);
 
     $('#arrow_path').css('fill', '#34495e');
@@ -317,13 +330,21 @@ $(document).ready(function() {
     $('#arrow_path').css('fill', 'none');
     $('#arrow_path').css('stroke', 'none');  
     var files = e.originalEvent.dataTransfer.files;
-    uploadFile(files[0]);
+    for(var i = 0; i < files.length; i++) {
+      if( files[i]['name'].split('.').pop() === "pdf") {
+        uploadFile(files[i]);
+      }
+    }
   });
 
   $('.upload._button').bind("drop", function(e){
     $('#cloud_path').attr('fill', 'url(#progression)')
     var files = e.originalEvent.dataTransfer.files;
-    uploadFile(files[0]);
+    for(var i = 0; i < files.length; i++) {
+      if( files[i]['name'].split('.').pop() === "pdf") {
+        uploadFile(files[i]);
+      }
+    }
     $(this).removeClass('drop');   
   });
 
@@ -339,8 +360,11 @@ $(document).ready(function() {
 
   var sendPrint = function() {
     var form = $('#printForm').validate();
+    var multi = (files.length > 1);
     if(! form['error']) {
-      for (var info in upload_information) { form[info] = upload_information[info]; }
+      form['gaspar'] = GASPAR;
+      form['files'] = files;
+      console.log(form);
       $('.print._button').addClass('_disabled');
       $.ajax('print.php', {
         type: "POST",
@@ -352,8 +376,12 @@ $(document).ready(function() {
             var rep = {'error_code' : -1};
           }
           if(rep['error_code'] == 0) {
-            showMessageProgression('The document was sent to the printer');
-            toggleTheUploadMode("UPLOAD NEW FILE");
+            if(multi) {
+              showMessageProgression('The documents were sent to the printer');
+            } else {
+              showMessageProgression('The document was sent to the printer');
+            }
+            toggleTheUploadMode("UPLOAD NEW FILES");
           } else if(rep['error_code'] == 2) {
             showMessageProgression('A problem occured with dropbox');
           } else if(rep['error_code'] == 3) {
@@ -367,6 +395,7 @@ $(document).ready(function() {
           showMessageProgression('An error occured while printing the document...');
         },
         complete: function() {
+          files = [];
           $('.print._button').removeClass('_disabled');
         }
       });
@@ -380,19 +409,18 @@ $(document).ready(function() {
     $('.dropbox._button').show().on("click", function() {
       upload_information = {};
       Dropbox.choose({
-        success: function(files) {
-          upload_information = {
-            'dropbox_url' : files[0].link,
-            'file_name' : files[0].name
-          };
+        success: function(fs) {
+          fs.forEach(function(f) {
+            files.push({'dropbox_url' : f.link, 'file_name' : f.name})
+          });
+          updateFilesList();
           showTick(true);
-          showMessageProgression('You chose "' + files[0].name + '"');
           toggleThePrintMode();
           $('.print._button').removeClass('_disabled');
         },
         error: function() {},
         linkType: "direct", // or "preview"
-        multiselect: false, // or true
+        multiselect: true, // or true
         extensions: ['.pdf']
       });
     });
@@ -404,5 +432,3 @@ $(document).ready(function() {
   });
 
 });
-
-var upload_information = {};

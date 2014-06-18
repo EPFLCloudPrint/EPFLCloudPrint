@@ -45,6 +45,14 @@ p, h1, h3, h5, .dialog {
   background-repeat: no-repeat;
 }
 
+.removeFile:before {
+    vertical-align:-5px;
+    margin-right:5px;
+    width: 16px;
+    height: 16px;
+    content: url(images/cancel.png); /* Little 16x16 currency symbol */
+}
+
 input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0px 1000px white inset;
 }
@@ -166,6 +174,13 @@ input[type="text"]._error:-ms-input-placeholder, input[type="password"]._error:-
 
 .cloud {
   padding-bottom: 15px;
+  margin-bottom: 20px !important;
+}
+
+@media only screen and (max-width: 767px) {
+  .cloud {
+    margin-bottom: 0px !important;
+  }
 }
 
 .cloud p {
@@ -173,10 +188,6 @@ input[type="text"]._error:-ms-input-placeholder, input[type="password"]._error:-
   max-width: 280px;
   margin:auto;
   text-align: center;
-}
-
-.cloud p .filename.wrap {
-  word-break: break-all;
 }
 
 .cloud .foreground {

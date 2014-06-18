@@ -20,5 +20,5 @@ if(strpos($prenom, ',')) {
 }
 
 $user = $oClient->getValue('user');
-echo "<script> var gaspar = '" . $user . "'</script>";
+echo "<script> var GASPAR = '" . $user . "'</script>";
 ?>

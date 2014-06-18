@@ -33,7 +33,7 @@
 
     <div class="cloud six columns omega" >
       <?php include("images/cloud.svg") ?>
-      <p class="message" style="display:none;">Uploading your file...</p>
+      <p class="message"></p>
     </div>
 
     <div class="dialog eight columns">
@@ -110,7 +110,7 @@
   </div>
   <!-- This is utility invisible things -->
   <form class="formUpload" action="upload_file.php" method="post" enctype="multipart/form-data">
-    <input type="file" name="file" class="fileInput" accept="application/pdf" style="display:none">
+    <input type="file" name="file" class="fileInput" accept="application/pdf" style="display:none" multiple>
   </form>
 </body>
 </html>
