@@ -181,21 +181,16 @@ $(document).ready(function() {
 
   var startCentering = function() {
     var proc = setInterval(function() {
-      console.log($('.container').height());
       centerCloud();
       centerDialog();
     }, 10);
     centeringProcessing.push(proc);
-    console.log('start');
-    console.log(centeringProcessing);
   }
   
   var stopCentering = function() {
       if(centeringProcessing.length > 0) {
       var proc = centeringProcessing.shift();
       clearInterval(proc);
-      console.log('stop');
-      console.log(centeringProcessing);
     }
   }
 
@@ -267,9 +262,9 @@ $(document).ready(function() {
 
     if(files.length > 1) {
       $('.all._radiobox').click();
-      $('._radioGroup.selection').hide();
+      $('._radioGroup.selection').hide(centerDialog);
     } else if($('._radioGroup.selection').css('display') == 'none') {
-      $('._radioGroup.selection').show(); 
+      $('._radioGroup.selection').show(centerDialog); 
     }
 
     centerCloud();
@@ -343,19 +338,23 @@ $(document).ready(function() {
   $('#cloud_path').bind("drop", function(e){
     $('#arrow_path').css('fill', 'none');
     $('#arrow_path').css('stroke', 'none');  
-    var files = e.originalEvent.dataTransfer.files;
+    var files = e.originalEvent.target.files || e.originalEvent.dataTransfer.files;
+    console.log(e);
     for(var i = 0; i < files.length; i++) {
-      if( files[i]['name'].split('.').pop() === "pdf") {
+      if( files[i].type === "application/pdf") {
         uploadFile(files[i]);
+      } else {
+        $('#cloud_path').trigger('dragleave');
       }
     }
   });
 
   $('.upload._button').bind("drop", function(e){
-    $('#cloud_path').attr('fill', 'url(#progression)')
-    var files = e.originalEvent.dataTransfer.files;
+    $('#cloud_path').attr('fill', 'url(#progression)');
+    var files = e.originalEvent.target.files || e.originalEvent.dataTransfer.files;
+    console.log(e);
     for(var i = 0; i < files.length; i++) {
-      if( files[i]['name'].split('.').pop() === "pdf") {
+      if( files[i].type === "application/pdf") {
         uploadFile(files[i]);
       }
     }
@@ -374,7 +373,6 @@ $(document).ready(function() {
 
   var sendPrint = function() {
     var form = $('#printForm').validate();
-    var multi = (files.length > 1);
     if(! form['error']) {
       form['gaspar'] = GASPAR;
       form['files'] = files;
@@ -389,8 +387,9 @@ $(document).ready(function() {
           } catch(e) {
             var rep = {'error_code' : -1};
           }
+          console.log(rep);
           if(rep['error_code'] == 0) {
-            if(multi) {
+            if(files.length > 1) {
               showMessageProgression('The documents were sent to the printer');
             } else {
               showMessageProgression('The document was sent to the printer');
