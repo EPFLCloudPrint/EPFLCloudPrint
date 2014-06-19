@@ -1,5 +1,10 @@
 <?php
-  include("tequila/login.php");
+if(!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] == ""){
+  $redirect = "https://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+  header("Location: $redirect");
+}
+
+include("tequila/login.php");
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -73,7 +78,7 @@
             <br class="clear" />
 
             <div class="_radioGroup selection" name="selection">
-            <h5>Pages</h5>
+              <h5>Pages</h5>
 
               <div class="all _radiobox _checked" name="all"></div>
               <span class="_label" for="all"> All </span><br/>
