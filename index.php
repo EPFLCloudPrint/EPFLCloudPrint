@@ -72,9 +72,9 @@
 
             <br class="clear" />
 
+            <div class="_radioGroup selection" name="selection">
             <h5>Pages</h5>
 
-            <div class="_radioGroup selection" name="selection">
               <div class="all _radiobox _checked" name="all"></div>
               <span class="_label" for="all"> All </span><br/>
 
