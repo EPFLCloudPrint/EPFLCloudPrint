@@ -339,7 +339,6 @@ $(document).ready(function() {
     $('#arrow_path').css('fill', 'none');
     $('#arrow_path').css('stroke', 'none');  
     var files = e.originalEvent.target.files || e.originalEvent.dataTransfer.files;
-    console.log(e);
     for(var i = 0; i < files.length; i++) {
       if( files[i].type === "application/pdf") {
         uploadFile(files[i]);
@@ -352,7 +351,6 @@ $(document).ready(function() {
   $('.upload._button').bind("drop", function(e){
     $('#cloud_path').attr('fill', 'url(#progression)');
     var files = e.originalEvent.target.files || e.originalEvent.dataTransfer.files;
-    console.log(e);
     for(var i = 0; i < files.length; i++) {
       if( files[i].type === "application/pdf") {
         uploadFile(files[i]);
@@ -376,7 +374,6 @@ $(document).ready(function() {
     if(! form['error']) {
       form['gaspar'] = GASPAR;
       form['files'] = files;
-      console.log(form);
       $('.print._button').addClass('_disabled');
       $.ajax('print.php', {
         type: "POST",
@@ -387,7 +384,6 @@ $(document).ready(function() {
           } catch(e) {
             var rep = {'error_code' : -1};
           }
-          console.log(rep);
           if(rep['error_code'] == 0) {
             if(files.length > 1) {
               showMessageProgression('The documents were sent to the printer');
