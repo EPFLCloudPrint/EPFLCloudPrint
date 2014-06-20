@@ -20,35 +20,32 @@ jQuery.fn.check = ->
 jQuery.fn.validate = ->
   result = {}
   form = $(this)
+  console.log form
 
-  form.find('input').each (e) ->
-    e.removeClass('_error')
+  form.find('input').each -> $(this).removeClass '_error'
 
-  form.find('input').each (e) ->
-    if not e.hasClass('_numberField')
-      if e.hasClass('nonempty') and $(this).val() is ""
+  form.find('input._nonempty').each  ->
+      if $(this).val() is ""
         result['error'] = true
-        showError e
+        showError $(this)
       else 
-        result[e.attr('name')] = e.val()
+        result[$(this).attr('name')] = $(this).val()
 
-  form.find('._checkbox').each (e) ->
-    result[e.attr('name')] = e.hasClass('_checked')
+  form.find('._checkbox').each ->
+    result[$(this).attr('name')] = $(this).hasClass('_checked')
 
-  form.find('._numberField').each (e) ->
-    if value = parseInt(e.val()) and (not e.attr('min') or value >= parseInt(e.attr('min'))) and (not e.attr('max') or value <= parseInt(e.attr('max')))
-      result[e.attr('name')] = value
+  form.find('._numberField').each ->
+    result[$(this).attr('name')] = parseInt($(this).val())
     else
-      showError e
+      showError $(this)
       result['error'] = true
 
-  form.find('._radioGroup').each (g) ->
-    result[g.attr('name')] = g.find('._radiobox._checked').attr('name');
+  form.find('._radioGroup').each ->
+    result[$(this).attr('name')] = $(this).find('._radiobox._checked').attr('name');
 
   result
 
-$ ->
-
+$(document).ready ->
   $('._checkbox').click ->
     event.preventDefault()
     if $(this).hasClass('_checked')
@@ -75,5 +72,3 @@ $ ->
 
   $('input._numberField').change ->
     $(this).check()
-
-  

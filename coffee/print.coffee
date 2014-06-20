@@ -4,11 +4,11 @@ sendPrint = ->
     form['gaspar'] = GASPAR
     form['files'] = files
     $('.print._button').addClass('_disabled')
-    $.ajax 'print.php',
+    $.ajax 'php/print.php',
       type: "POST"
       data: form
       success: (response) ->
-        rep = try JSON.parse(response) catch e then 'error_code' : -1
+        rep = try JSON.parse(response) catch exeption then 'error_code' : -1
         switch rep['error_code']
           when 0
             message('The document' + (if files.length > 1 then 's were' else ' was') + ' sent to the printer')
@@ -26,5 +26,5 @@ sendPrint = ->
         files = []
         $('.print._button').removeClass('_disabled')
 
-$ ->
+$(document).ready ->
   $('.print._button').click sendPrint

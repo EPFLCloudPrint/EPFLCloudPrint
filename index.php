@@ -24,7 +24,7 @@ include("tequila/login.php");
 <link rel="stylesheet" type="text/css" href="styles.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="gv048u7pj3hnrec"></script>
-<script src="script.js"></script>
+<script type="text/javascript" src="script.js"></script>
 <body>
   <div class="header">
     <img class="logout" src="images/logout.svg"/>
