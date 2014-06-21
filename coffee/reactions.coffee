@@ -2,70 +2,53 @@
 
 centerCloud = ->
   if $('div.container').width() >= 768
-    h = Math.max 0, ($('.container').height() - 45 - $('.cloud').height()) / 2
-    $('.cloud').css('margin-top', h)
+    h = Math.max 0, ($('.container').height() - 70 - $('#cloud_column .foreground').height()) / 2
+    $('#cloud_column').css('margin-top', h)
   else
-    $('.cloud').css('margin-top', 0)
+    $('#cloud_column').css('margin-top', 0)
 
 centerDialog = ->
   if $('.container').width() >=  768
-    h = Math.max 0, ($('div.container').height() - 45 - $('div.dialog').height()) / 2
+    h = Math.max 0, ($('div.container').height() - 40 - $('div.dialog').height()) / 2
     $('.dialog').css('margin-top', h)
   else
     $('.dialog').css('margin-top', 0)
 
-centerButtons = -> 
-  switch $('.container').width()
-    when 300
-      $('.upload._button').css('margin-left', ($('.dialog').width() - $('.upload._button').width())/2)
-      $('.dropbox._button').css('margin-left', ($('.dialog').width() - $('.dropbox._button').width())/2)
-    when 420, 960
-      $('.upload._button').css('margin-left', 0)
-      $('.dropbox._button').css('margin-left', "10px")
-    when 768
-      $('.upload._button').css('margin-left', 0)
-      $('.dropbox._button').css('margin-left', 0)
 
-centerAll = -> 
-  centerDialog()
+$(document).ready ->
   centerCloud()
-  centerButtons()
-
-centeringProcessing = []
-
-startCentering = ->
-  proc = setInterval centerAll, 10
-  centeringProcessing.push proc
-
-stopCentering = ->
-  if centeringProcessing.length > 0
-    clearInterval centeringProcessing.shift
+  centerDialog()
+  $(window).resize -> 
+    centerCloud()
+    centerDialog()
 
 message = (m) ->
   $('.message').html(m)
-  centerCloud()
 
 # TOGGLE MODE
 
-toggleSelectionMode = ->
-  startCentering()
+toggleSelectedOnly = ->
   if $('.selectedonly').hasClass('_checked')
-    $('.fromto').slideDown 'normal', stopCentering
+    $('.fromto').slideDown centerDialog
     $('.from._numberField').val("")
     $('.to._numberField').val("")
   else
-    $('.fromto').slideUp('normal', stopCentering)
+    $('.fromto').slideUp centerDialog
 
-toggleTheUploadMode = (buttonName) ->
-  $('.options').hide()
+toggleSelection = ->
+  $('.all._radiobox').click()
+  if files.length == 1
+    $('._radioGroup.selection').slideDown centerDialog
+  else
+    $('._radioGroup.selection').slideUp centerDialog
+
+showUpload = ->
+  $('.options').slideUp -> $('#button_wrapper').slideDown centerDialog
   $('.formUpload')[0].reset()
-  $('.upload._button').html buttonName
-  $('._empty._button').show centerAll
 
-toggleThePrintMode = ->
-  startCentering()
-  $('._empty._button').hide()
-  $('.options').slideDown 1000, stopCentering
+showPrint = ->
+  $('#button_wrapper').slideUp -> $('.options').slideDown centerDialog
+  
 
 # DRAG AND DROP 
 
@@ -108,13 +91,11 @@ $(document).ready ->
 # BINDING ACTIONS AND START
 
 $(document).ready ->
-  centerAll()
-  $(window).resize centerAll
   $('.logout').click -> location.replace 'tequila/logout.php'
   $('#cloud_path').click -> $('.fileInput').click()
   $('.upload._button').click -> $('.fileInput').click()
   $('form.formUpload').change -> uploadFile file for file in $(".fileInput")[0].files
+  $('.selection._radioGroup').bind 'valueChanged', toggleSelectedOnly
   $('.from').change ->
     $('.to').attr 'min', $('.from').val
     $('.to').check()
-  $('.selection._radioGroup').on 'valueChanged', toggleSelectionMode

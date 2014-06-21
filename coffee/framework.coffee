@@ -35,8 +35,7 @@ jQuery.fn.validate = ->
     result[$(this).attr('name')] = $(this).hasClass('_checked')
 
   form.find('._numberField').each ->
-    result[$(this).attr('name')] = parseInt($(this).val())
-    else
+    if not result[$(this).attr('name')] = parseInt($(this).val())
       showError $(this)
       result['error'] = true
 

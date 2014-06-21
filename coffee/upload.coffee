@@ -1,28 +1,28 @@
 files = []
 
-updateFilesList = ->
-  $('.message').html "<ul id='files'></ul>"
-  for f in files
-    name = if f.file_name.length < 30 then f.file_name else f.file_name[..14] + "..." + f.file_name[-14...]
-    $('#files').append("<li><span class='removeFile'>" + name + "</span></li>")
+addFile = (file) -> 
+  files.push file    
+  name = if file.file_name.length < 40 then file.file_name else file.file_name[..17] + "..." + file.file_name[-10...]
+  $('#fileList').append "<li style='display: none;'>
+          <img class='cancel' src='images/cancel.png' alt='remove file'/>
+          " + name + 
+          "</li>"
+  $('#fileList li').slideDown('very slow')
+  toggleSelection()
+  $('.cancel').unbind('click').click removeFile
 
-  if files.length > 1
-    $('.all._radiobox').click()
-    $('._radioGroup.selection').hide(centerDialog)
-  else if $('._radioGroup.selection').css('display') is 'none'
-    $('._radioGroup.selection').show centerDialog
-
-  centerCloud()
-
-  $('span.removeFile').click ->
-    files.splice $(this).index(), 1
-    if files.length is 0
-      toggleTheUploadMode()
-      $("#tick_path").hide()
-    updateFilesList()
+removeFile = ->
+  id = $('li').index($(this).parent('li'))
+  files.splice id, 1
+  $(this).parent('li').slideUp 'very slow', -> $(this).remove()
+  if files.length is 0
+    showUpload()
+    $("#tick_path").hide()
+  else if files.length is 1
+    toggleSelection()
 
 uploadFile = (file) ->
-  toggleThePrintMode()
+  showPrint()
   $('.print._button').addClass('_disabled')
   fd = new FormData()
   fd.append 'file', file
@@ -31,16 +31,15 @@ uploadFile = (file) ->
     rep = try JSON.parse(e.currentTarget.responseText) catch e then {'error_code' : -1}
     if rep['error_code'] == 0
       $("#tick_path").show()
-      files.push {
+      addFile {
         file_name: rep['file_name']
         server_file_name: rep['server_file_name']
       }
       $('.print._button').removeClass('_disabled')
-      updateFilesList()
     else
       $("#tick_path").hide()
       message('An error occured, please retry...')
-      toggleTheUploadMode("UPLOAD YOUR FILES")
+      showUpload()
 
   xhr.open "POST", "php/upload_file.php"
   xhr.send(fd)

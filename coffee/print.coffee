@@ -12,7 +12,7 @@ sendPrint = ->
         switch rep['error_code']
           when 0
             message('The document' + (if files.length > 1 then 's were' else ' was') + ' sent to the printer')
-            toggleTheUploadMode("UPLOAD NEW FILES")
+            showUpload()
           when 2
             message('A problem occured with dropbox')
           when 3

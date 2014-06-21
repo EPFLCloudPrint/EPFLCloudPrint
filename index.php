@@ -1,10 +1,12 @@
 <?php
-/*if(!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] == ""){
+/*
+if(!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] == ""){
   $redirect = "https://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
   header("Location: $redirect");
-}*/
-
+}
+*/
 include("tequila/login.php");
+
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -22,7 +24,7 @@ include("tequila/login.php");
 <link rel="stylesheet" type="text/css" href="skeleton/skeleton.css" />
 <link rel="stylesheet" type="text/css" href="skeleton/layout.css" />
 <link rel="stylesheet" type="text/css" href="styles.css" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" ></script>
 <script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="gv048u7pj3hnrec"></script>
 <script type="text/javascript" src="script.js"></script>
 <body>
@@ -30,21 +32,23 @@ include("tequila/login.php");
     <img class="logout" src="images/logout.svg"/>
     <p><?php echo $name; ?></p>
   </div>
-
   <div class="container">
-    <h1 class="sixteen columns alpha mobile" style="display:none;" ><span class="colored">EPFL</span>CloudPrint</h1>
+    <h1 class="mobile" style="display:none;" ><span class="colored">EPFL</span>CloudPrint</h1>
 
     <div class="desktop ghost two columns alpha" style="visibility: hidden">hidden</div>
 
-    <div class="cloud six columns omega" >
+    <div id="cloud_column" class="six columns" >
       <?php include("images/cloud.svg") ?>
-      <p class="message"></p>
+      <p class="message" style="display:none">
+      </p>
+      <ul id="fileList">
+      </ul>
     </div>
 
-    <div class="dialog eight columns">
+    <div class="dialog eight columns omega">
       <h1 class="eight columns alpha desktop" ><span class="colored">EPFL</span>CloudPrint</h1>
 
-      <div id="button_wrapper eight columns">
+      <div id="button_wrapper" class="eight columns">
         <div class="upload _button _empty">
           UPLOAD YOUR FILE
         </div>
@@ -57,10 +61,10 @@ include("tequila/login.php");
         <form id="printForm">
 
           <!-- Options -->
-          <div class="six columns alpha omega">
+          <div class="six columns alpha">
 
             <div class="three columns alpha">
-              <h5 class="three columns alpha">Number of copies</h5>
+              <h5>Number of copies</h5>
               <input type="text" class="_numberField two columns alpha" value="1" min="1" name="numbercopies"/>
             </div>
 
@@ -85,34 +89,30 @@ include("tequila/login.php");
 
               <div class="selectedonly _radiobox _unchecked" name="selectedonly"></div>
               <span class="_label" for="selectedonly"> Selected only </span><br/>
-              <div class="fromto" style="display: none">
-                <div class="two columns alpha" >
-                  <input min="1" type="text" class="from _numberField" placeholder="From" name="from" />
-                </div>
-                <div class="two columns omega">
-                  <input min="1" type="text" class="to _numberField" placeholder="To" default="1" name="to" />
-                </div>
-                <br class="clear"/>
+              <div class="fromto" style="display: none;">
+                <input id="from" class="two columns alpha from _numberField" min="1" type="text" placeholder="From" name="from" />
+                <input id="to" class="two columns omega to _numberField" min="1" type="text" placeholder="To" default="1" name="to" />
               </div>
             </div>
 
-            <div class="print _full _button _disabled submit five columns alpha">PRINT</div>
+            <div id="print-button" class="print _full _button _disabled submit five columns alpha">PRINT</div>
           </div>
         </form>
       </div>
     </div>
 
     <br class="clear"/>
-
-    <div class="footer sixteen columns">
-      <p>
-        <a  href="https://github.com/giacomogiudice/EPFLCloudPrint" target="_blank">
-          <img class="logo-github" src="images/GitHub.svg" alt="GitHub link"/>
-        </a>
-        Jean-Baptiste Cordonnier, Charles Gallay and Giacomo Giudice
-      </p>
-    </div>
   </div>
+
+  <div id="footer">
+    <p>
+      <a  href="https://github.com/giacomogiudice/EPFLCloudPrint" target="_blank">
+        <img src="images/GitHub.png" alt="GitHub link"/>
+      </a>
+      Jean-Baptiste Cordonnier, Charles Gallay and Giacomo Giudice
+    </p>
+  </div>
+
   <!-- This is utility invisible things -->
   <form class="formUpload" action="upload_file.php" method="post" enctype="multipart/form-data">
     <input type="file" name="file" class="fileInput" accept="application/pdf" style="display:none" multiple>
