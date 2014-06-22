@@ -2,17 +2,17 @@
 
 centerCloud = ->
   if $('div.container').width() >= 768
-    h = Math.max 0, ($('.container').height() - 70 - $('#cloud_column .foreground').height()) / 2
-    $('#cloud_column').css('margin-top', h)
+    h = Math.max 0, ($('.container').height() - 70 - $('#cloudPicture').height()) / 2
+    $('#cloud').css('margin-top', h)
   else
-    $('#cloud_column').css('margin-top', 0)
+    $('#cloud').css('margin-top', 0)
 
 centerDialog = ->
   if $('.container').width() >=  768
-    h = Math.max 0, ($('div.container').height() - 40 - $('div.dialog').height()) / 2
-    $('.dialog').css('margin-top', h)
+    h = Math.max 0, ($('div.container').height() - 40 - $('#dialog').height()) / 2
+    $('#dialog').css('margin-top', h)
   else
-    $('.dialog').css('margin-top', 0)
+    $('#dialog').css('margin-top', 0)
 
 
 $(document).ready ->
@@ -23,7 +23,7 @@ $(document).ready ->
     centerDialog()
 
 message = (m) ->
-  $('.message').html(m)
+  $('#message').html(m).slideDown 1000, -> setTimeout (-> $('#message').slideUp 1000), 3000
 
 # TOGGLE MODE
 
@@ -43,11 +43,11 @@ toggleSelection = ->
     $('._radioGroup.selection').slideUp centerDialog
 
 showUpload = ->
-  $('.options').slideUp -> $('#button_wrapper').slideDown centerDialog
+  $('.options').slideUp -> $('#buttonWrapper').slideDown centerDialog
   $('.formUpload')[0].reset()
 
 showPrint = ->
-  $('#button_wrapper').slideUp -> $('.options').slideDown centerDialog
+  $('#buttonWrapper').slideUp -> $('.options').slideDown centerDialog
   
 
 # DRAG AND DROP 
@@ -64,27 +64,27 @@ $(document).ready ->
     e.preventDefault()
     false
 
-  $('#cloud_path').bind "dragenter", ->
-    wasTicked = ($('#tick_path').css('display') is not 'none')
-    $('#tick_path').hide()
-    $('#arrow_path').css 'fill', '#34495e'
-    $('#arrow_path').css 'stroke', '#34495e'
+  $('#cloudPath').bind "dragenter", ->
+    wasTicked = ($('#tickPath').css('display') is not 'none')
+    $('#tickPath').hide()
+    $('#arrowPath').css 'fill', '#34495e'
+    $('#arrowPath').css 'stroke', '#34495e'
 
-  $('#cloud_path').bind "dragleave", ->
-    $('#tick_path').show() if wasTicked
-    $('#arrow_path').css('fill', 'none')
-    $('#arrow_path').css('stroke', 'none')
+  $('#cloudPath').bind "dragleave", ->
+    $('#tickPath').show() if wasTicked
+    $('#arrowPath').css('fill', 'none')
+    $('#arrowPath').css('stroke', 'none')
 
-  $('#cloud_path').bind "drop", (e) ->
-    $('#cloud_path').trigger('dragleave') 
+  $('#cloudPath').bind "drop", (e) ->
+    $('#cloudPath').trigger('dragleave') 
     files = e.originalEvent.target.files || e.originalEvent.dataTransfer.files
     uploadFile file for file in files when file.type is "application/pdf"
 
-  $('.upload._button').bind "dragenter", -> $(this).addClass 'drop'
-  $('.upload._button').bind "dragleave", -> $(this).removeClass 'drop'
+  $('#uploadButton').bind "dragenter", -> $(this).addClass 'drop'
+  $('#uploadButton').bind "dragleave", -> $(this).removeClass 'drop'
 
-  $('.upload._button').bind "drop", (e) ->
-    $('.upload._button').trigger('dragleave') 
+  $('#uploadButton').bind "drop", (e) ->
+    $('#uploadButton').trigger('dragleave') 
     files = e.originalEvent.target.files || e.originalEvent.dataTransfer.files
     uploadFile file for file in files when file.type is "application/pdf"
 
@@ -92,8 +92,8 @@ $(document).ready ->
 
 $(document).ready ->
   $('.logout').click -> location.replace 'tequila/logout.php'
-  $('#cloud_path').click -> $('.fileInput').click()
-  $('.upload._button').click -> $('.fileInput').click()
+  $('#cloudPath').click -> $('.fileInput').click()
+  $('#uploadButton').click -> $('.fileInput').click()
   $('form.formUpload').change -> uploadFile file for file in $(".fileInput")[0].files
   $('.selection._radioGroup').bind 'valueChanged', toggleSelectedOnly
   $('.from').change ->

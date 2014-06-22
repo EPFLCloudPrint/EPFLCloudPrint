@@ -3,7 +3,7 @@ sendPrint = ->
   unless form['error']
     form['gaspar'] = GASPAR
     form['files'] = files
-    $('.print._button').addClass('_disabled')
+    $('#printButton').addClass('_disabled')
     $.ajax 'php/print.php',
       type: "POST"
       data: form
@@ -23,8 +23,8 @@ sendPrint = ->
       error: ->
         message('An error occured while printing the document...')
       complete: ->
-        files = []
-        $('.print._button').removeClass('_disabled')
+        clearFileList()
+        $('#printButton').addClass('_disabled')
 
 $(document).ready ->
-  $('.print._button').click sendPrint
+  $('#printButton').click sendPrint

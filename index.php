@@ -1,10 +1,10 @@
 <?php
-/*
+
 if(!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] == ""){
   $redirect = "https://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
   header("Location: $redirect");
 }
-*/
+
 include("tequila/login.php");
 
 ?>
@@ -24,35 +24,38 @@ include("tequila/login.php");
 <link rel="stylesheet" type="text/css" href="skeleton/skeleton.css" />
 <link rel="stylesheet" type="text/css" href="skeleton/layout.css" />
 <link rel="stylesheet" type="text/css" href="styles.css" />
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" ></script>
 <script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="gv048u7pj3hnrec"></script>
 <script type="text/javascript" src="script.js"></script>
+
 <body>
   <div class="header">
-    <img class="logout" src="images/logout.svg"/>
+    <img class="logout" src="images/logout.png"/>
     <p><?php echo $name; ?></p>
   </div>
+
   <div class="container">
     <h1 class="mobile" style="display:none;" ><span class="colored">EPFL</span>CloudPrint</h1>
 
     <div class="desktop ghost two columns alpha" style="visibility: hidden">hidden</div>
 
-    <div id="cloud_column" class="six columns" >
+    <div id="cloud" class="six columns" >
       <?php include("images/cloud.svg") ?>
-      <p class="message" style="display:none">
+      <p id="message" style="display:none">
       </p>
       <ul id="fileList">
       </ul>
     </div>
 
-    <div class="dialog eight columns omega">
+    <div id="dialog" class="eight columns omega">
       <h1 class="eight columns alpha desktop" ><span class="colored">EPFL</span>CloudPrint</h1>
 
-      <div id="button_wrapper" class="eight columns">
-        <div class="upload _button _empty">
+      <div id="buttonWrapper" class="eight columns">
+        <div id="uploadButton" class="_button _empty">
           UPLOAD YOUR FILE
         </div>
-        <div class="dropbox _button _empty" style="display: none;">
+        <div id="dropboxButton" class="_button _empty" style="display: none;">
           LOOK IN DROPBOX
         </div>
       </div>
@@ -95,7 +98,7 @@ include("tequila/login.php");
               </div>
             </div>
 
-            <div id="print-button" class="print _full _button _disabled submit five columns alpha">PRINT</div>
+            <div id="printButton" class="_full _button _disabled submit five columns alpha">PRINT</div>
           </div>
         </form>
       </div>

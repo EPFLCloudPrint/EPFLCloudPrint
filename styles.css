@@ -17,23 +17,25 @@ body {
   height: calc(100% - 84px);
 }
 
-.header {
-  display: inline-block;
-  width: 100%;
-}
-
-.header p, .header img {
-  margin: 0px;
-  padding: 10px 5px;
-}
-
 .ghost {
   visibility: hidden
 }
 
-p, h1, h3, h5, .dialog {
+p, h1, h3, h5, #dialog {
   font-family: inherit;
   color: inherit;
+}
+
+h3 {
+  font-size: 1.4em;
+}
+
+h5 {
+  font-size: 1em;
+}
+
+._label {
+  font-size: 0.8em;
 }
 
 /* MY FRAMEWORK */
@@ -60,9 +62,9 @@ div._button {
   padding: 20px 20px;
   color: white;
   text-align: center;
+  vertical-align: middle;
   border-radius: 5px;
   cursor: pointer;
-  vertical-align: middle;
   font-size: 1.2em;
 }
 
@@ -75,16 +77,16 @@ div._button {
   background-color: #E95E50;
 }
 
-._button._full:active {
+._full:active {
   background-color: #B93D30;
 }
 
-._full._button._disabled {
+._full._disabled {
   background-color: #bdc3c7;
   pointer-events: none;
 }
 
-._full_button._disabled:hover {
+._full._disabled:hover {
   background-color: #bdc3c7;
 }
 
@@ -107,11 +109,16 @@ div._button {
 /* HEADER */
 
 .header {
+  display: inline-block;
   width: 100%;
 }
 
+.header p, .header img {
+  margin: 0px;
+  padding: 10px 5px;
+}
+
 .header img {
-  height:24px;
   float: right;
   cursor: pointer;
 }
@@ -122,79 +129,34 @@ div._button {
   color: #bdc3c7;
 }
 
-/* CLOUD */
-
-#cloud_path {
-  cursor: pointer;
-}
-
 /* TITLE */
-
-h1 .colored {
-  color: #e74c3c;
-}
-
-/* DIALOG */
-
-.dialog {
-  transition: margin-top 1s;
-  /* no selection */
-  -webkit-user-select: none; /* webkit (safari, chrome) browsers */
-  -moz-user-select: none; /* mozilla browsers */
-  -khtml-user-select: none; /* webkit (konqueror) browsers */
-  -ms-user-select: none; /* IE10+ */
-}
 
 h1 {
   padding-bottom: 20px;
 }
 
-h3 {
-  font-size: 1.4em;
-}
-
-h5 {
-  font-size: 1em;
-}
-
-._label {
-  font-size: 0.8em;
-}
-
-input {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
-.upload._button.drop {
-  border: 1px white dashed;
-}
-
-.print._button {
-  padding: 15px 0;
-  margin: 20px 0;
-}
-
-#button_wrapper {
-  padding: 0;
-  margin: 0;
+h1 .colored {
+  color: #e74c3c;
 }
 
 /* CLOUD */
 
-path:not(#cloud_path) {  
+path:not(#cloudPath) {  
   pointer-events: none;
 }
 
-#cloud_column {
+#cloud {
   transition: margin-top 1s;
 }
 
-#cloud_column svg.foreground {
+#cloudPicture {
   margin: auto;
   display: block;
   padding-bottom: 10px;
+}
+
+#cloudPath {
+  cursor: pointer;
 }
 
 /* FILE LIST */
@@ -220,6 +182,41 @@ path:not(#cloud_path) {
   cursor: pointer;
 }
 
+p#message {
+  text-align: center;
+}
+
+/* DIALOG */
+
+#dialog {
+  transition: margin-top 1s;
+  /* no selection */
+  -webkit-user-select: none; /* webkit (safari, chrome) browsers */
+  -moz-user-select: none; /* mozilla browsers */
+  -khtml-user-select: none; /* webkit (konqueror) browsers */
+  -ms-user-select: none; /* IE10+ */
+}
+
+input {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+#uploadButton.drop {
+  border: 1px white dashed;
+}
+
+#printButton {
+  padding: 15px 0;
+  margin: 20px 0;
+}
+
+#buttonWrapper {
+  padding: 0;
+  margin: 0;
+}
+
 /* FOOTER */
 
 #footer {
@@ -242,10 +239,12 @@ path:not(#cloud_path) {
   padding: 8px;
 }
 
+/* SCREEN ADAPTATIONS */
+
+/* One column design */
 @media only screen and (max-width: 767px) {
   .header {
     border-bottom: 1px solid #bdc3c7;
-    /*background-color: #233240;*/
   }
 
   .mobile {
@@ -262,11 +261,11 @@ path:not(#cloud_path) {
     padding-top: 25px;
   }
   
-  .dialog {
+  #dialog {
     padding-bottom: 30px;
   }
 
-  #cloud_column {
+  #cloud {
     padding-bottom: 10px;
   }
 
@@ -276,7 +275,7 @@ path:not(#cloud_path) {
     margin-bottom: 10px;
   }
 
-  #button_wrapper {
+  #buttonWrapper {
     text-align: center;
   }
 
@@ -294,7 +293,7 @@ path:not(#cloud_path) {
     margin-top: 6px;
   }
 
-  .print._button {
+  #printButton {
     padding: 15px 0;
     margin: 25px 0;
   }
@@ -311,13 +310,13 @@ path:not(#cloud_path) {
 }
 
 @media only screen and (min-width: 768px) and (max-width: 940px) {
-  .upload._button {
+  #uploadButton {
     margin-bottom: 15px;
   }
 }
 
 @media only screen and (min-width: 940px) {
-  .dropbox._button {
+  #dropboxButton {
     margin-left: 15px;
   }
 }

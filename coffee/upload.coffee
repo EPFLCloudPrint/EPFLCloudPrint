@@ -17,27 +17,31 @@ removeFile = ->
   $(this).parent('li').slideUp 'very slow', -> $(this).remove()
   if files.length is 0
     showUpload()
-    $("#tick_path").hide()
+    $("#tickPath").hide()
   else if files.length is 1
     toggleSelection()
 
+clearFileList = ->
+  $('#fileList').slideUp().html('').slideDown()
+  files = []
+
 uploadFile = (file) ->
   showPrint()
-  $('.print._button').addClass('_disabled')
+  $('#printButton').addClass('_disabled')
   fd = new FormData()
   fd.append 'file', file
   xhr = new XMLHttpRequest()
   xhr.addEventListener "loadend", (e) -> 
     rep = try JSON.parse(e.currentTarget.responseText) catch e then {'error_code' : -1}
     if rep['error_code'] == 0
-      $("#tick_path").show()
+      $("#tickPath").show()
       addFile {
         file_name: rep['file_name']
         server_file_name: rep['server_file_name']
       }
-      $('.print._button').removeClass('_disabled')
+      $('#printButton').removeClass('_disabled')
     else
-      $("#tick_path").hide()
+      $("#tickPath").hide()
       message('An error occured, please retry...')
       showUpload()
 

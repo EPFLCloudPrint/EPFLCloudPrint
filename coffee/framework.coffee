@@ -5,7 +5,6 @@ showError = (field) ->
     $(this).removeClass('_error')
     $(this).unbind(event)
 
-
 # number field check
 jQuery.fn.check = ->
   if $(this).hasClass('_numberField')
@@ -20,7 +19,6 @@ jQuery.fn.check = ->
 jQuery.fn.validate = ->
   result = {}
   form = $(this)
-  console.log form
 
   form.find('input').each -> $(this).removeClass '_error'
 
@@ -35,9 +33,7 @@ jQuery.fn.validate = ->
     result[$(this).attr('name')] = $(this).hasClass('_checked')
 
   form.find('._numberField').each ->
-    if not result[$(this).attr('name')] = parseInt($(this).val())
-      showError $(this)
-      result['error'] = true
+    result[$(this).attr('name')] = parseInt($(this).val())
 
   form.find('._radioGroup').each ->
     result[$(this).attr('name')] = $(this).find('._radiobox._checked').attr('name');
