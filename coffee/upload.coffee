@@ -25,12 +25,19 @@ clearFileList = ->
   $('#fileList').slideUp().html('').slideDown()
   files = []
 
+loadingFiles = []
+
 uploadFile = (file) ->
   showPrint()
   $('#printButton').addClass('_disabled')
   fd = new FormData()
   fd.append 'file', file
   xhr = new XMLHttpRequest()
+  id = loadingFiles.length
+  loadingFiles.push { loaded: 0, total: 0 }
+  xhr.upload.addEventListener "progress", (e) ->
+    loadingFiles[id] = {loaded: e.loaded, total: e.total}
+    updateProgression()
   xhr.addEventListener "loadend", (e) -> 
     rep = try JSON.parse(e.currentTarget.responseText) catch e then {'error_code' : -1}
     if rep['error_code'] == 0
@@ -47,3 +54,14 @@ uploadFile = (file) ->
 
   xhr.open "POST", "php/upload_file.php"
   xhr.send(fd)
+
+updateProgression = ->
+  sums = loadingFiles.reduce (a, b) -> { loaded: a.loaded + b.loaded, total: a.total + b.total }
+  if ( sums.loaded is sums.total ) and ( not loadingFiles.some((f) -> f.loaded is 0 or f.total is 0) )
+    loadingFiles = []
+    $('#tickPath').show()
+    $('#cloudPath').attr('fill', 'white')
+  else
+    $('#tickPath').hide()
+    $('#cloudPath').attr('fill', 'url(#progression)')
+    $('#progression stop').attr 'offset', sums.loaded / sums.total * 100 + "%"

@@ -1,3 +1,4 @@
+
 $(document).ready ->
   if Dropbox.isBrowserSupported()
     $('#dropboxButton').show().click ->
