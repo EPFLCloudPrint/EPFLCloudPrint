@@ -9,7 +9,7 @@ if(isset($_FILES["file"])) {
     $answer['error_code'] = $_FILES["file"]["error"];
   } else {
     $answer['file_name'] = $_FILES["file"]["name"];
-
+    $_SESSION['file_name'] = $_FILES["file"]["name"];
     //remove special char
     $name = str_replace(' ', '', $_FILES["file"]["name"]);
     $name = str_replace('-', '', $name);

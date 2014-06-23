@@ -49,13 +49,14 @@ session_start();
 				array_push($options, "-o JCLColorCorrection=BlackWhite");
 			}
 
-			array_push($options, "-T '" . $file["file_name"] . "'");
+			array_push($options, "-T " . $_SESSION["file_name"]);
 
 			$printer='mainPrinter';
-			$cmd_print = 'lpr -P ' . $printer . ' -U '. $_SESSION['username'] .' ' . join(" ", $options) . " '/tmp/CloudPrintUpload" . $_SESSION["server_file_name"] . "' 2>&1";
+			$cmd_print = 'lpr -P ' . escapeshellarg($printer) . ' -U '. escapeshellarg($_SESSION['username']) .' ' . join(' ', escapeshellarg($options)) . ' /tmp/CloudPrintUpload' . escapeshellarg($_SESSION["server_file_name"]) . " 2>&1";
 			$return = shell_exec($cmd_print);
 
 		}
 
 		end:
 		echo json_encode($answer);
+?>
