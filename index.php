@@ -1,9 +1,10 @@
 <?php
-
+<conf key="https">
 if(!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] == ""){
   $redirect = "https://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
   header("Location: $redirect");
 }
+</conf>
 
 include("tequila/login.php");
 
@@ -16,7 +17,7 @@ include("tequila/login.php");
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <link rel="icon" type="image/png" href="images/favicon.png" />
   <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
-  <title>EPFLCloudPrint</title>
+  <title><conf key="name"/></title>
 </head>
 
 <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
