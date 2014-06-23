@@ -1,6 +1,6 @@
 <?php
 session_start();
-$output_dir = "/tmp/CloudPrintUpload";
+$output_dir = "/tmp/CloudPrintUpload/";
 $answer = array();
 $answer['error_code'] = 0;
 

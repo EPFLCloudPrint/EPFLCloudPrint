@@ -36,10 +36,10 @@ session_start();
 			$options = array();
 
 			if($_POST["selection"] === "selectedonly"){
-				array_push($options, "-o page-ranges=" . $_POST["from"] . "-" . $_POST["to"]);
+				array_push($options, escapeshellarg("-o page-ranges=" . $_POST["from"] . "-" . $_POST["to"]));
 			}
 
-			array_push($options, "-#" . $_POST["numbercopies"]);
+			array_push($options, escapeshellarg("-#" . $_POST["numbercopies"]));
 
 			if($_POST["doublesided"]){
 				array_push($options, "-o sides=two-sided-long-edge");  
@@ -49,10 +49,12 @@ session_start();
 				array_push($options, "-o JCLColorCorrection=BlackWhite");
 			}
 
-			array_push($options, "-T " . $_SESSION["file_name"]);
+			array_push($options, escapeshellarg("-T " . $_SESSION['file_name']));
+			
+
 
 			$printer='mainPrinter';
-			$cmd_print = 'lpr -P ' . escapeshellarg($printer) . ' -U '. escapeshellarg($_SESSION['username']) .' ' . join(' ', escapeshellarg($options)) . ' /tmp/CloudPrintUpload' . escapeshellarg($_SESSION["server_file_name"]) . " 2>&1";
+			$cmd_print = 'lpr -P ' . escapeshellarg($printer) . ' -U '. escapeshellarg($_SESSION['username']) .' ' . join(' ', $options) . ' ' . escapeshellarg('/tmp/CloudPrintUpload/'.$_SESSION["server_file_name"]) . " 2>&1";
 			$return = shell_exec($cmd_print);
 
 		}
