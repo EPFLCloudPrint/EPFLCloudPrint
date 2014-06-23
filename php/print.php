@@ -22,7 +22,7 @@
 
 	// fetch content
 				$content = file_get_contents($file['dropbox_url']);
-				$success = file_put_contents("uploads/" . $name, $content);
+				$success = file_put_contents("/tmp/CloudPrintUpload/" . $name, $content);
 				$_POST['server_file_name'] = $name;
 
 				if(! $content || ! $success) {
@@ -52,7 +52,7 @@
 			array_push($options, "-T '" . $file["file_name"] . "'");
 
 			$printer='mainPrinter';
-			$cmd_print = 'lpr -P ' . $printer . ' -U '. $_POST['gaspar'] .' ' . join(" ", $options) . " '/tmp/" . $file["server_file_name"] . "' 2>&1";
+			$cmd_print = 'lpr -P ' . $printer . ' -U '. $_POST['gaspar'] .' ' . join(" ", $options) . " '/tmp/CloudPrintUpload" . $file["server_file_name"] . "' 2>&1";
 			$return = shell_exec($cmd_print);
 
 		}

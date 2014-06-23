@@ -1,6 +1,6 @@
 <?php
 
-$output_dir = "/tmp/";
+$output_dir = "/tmp/CloudPrintUpload";
 $answer = array();
 $answer['error_code'] = 0;
 
