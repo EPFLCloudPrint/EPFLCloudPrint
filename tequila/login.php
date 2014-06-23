@@ -20,5 +20,6 @@ if(strpos($prenom, ',')) {
 }
 
 $user = $oClient->getValue('user');
-echo "<script> var GASPAR = '" . $user . "'</script>";
+session_start();
+$_SESSION['username'] = $user;
 ?>
