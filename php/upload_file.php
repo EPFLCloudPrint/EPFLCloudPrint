@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 $output_dir = "/tmp/CloudPrintUpload";
 $answer = array();
 $answer['error_code'] = 0;
@@ -17,7 +17,7 @@ if(isset($_FILES["file"])) {
     $name = str_replace(')', '', $name);
     $name = preg_replace("/(\\.)([^.\\s]{3,4})$/", "${1}-" . time() . "-" . rand() . ".$2", $name);
     $answer['server_file_name'] = $name;	
-
+    $_SESSION['server_file_name'] = $name;
     //move the uploaded file to uploads folder and check if success
     $ok = move_uploaded_file($_FILES["file"]["tmp_name"], $output_dir . $name);
     if(! $ok) {
