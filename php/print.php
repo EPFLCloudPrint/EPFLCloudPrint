@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 /*
 	ERROR_CODE :
 		* 1 -> printing problem
@@ -52,7 +52,7 @@
 			array_push($options, "-T '" . $file["file_name"] . "'");
 
 			$printer='mainPrinter';
-			$cmd_print = 'lpr -P ' . $printer . ' -U '. $_POST['gaspar'] .' ' . join(" ", $options) . " '/tmp/CloudPrintUpload" . $file["server_file_name"] . "' 2>&1";
+			$cmd_print = 'lpr -P ' . $printer . ' -U '. $_SESSION['username'] .' ' . join(" ", $options) . " '/tmp/CloudPrintUpload" . $file["server_file_name"] . "' 2>&1";
 			$return = shell_exec($cmd_print);
 
 		}
