@@ -15,7 +15,7 @@ fi
 echo "create directory CloudPrintUpload for uploading files in /tmp:\n";
 rm -r /tmp/CloudPrintUpload;
 #Create a folder that everybody can write in 
-mkdir --mode=o+wr /tmp/CloudPrintUpload;
+mkdir -m o+wr /tmp/CloudPrintUpload;
 
 
 echo "Adding a printer named mainPrinter\n";
