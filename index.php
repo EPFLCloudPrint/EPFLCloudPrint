@@ -1,9 +1,10 @@
 <?php
-
-#if(!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] == ""){
-#  $redirect = "https://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
-#  header("Location: $redirect");
-#}
+if ($_SERVER['REMOTE_ADDR'] != '127.0.0.1'){
+  if(!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] == ""){
+    $redirect = "https://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+    header("Location: $redirect");
+  }
+}
 
 include("tequila/login.php");
 ?>
@@ -60,7 +61,7 @@ include("tequila/login.php");
           LOOK IN DROPBOX
         </div>
       </div>
-      
+
       <div class="options six columns alpha" style="display: none;">
         <form id="printForm">
 

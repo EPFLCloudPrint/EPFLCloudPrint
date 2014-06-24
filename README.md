@@ -10,9 +10,9 @@ Its uses aren't limited to our university but can be ported to any company or un
 
 - enable php on the server : uncomment `LoadModule php5...` line in configuration file `/etc/apache2/httpd.conf`,
 - fix the `upload_max_filesize` option in `/etc/php.ini`,
-- fix the rights for `uploads/` : `chown _www uploads/` or `chown var_www uploads/`
-- give rights to amin the printers to the web server user : `sudo dseditgroup -o edit -a _www -t user admin` for OS X,
-- change CUPS configuration (on `localhost:631/admin`) and toggle "Use Kerberos authentification" feature.
+- `wget` the correct printer driver and install it,
+- run `$ Administration/install.sh` to configure the server printer (Mac OSX users might need to add `sudo`),
+- if you are running in localhost and don't have an https cert, comment out first lines of `index.php` that force https. 
 
 ======
 This project was originally developed during Facebook Hackathon 2014 organized by Hackers@EPFL (http://hackersatepfl.com).
