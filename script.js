@@ -389,9 +389,7 @@
     });
     xhr.open("POST", "php/upload_file.php");
     xhr.send(fd);
-    if (xhr.readyState === !'DONE' || xhr.status === 200) {
-      return showPrint();
-    }
+    return showPrint();
   };
 
   updateProgression = function() {
