@@ -12,7 +12,8 @@ Its uses aren't limited to our university but can be ported to any company or un
 - fix the `upload_max_filesize` option in `/etc/php.ini`,
 - `wget` the correct printer driver and install it,
 - run `$ Administration/install.sh` to configure the server printer (Mac OSX users might need to add `sudo`),
-- if you are running in localhost and don't have an https cert, comment out first lines of `index.php` that force https. 
+- start the server with `# apachectl start`,
+- everything should be ok, you can test from `localhost` in your browser.
 
 ======
 This project was originally developed during Facebook Hackathon 2014 organized by Hackers@EPFL (http://hackersatepfl.com).
