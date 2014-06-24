@@ -59,7 +59,7 @@ uploadFile = (file) ->
 
   xhr.open "POST", "php/upload_file.php"
   xhr.send(fd)
-  showPrint() if xhr.readyState is not 'DONE' or xhr.status is 200
+  showPrint()
 
 updateProgression = ->
   sums = loadingFiles.reduce (a, b) -> { loaded: a.loaded + b.loaded, total: a.total + b.total }
