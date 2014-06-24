@@ -14,7 +14,7 @@ addFile = (file) ->
 removeFile = ->
   id = $('li').index($(this).parent('li'))
   f = files.splice id, 1
-  removeFileServer f.server_file_name
+  removeFileServer f[0].server_file_name
   $(this).parent('li').slideUp 'very slow', -> $(this).remove()
   if files.length is 0
     showUpload()
@@ -22,10 +22,8 @@ removeFile = ->
   else if files.length is 1
     toggleSelection()
 
-removeFileServer = (server_file_name) -> 
-  $.ajax 'php/remove_file.php',
-    type: "POST"
-    data: server_file_name
+removeFileServer = (server_file_name) ->
+  $.post 'php/remove_file.php', { 'server_file_name': server_file_name }
 
 clearFileList = ->
   $('#fileList').slideUp().html('').slideDown()

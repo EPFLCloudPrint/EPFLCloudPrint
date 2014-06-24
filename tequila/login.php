@@ -22,4 +22,5 @@ if(strpos($prenom, ',')) {
 $user = $oClient->getValue('user');
 session_start();
 $_SESSION['username'] = $user;
+$_SESSION['files'] = array();
 ?>

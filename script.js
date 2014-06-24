@@ -318,7 +318,7 @@
     var f, id;
     id = $('li').index($(this).parent('li'));
     f = files.splice(id, 1);
-    removeFileServer(f.server_file_name);
+    removeFileServer(f[0].server_file_name);
     $(this).parent('li').slideUp('very slow', function() {
       return $(this).remove();
     });
@@ -331,9 +331,8 @@
   };
 
   removeFileServer = function(server_file_name) {
-    return $.ajax('php/remove_file.php', {
-      type: "POST",
-      data: server_file_name
+    return $.post('php/remove_file.php', {
+      'server_file_name': server_file_name
     });
   };
 
