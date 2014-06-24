@@ -9,27 +9,7 @@ session_start();
 
 		$answer = array("error_code" => 0);
 
-		for ($i=0; $i < sizeof($_POST['files']); $i++) {
-
-			$file =  $_POST['files'][$i];
-
-// DROPBOX FETCHING
-			if(isset($file['dropbox_url'])) {
-		// create file name
-				$removed = array(' ', '_', '_', '(', ')');
-				$name = str_replace($removed, '', $file['file_name']);
-				$name = preg_replace("/(\\.)([^.\\s]{3,4})$/", "${1}-" . time() . "-" . rand() . ".$2", $name);
-
-	// fetch content
-				$content = file_get_contents($file['dropbox_url']);
-				$success = file_put_contents("/tmp/CloudPrintUpload/" . $name, $content);
-				$_POST['server_file_name'] = $name;
-
-				if(! $content || ! $success) {
-					$answer = array("error_code" => 2);
-					goto end;
-				}
-			}
+		foreach ($_SESSION['files'] as $f) {
 
 // PRINT
 
@@ -49,16 +29,19 @@ session_start();
 				array_push($options, "-o JCLColorCorrection=BlackWhite");
 			}
 
-			array_push($options, escapeshellarg("-T " . $_SESSION['file_name']));
+			array_push($options, escapeshellarg("-T " . $f['file_name']));
 			
 
 
 			$printer='mainPrinter';
-			$cmd_print = 'lpr -P ' . escapeshellarg($printer) . ' -U '. escapeshellarg($_SESSION['username']) .' ' . join(' ', $options) . ' ' . escapeshellarg('/tmp/CloudPrintUpload/'.$_SESSION["server_file_name"]) . " 2>&1";
+			$cmd_print = 'lpr -P ' . escapeshellarg($printer) . ' -U '. escapeshellarg($_SESSION['username']) .' ' . join(' ', $options) . ' ' . escapeshellarg('/tmp/CloudPrintUpload/'.$f['server_file_name']) . " 2>&1";
 			$return = shell_exec($cmd_print);
-
+			$file = fopen("test.txt","w");
+			fwrite($file,$cmd_print);
+			fclose($file);
 		}
 
 		end:
 		echo json_encode($answer);
+		session_destroy();
 ?>
