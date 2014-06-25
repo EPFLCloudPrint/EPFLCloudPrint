@@ -27,6 +27,7 @@ removeFileServer = (server_file_name) ->
 
 clearFileList = ->
   $('#fileList').slideUp().html('').slideDown()
+  removeFileServer f['server_file_name'] for f in files 
   files = []
 
 loadingFiles = []

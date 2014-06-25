@@ -9,9 +9,10 @@ sendPrint = ->
         rep = try JSON.parse(response) catch exeption then 'error_code' : -1
         switch rep['error_code']
           when 0
+            n = files.length
             clearFileList()
             $('#printButton').addClass('_disabled')
-            message('The document' + (if files.length > 1 then 's were' else ' was') + ' sent to the printer')
+            message('The document' + (if n > 1 then 's were' else ' was') + ' sent to the printer')
             showUpload()
           when 2
             message('A problem occured with dropbox')

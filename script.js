@@ -5,24 +5,42 @@
   $(document).ready(function() {
     if (Dropbox.isBrowserSupported()) {
       return $('#dropboxButton').show().click(function() {
-        return Dropbox.choose({
+        Dropbox.choose({
           success: function(fs) {
-            var f, _i, _len;
-            for (_i = 0, _len = fs.length; _i < _len; _i++) {
-              f = fs[_i];
-              addFile({
+            var n;
+            n = fs.length;
+            return fs.forEach(function(f) {
+              return $.post('php/dropbox.php', {
                 dropbox_url: f.link,
                 file_name: f.name
+              }, function(e) {
+                var exeption, rep;
+                rep = (function() {
+                  try {
+                    return JSON.parse(e);
+                  } catch (_error) {
+                    exeption = _error;
+                    return {
+                      'error_code': -1
+                    };
+                  }
+                })();
+                addFile({
+                  file_name: rep['file_name'],
+                  server_file_name: rep['server_file_name']
+                });
+                if (--n === 0) {
+                  $("#tickPath").show();
+                  return $('#printButton').removeClass('_disabled');
+                }
               });
-            }
-            $("#tickPath").show();
-            showPrint();
-            return $('#printButton').removeClass('_disabled');
+            });
           },
           linkType: "direct",
           multiselect: true,
           extensions: ['.pdf']
         });
+        return showPrint();
       });
     }
   });
@@ -114,7 +132,7 @@
         type: "POST",
         data: form,
         success: function(response) {
-          var exeption, rep;
+          var exeption, n, rep;
           rep = (function() {
             try {
               return JSON.parse(response);
@@ -127,9 +145,10 @@
           })();
           switch (rep['error_code']) {
             case 0:
+              n = files.length;
               clearFileList();
               $('#printButton').addClass('_disabled');
-              message('The document' + (files.length > 1 ? 's were' : ' was') + ' sent to the printer');
+              message('The document' + (n > 1 ? 's were' : ' was') + ' sent to the printer');
               return showUpload();
             case 2:
               return message('A problem occured with dropbox');
@@ -337,7 +356,12 @@
   };
 
   clearFileList = function() {
+    var f, _i, _len;
     $('#fileList').slideUp().html('').slideDown();
+    for (_i = 0, _len = files.length; _i < _len; _i++) {
+      f = files[_i];
+      removeFileServer(f['server_file_name']);
+    }
     return files = [];
   };
 
