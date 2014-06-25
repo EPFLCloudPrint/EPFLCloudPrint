@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer1" xmlns="http://www.w3.org/2000/svg"  x="0px" y="0px"
+	width="85px" height="110px">
+<polyline fill="#FFFFFF" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+	40.082,69.518 40.082,105.999 4.583,105.999 4.583,58.398 28.885,58.398 40.082,69.518 28.885,69.518 28.885,68.859 28.885,58.398
+	"/>
+<polyline fill="#FFFFFF" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+	82.082,69.518 82.082,105.999 46.583,105.999 46.583,58.398 70.885,58.398 82.082,69.518 70.885,69.518 70.885,68.859
+	70.885,58.398 "/>
+<polyline fill="#FFFFFF" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+	40.082,15.518 40.082,51.999 4.583,51.999 4.583,4.398 28.885,4.398 40.082,15.518 28.885,15.518 28.885,14.859 28.885,4.398 "/>
+<polyline fill="#FFFFFF" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+	82.082,15.518 82.082,51.999 46.583,51.999 46.583,4.398 70.885,4.398 82.082,15.518 70.885,15.518 70.885,14.859 70.885,4.398 "/>
+<g>
+	<g>
+		<polyline fill="none" stroke="#2ECC71" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" points="37.403,82.199
+			64.333,82.199 22.333,28.199 64.333,28.199 		"/>
+		<g>
+			<polygon fill="#2ECC71" points="40.467,92.671 22.333,82.199 40.467,71.728 			"/>
+		</g>
+	</g>
+</g>
+</svg>

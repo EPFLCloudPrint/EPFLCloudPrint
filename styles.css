@@ -8,7 +8,8 @@ body {
   background-color: #2c3e50;
   min-height:100%;
   cursor: default;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Open Sans Light', sans-serif;
+  font-weight: 300;
   color: white;
 }
 
@@ -23,6 +24,7 @@ body {
 
 p, h1, h3, h5, #dialog {
   font-family: inherit;
+  font-weight: inherit;
   color: inherit;
 }
 
@@ -35,7 +37,7 @@ h5 {
 }
 
 ._label {
-  font-size: 0.8em;
+  font-size: 0.9em;
 }
 
 /* MY FRAMEWORK */
@@ -48,7 +50,7 @@ h5 {
 }
 
 ._checked {
-  background: url(images/checked.png); 
+  background: url(images/checked.png);
   background-repeat: no-repeat;
 }
 
@@ -141,7 +143,7 @@ h1 .colored {
 
 /* CLOUD */
 
-path:not(#cloudPath) {  
+path:not(#cloudPath) {
   pointer-events: none;
 }
 
@@ -260,7 +262,7 @@ input {
     text-align: center;
     padding-top: 25px;
   }
-  
+
   #dialog {
     padding-bottom: 30px;
   }
@@ -304,7 +306,7 @@ input {
     margin-left: 25px;
   }
 
-  #from, #to { 
+  #from, #to {
     margin-bottom: 0px;
   }
 }
@@ -319,4 +321,14 @@ input {
   #dropboxButton {
     margin-left: 15px;
   }
+}
+
+/*  MULTIPAGE LAYOUT  */
+.layoutPreview {
+  height: 40px;
+}
+
+#pagesheet {
+  width: 50px;
+  margin: 10px 20px 10px 0px
 }

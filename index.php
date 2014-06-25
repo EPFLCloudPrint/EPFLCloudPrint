@@ -1,5 +1,5 @@
 <?php
-if ($_SERVER['REMOTE_ADDR'] != '127.0.0.1'){
+if ($_SERVER['REMOTE_ADDR'] != '127.0.0.1' && $_SERVER['REMOTE_ADDR'] != "::1"){
   if(!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] == ""){
     $redirect = "https://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
     header("Location: $redirect");
@@ -28,6 +28,7 @@ include("tequila/login.php");
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" ></script>
 <script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="gv048u7pj3hnrec"></script>
 <script type="text/javascript" src="script.js"></script>
+<script type="text/javascript" src="pagelayout.js"></script>
 
 <body>
   <noscript><?php include("noscript.html") ?></noscript>
@@ -99,7 +100,21 @@ include("tequila/login.php");
                 <input id="to" class="two columns omega to _numberField" min="1" type="text" placeholder="To" default="1" name="to" />
               </div>
             </div>
-
+            <div class="selection" name="pagelayout">
+              <h5>Pages per Sheet</h5>
+              <select id="pagesheet" class="one columns alpha">
+                <option selected="selected" value="1">1</option>
+                <option value="2">2</option>
+                <option value="4">4</option>
+              </select>
+              <div id="viewlayout" class="three columns alpha" style="display: none;">
+              <img class="layoutPreview" src="images/src/layout1.svg"></img>
+              <img class="layoutPreview"src="images/src/layout2.svg"></img>
+              <img class="layoutPreview" src="images/src/layout3.svg"></img>
+              <img class="layoutPreview" src="images/src/layout4.svg"></img>
+              </div>
+            </div>
+            <br/>
             <div id="printButton" class="_full _button _disabled submit five columns alpha">PRINT</div>
           </div>
         </form>
