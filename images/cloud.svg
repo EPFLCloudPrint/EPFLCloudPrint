@@ -1,6 +1,6 @@
 <svg id="cloudPicture" height="170" width="252">
   <defs>
-    <linearGradient id="progression" x1="0" y1="0" x2="100%" y2="35%">
+    <linearGradient id="progression" x1="0" y1="0" x2="100%" y2="0">
       <stop offset="0%" stop-color="#2ecc71" />
       <stop offset="0%" stop-color="#FFFFFF" />
     </linearGradient>

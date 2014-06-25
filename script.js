@@ -5,42 +5,61 @@
   $(document).ready(function() {
     if (Dropbox.isBrowserSupported()) {
       return $('#dropboxButton').show().click(function() {
-        Dropbox.choose({
+        $('#tickPath').hide();
+        return Dropbox.choose({
           success: function(fs) {
-            var n;
-            n = fs.length;
-            return fs.forEach(function(f) {
-              return $.post('php/dropbox.php', {
-                dropbox_url: f.link,
-                file_name: f.name
-              }, function(e) {
-                var exeption, rep;
-                rep = (function() {
-                  try {
-                    return JSON.parse(e);
-                  } catch (_error) {
-                    exeption = _error;
-                    return {
-                      'error_code': -1
-                    };
+            var m, n;
+            if (fs.length > 0) {
+              showPrint();
+              console.log('show');
+              m = fs.length;
+              n = fs.length;
+              return fs.forEach(function(f) {
+                return $.post('php/dropbox.php', {
+                  dropbox_url: f.link,
+                  file_name: f.name
+                }, function(e) {
+                  var exeption, rep;
+                  rep = (function() {
+                    try {
+                      return JSON.parse(e);
+                    } catch (_error) {
+                      exeption = _error;
+                      return {
+                        'error_code': -1
+                      };
+                    }
+                  })();
+                  addFile({
+                    file_name: rep['file_name'],
+                    server_file_name: rep['server_file_name']
+                  });
+                  if (--n === 0 && m === 1) {
+                    $("#cloudPath").attr('fill', 'white');
+                    $("#tickPath").show();
+                    return $('#printButton').removeClass('_disabled');
+                  } else if (n === 0) {
+                    $('#tickPath').hide();
+                    $('#cloudPath').attr('fill', 'url(#progression)');
+                    $('#progression stop').attr('offset', 100 + "%");
+                    $('#printButton').removeClass('_disabled');
+                    return setTimeout((function() {
+                      $("#cloudPath").attr('fill', 'white');
+                      return $("#tickPath").show();
+                    }), 1000);
+                  } else {
+                    $('#tickPath').hide();
+                    $('#cloudPath').attr('fill', 'url(#progression)');
+                    return $('#progression stop').attr('offset', (m - n) / m * 100 + "%");
                   }
-                })();
-                addFile({
-                  file_name: rep['file_name'],
-                  server_file_name: rep['server_file_name']
                 });
-                if (--n === 0) {
-                  $("#tickPath").show();
-                  return $('#printButton').removeClass('_disabled');
-                }
               });
-            });
+            }
           },
           linkType: "direct",
           multiselect: true,
           extensions: ['.pdf']
         });
-        return showPrint();
       });
     }
   });
@@ -227,10 +246,12 @@
   };
 
   showUpload = function() {
-    $('.options').slideUp(function() {
-      return $('#buttonWrapper').slideDown(centerDialog);
-    });
-    return $('.formUpload')[0].reset();
+    if ($('.options').css('display') === 'none') {
+      $('.options').slideUp(function() {
+        return $('#buttonWrapper').slideDown(centerDialog);
+      });
+      return $('.formUpload')[0].reset();
+    }
   };
 
   showPrint = function() {
