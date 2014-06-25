@@ -149,6 +149,9 @@
               clearFileList();
               $('#printButton').addClass('_disabled');
               message('The document' + (n > 1 ? 's were' : ' was') + ' sent to the printer');
+              setTimeout((function() {
+                return $('#tickPath').hide();
+              }), 5000);
               return showUpload();
             case 2:
               return message('A problem occured with dropbox');

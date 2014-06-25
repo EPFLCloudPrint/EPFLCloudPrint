@@ -13,6 +13,7 @@ sendPrint = ->
             clearFileList()
             $('#printButton').addClass('_disabled')
             message('The document' + (if n > 1 then 's were' else ' was') + ' sent to the printer')
+            setTimeout (-> $('#tickPath').hide()), 5000
             showUpload()
           when 2
             message('A problem occured with dropbox')
