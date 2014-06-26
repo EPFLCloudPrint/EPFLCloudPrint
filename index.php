@@ -1,6 +1,6 @@
 <?php
 
-if ($_SERVER['REMOTE_ADDR'] != '127.0.0.1'){
+if ($_SERVER['REMOTE_ADDR'] != '127.0.0.1' && $_SERVER['REMOTE_ADDR'] != '::1'){
   if(!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] == ""){
     $redirect = "https://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
     header("Location: $redirect");
@@ -34,7 +34,7 @@ include("tequila/login.php");
   <noscript><?php include("noscript.html") ?></noscript>
 
   <div class="header">
-    <img class="logout" src="images/logout.png"/>
+    <img class="logout svgfallback" id="logoutIcon" src="images/logout.svg"/>
     <p><?php echo $name; ?></p>
   </div>
 
@@ -43,7 +43,7 @@ include("tequila/login.php");
 
     <div class="desktop ghost two columns alpha" style="visibility: hidden">hidden</div>
 
-    <div id="cloud" class="six columns" >
+    <div id="cloud" class="six columns">
       <?php include("images/cloud.svg") ?>
       <p id="message" style="display:none">
       </p>
@@ -113,7 +113,7 @@ include("tequila/login.php");
   <div id="footer">
     <p>
       <a  href="https://github.com/giacomogiudice/EPFLCloudPrint" target="_blank">
-        <img src="images/GitHub.png" alt="GitHub link"/>
+        <img class="svgfallback" src="images/GitHub.svg" alt="GitHub link"/>
       </a>
       Jean-Baptiste Cordonnier, Charles Gallay and Giacomo Giudice
     </p>

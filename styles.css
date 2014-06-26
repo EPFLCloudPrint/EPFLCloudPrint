@@ -9,6 +9,7 @@ body {
   min-height:100%;
   cursor: default;
   font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
   color: white;
 }
 
@@ -23,6 +24,7 @@ body {
 
 p, h1, h3, h5, #dialog {
   font-family: inherit;
+  font-weight: inherit;
   color: inherit;
 }
 
@@ -35,7 +37,7 @@ h5 {
 }
 
 ._label {
-  font-size: 0.8em;
+  font-size: 0.9em;
 }
 
 /* MY FRAMEWORK */
@@ -48,7 +50,7 @@ h5 {
 }
 
 ._checked {
-  background: url(images/checked.png); 
+  background: url(images/checked.png);
   background-repeat: no-repeat;
 }
 
@@ -129,6 +131,12 @@ div._button {
   color: #bdc3c7;
 }
 
+#logoutIcon {
+  width: 20px;
+  height: 24px;
+  margin: 0 15px 0 0;
+}
+
 /* TITLE */
 
 h1 {
@@ -141,7 +149,7 @@ h1 .colored {
 
 /* CLOUD */
 
-path:not(#cloudPath) {  
+path:not(#cloudPath) {
   pointer-events: none;
 }
 
@@ -152,7 +160,6 @@ path:not(#cloudPath) {
 #cloudPicture {
   margin: auto;
   display: block;
-  padding-bottom: 10px;
 }
 
 #cloudPath {
@@ -237,6 +244,8 @@ input {
 #footer img {
   vertical-align: middle;
   padding: 8px;
+  width:26px;
+  height:26px;
 }
 
 /* SCREEN ADAPTATIONS */
@@ -260,7 +269,7 @@ input {
     text-align: center;
     padding-top: 25px;
   }
-  
+
   #dialog {
     padding-bottom: 30px;
   }
@@ -304,7 +313,7 @@ input {
     margin-left: 25px;
   }
 
-  #from, #to { 
+  #from, #to {
     margin-bottom: 0px;
   }
 }
