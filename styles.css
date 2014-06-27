@@ -123,18 +123,15 @@ div._button {
 .header img {
   float: right;
   cursor: pointer;
+  width: 20px;
+  height: 24px;
+  margin: 0 15px 0 0;
 }
 
 .header p {
   float: right;
   font-size: 1.3em;
   color: #bdc3c7;
-}
-
-#logoutIcon {
-  width: 20px;
-  height: 24px;
-  margin: 0 15px 0 0;
 }
 
 /* TITLE */

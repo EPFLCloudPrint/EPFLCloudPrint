@@ -246,7 +246,7 @@
   };
 
   showUpload = function() {
-    if ($('.options').css('display') === 'none') {
+    if ($('#buttonWrapper').css('display') === 'none') {
       $('.options').slideUp(function() {
         return $('#buttonWrapper').slideDown(centerDialog);
       });
@@ -263,15 +263,17 @@
   wasTicked = false;
 
   $(document).ready(function() {
-    $(document.body).bind("dragover", function(e) {
+    $(document.body).bind("dragover drop", function(e) {
       e.preventDefault();
       return false;
     });
-    $(document.body).bind("drop", function(e) {
+
+    $('#cloudPath').bind("dragover", function(e) {
       e.preventDefault();
       return false;
     });
-    $('#cloudPath').bind("dragenter", function() {
+    $('#cloudPath').bind("dragenter", function(e) {
+      e.preventDefault();
       wasTicked = $('#tickPath').css('display') === !'none';
       $('#tickPath').hide();
       $('#arrowPath').css('fill', '#34495e');
@@ -285,19 +287,20 @@
       return $('#arrowPath').css('stroke', 'none');
     });
     $('#cloudPath').bind("drop", function(e) {
+      e.preventDefault();
       var file, files, _i, _len, _results;
       $('#cloudPath').trigger('dragleave');
       files = e.originalEvent.target.files || e.originalEvent.dataTransfer.files;
       _results = [];
       for (_i = 0, _len = files.length; _i < _len; _i++) {
         file = files[_i];
-        if (file.type === "application/pdf") {
+        if (file.type === "text/html" || file.type === "application/pdf") {
           _results.push(uploadFile(file));
         }
       }
       return _results;
     });
-    $('#uploadButton').bind("dragenter", function() {
+    $('#uploadButton').bind("dragenter dragover", function() {
       return $(this).addClass('drop');
     });
     $('#uploadButton').bind("dragleave", function() {
@@ -310,7 +313,7 @@
       _results = [];
       for (_i = 0, _len = files.length; _i < _len; _i++) {
         file = files[_i];
-        if (file.type === "application/pdf") {
+        if (file.type === "text/html" || file.type === "application/pdf") {
           _results.push(uploadFile(file));
         }
       }

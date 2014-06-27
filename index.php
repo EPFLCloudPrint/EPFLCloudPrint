@@ -56,7 +56,7 @@ include("tequila/login.php");
 
       <div id="buttonWrapper" class="eight columns">
         <div id="uploadButton" class="_button _empty">
-          UPLOAD YOUR FILE
+          UPLOAD YOUR FILES
         </div>
         <div id="dropboxButton" class="_button _empty" style="display: none;">
           LOOK IN DROPBOX
