@@ -43,9 +43,8 @@ toggleSelection = ->
     $('._radioGroup.selection').slideUp centerDialog
 
 showUpload = ->
-  if $('.options').css('display') is 'none'
-    $('.options').slideUp -> $('#buttonWrapper').slideDown centerDialog
-    $('.formUpload')[0].reset()
+  $('.options').slideUp -> $('#buttonWrapper').slideDown centerDialog
+  $('.formUpload')[0].reset()
 
 showPrint = ->
   $('#buttonWrapper').slideUp -> $('.options').slideDown centerDialog

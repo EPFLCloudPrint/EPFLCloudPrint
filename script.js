@@ -246,12 +246,10 @@
   };
 
   showUpload = function() {
-    if ($('.options').css('display') === 'none') {
-      $('.options').slideUp(function() {
-        return $('#buttonWrapper').slideDown(centerDialog);
-      });
-      return $('.formUpload')[0].reset();
-    }
+    $('.options').slideUp(function() {
+      return $('#buttonWrapper').slideDown(centerDialog);
+    });
+    return $('.formUpload')[0].reset();
   };
 
   showPrint = function() {
