@@ -112,7 +112,7 @@ include("tequila/login.php");
 
   <div id="footer">
     <p>
-      <a  href="https://github.com/giacomogiudice/EPFLCloudPrint" target="_blank">
+      <a  href="https://github.com/EPFLCloudPrint/EPFLCloudPrint" target="_blank">
         <img class="svgfallback" src="images/GitHub.svg" alt="GitHub link"/>
       </a>
       Jean-Baptiste Cordonnier, Charles Gallay and Giacomo Giudice
