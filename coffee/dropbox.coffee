@@ -4,10 +4,10 @@ $(document).ready ->
     $('#dropboxButton').show().click ->
       $('#printButton').addClass '_disabled'
       $('#tickPath').hide()
-      updateProgression 5, 100
       Dropbox.choose {
         success: (fs) ->
           if(fs.length > 0)
+            updateProgression 5, 100
             showPrint()
             m = fs.length
             n = fs.length

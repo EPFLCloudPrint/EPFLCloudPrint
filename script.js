@@ -7,11 +7,11 @@
       return $('#dropboxButton').show().click(function() {
         $('#printButton').addClass('_disabled');
         $('#tickPath').hide();
-        updateProgression(5, 100);
         return Dropbox.choose({
           success: function(fs) {
             var m, n;
             if (fs.length > 0) {
+              updateProgression(5, 100);
               showPrint();
               m = fs.length;
               n = fs.length;
@@ -172,13 +172,13 @@
               }), 5000);
               return showUpload();
             case 2:
-              return message('A problem occured with dropbox');
+              return showError('A problem occured with dropbox');
             default:
-              return message('An error occured while printing the document...');
+              return showError('An error occured while printing the documents...');
           }
         },
         error: function() {
-          return message('An error occured while printing the document...');
+          return showError('An error occured while printing the documents...');
         }
       });
     }
@@ -187,6 +187,13 @@
   $(document).ready(function() {
     return $('#printButton').click(sendPrint);
   });
+
+  showError = function(m) {
+    $('#tickPath').hide();
+    message(m);
+    clearFileList();
+    return showUpload();
+  };
 
   centerCloud = function() {
     var h;
@@ -381,12 +388,12 @@
     return files = [];
   };
 
-  uploadFiles = function(files) {
+  uploadFiles = function(fs) {
     var f, fd, xhr, _i, _len;
     $('#printButton').addClass('_disabled');
     fd = new FormData();
-    for (_i = 0, _len = files.length; _i < _len; _i++) {
-      f = files[_i];
+    for (_i = 0, _len = fs.length; _i < _len; _i++) {
+      f = fs[_i];
       fd.append('file[]', f);
     }
     xhr = new XMLHttpRequest();
@@ -412,9 +419,7 @@
         _ref = rep['files'];
         for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
           f = _ref[_j];
-          if (f.file_name !== null && f.server_file_name !== "") {
-            addFile(f);
-          }
+          addFile(f);
         }
         return $('#printButton').removeClass('_disabled');
       } else {

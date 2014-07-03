@@ -16,11 +16,17 @@ sendPrint = ->
             setTimeout (-> $('#tickPath').hide()), 5000
             showUpload()
           when 2
-            message('A problem occured with dropbox')
+            showError('A problem occured with dropbox')
           else
-            message('An error occured while printing the document...')
+            showError('An error occured while printing the documents...')
       error: ->
-        message('An error occured while printing the document...')
+        showError('An error occured while printing the documents...')
 
 $(document).ready ->
   $('#printButton').click sendPrint
+
+showError = (m) -> 
+  $('#tickPath').hide()
+  message(m)
+  clearFileList();
+  showUpload();

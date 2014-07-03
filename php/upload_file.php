@@ -21,7 +21,7 @@ foreach ($_FILES["file"]['error'] as $error) {
   } 
 }
 
-for ($i=0; $i < sizeof($_FILES["file"]); $i++) { 
+for ($i=0; $i < sizeof($_FILES['file']['name']); $i++) { 
   $file_name = $_FILES["file"]["name"][$i];
   $server_file_name = preg_replace("/(\\.)([^.\\s]{3,4})$/", "${1}-" . time() . "-" . rand() . ".$2", $file_name);
 

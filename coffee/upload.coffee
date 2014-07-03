@@ -30,10 +30,10 @@ clearFileList = ->
   removeFileServer f['server_file_name'] for f in files 
   files = []
 
-uploadFiles = (files) ->
+uploadFiles = (fs) ->
   $('#printButton').addClass('_disabled')
   fd = new FormData()
-  fd.append 'file[]', f for f in files
+  fd.append 'file[]', f for f in fs
   xhr = new XMLHttpRequest()
   xhr.upload.addEventListener "progress", (e) ->
     updateProgression(e.loaded, e.total)
@@ -44,7 +44,7 @@ uploadFiles = (files) ->
       $('#cloudPath').attr('fill', 'white')
       $('#tickPath').show()
       for f in rep['files']
-        addFile f if f.file_name isnt null and f.server_file_name isnt ""
+        addFile f
       $('#printButton').removeClass('_disabled')
     else
       $("#tickPath").hide()
