@@ -28,8 +28,11 @@ if [ ! -e "$ppd" ]; then
 	if [ $(uname) = "Darwin" ] && [ -e "$mac_ppd" ]; then
 		mv "$mac_ppd" "$ppd";
 	else
-		echo "Printer PPD for Xerox WorkCentre 7655 not found" >&2;
-		exit 1;
+		echo "downloading it from EPFL server";
+		wget http://linux.epfl.ch/webdav/site/linuxline/shared/xr_WorkCentre7655R.ppd.gz -P /usr/share/cups/model;
+		if [ $(uname) = "Darwin" ]; then
+			gunzip /usr/share/cups/model/xr_WorkCentre7655R.ppd.gz /usr/share/cups/model/;
+		fi
 	fi
 fi
 if [ -f "$ppd" ] && [ -d "$dir" ]; then
