@@ -20,7 +20,9 @@ if(strpos($prenom, ',')) {
 }
 
 $user = $oClient->getValue('user');
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+  session_start();
+}
 $_SESSION['username'] = $user;
 $_SESSION['files'] = array();
 ?>

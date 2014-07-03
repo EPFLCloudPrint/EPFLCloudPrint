@@ -2,7 +2,7 @@
 
 centerCloud = ->
   if $('div.container').width() >= 768
-    h = Math.max 0, ($('.container').height() - 70 - $('#cloudPicture').height()) / 2
+    h = Math.max 0, ($('.container').height() - 60 - $('#cloudPicture').height()) / 2
     $('#cloud').css('margin-top', h)
   else
     $('#cloud').css('margin-top', 0)
@@ -18,7 +18,7 @@ centerDialog = ->
 $(document).ready ->
   centerCloud()
   centerDialog()
-  $(window).resize -> 
+  $(window).resize ->
     centerCloud()
     centerDialog()
 
@@ -29,11 +29,11 @@ message = (m) ->
 
 toggleSelectedOnly = ->
   if $('.selectedonly').hasClass('_checked')
-    $('.fromto').slideDown centerDialog
+    $('.fromto').slideDown()
     $('.from._numberField').val("")
     $('.to._numberField').val("")
   else
-    $('.fromto').slideUp centerDialog
+    $('.fromto').slideUp()
 
 toggleSelection = ->
   $('.all._radiobox').click()
@@ -43,28 +43,25 @@ toggleSelection = ->
     $('._radioGroup.selection').slideUp centerDialog
 
 showUpload = ->
-  $('.options').slideUp -> $('#buttonWrapper').slideDown centerDialog
-  $('.formUpload')[0].reset()
+  if $('#buttonWrapper').css('display') == 'none'
+    $('.options').slideUp -> $('#buttonWrapper').slideDown centerDialog
+    $('.formUpload')[0].reset()
 
 showPrint = ->
   $('#buttonWrapper').slideUp -> $('.options').slideDown centerDialog
-  
 
-# DRAG AND DROP 
+
+# DRAG AND DROP
 
 wasTicked = false
 
 $(document).ready ->
 
-  $(document.body).bind "dragover", (e) ->
+  $(document.body).bind "dragover drop", (e) ->
     e.preventDefault()
     false
 
-  $(document.body).bind "drop", (e) ->
-    e.preventDefault()
-    false
-
-  $('#cloudPath').bind "dragenter", ->
+  $('#cloudPath').bind "dragenter", (e) ->
     wasTicked = ($('#tickPath').css('display') is not 'none')
     $('#tickPath').hide()
     $('#arrowPath').css 'fill', '#34495e'
@@ -76,17 +73,17 @@ $(document).ready ->
     $('#arrowPath').css('stroke', 'none')
 
   $('#cloudPath').bind "drop", (e) ->
-    $('#cloudPath').trigger('dragleave') 
+    $('#cloudPath').trigger('dragleave')
     files = e.originalEvent.target.files || e.originalEvent.dataTransfer.files
-    uploadFile file for file in files when file.type is "application/pdf"
+    uploadFile file for file in files when file.type is "application/pdf" or file.type is "text/html"
 
-  $('#uploadButton').bind "dragenter", -> $(this).addClass 'drop'
+  $('#uploadButton').bind "dragenter dragover", -> $(this).addClass 'drop'
   $('#uploadButton').bind "dragleave", -> $(this).removeClass 'drop'
 
   $('#uploadButton').bind "drop", (e) ->
-    $('#uploadButton').trigger('dragleave') 
+    $('#uploadButton').trigger('dragleave')
     files = e.originalEvent.target.files || e.originalEvent.dataTransfer.files
-    uploadFile file for file in files when file.type is "application/pdf"
+    uploadFile file for file in files when file.type is "application/pdf" or file.type is "text/html"
 
 # BINDING ACTIONS AND START
 
