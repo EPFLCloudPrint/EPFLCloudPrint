@@ -112,7 +112,7 @@
   };
 
   $(document).ready(function() {
-    $('._checkbox').click(function() {
+    $('._checkbox').click(function(event) {
       event.preventDefault();
       if ($(this).hasClass('_checked')) {
         $(this).removeClass('_checked').addClass('_unchecked');
@@ -121,7 +121,7 @@
       }
       return $(this).trigger('valueChanged');
     });
-    $('._radiobox').click(function() {
+    $('._radiobox').click(function(event) {
       event.preventDefault();
       if ($(this).hasClass('_unchecked')) {
         $(this).parents('._radioGroup').children('._radiobox').removeClass('_checked').addClass('_unchecked');
@@ -129,7 +129,7 @@
         return $(this).parents('._radioGroup').trigger('valueChanged');
       }
     });
-    $('._label').click(function() {
+    $('._label').click(function(event) {
       event.preventDefault();
       return $('.' + $(this).attr('for')).click();
     });
@@ -192,7 +192,7 @@
   centerCloud = function() {
     var h;
     if ($('div.container').width() >= 768) {
-      h = Math.max(0, ($('.container').height() - 70 - $('#cloudPicture').height()) / 2);
+      h = Math.max(0, ($('.container').height() - 60 - $('#cloudPicture').height()) / 2);
       return $('#cloud').css('margin-top', h);
     } else {
       return $('#cloud').css('margin-top', 0);
@@ -228,11 +228,11 @@
 
   toggleSelectedOnly = function() {
     if ($('.selectedonly').hasClass('_checked')) {
-      $('.fromto').slideDown(centerDialog);
+      $('.fromto').slideDown();
       $('.from._numberField').val("");
       return $('.to._numberField').val("");
     } else {
-      return $('.fromto').slideUp(centerDialog);
+      return $('.fromto').slideUp();
     }
   };
 
@@ -246,10 +246,12 @@
   };
 
   showUpload = function() {
-    $('.options').slideUp(function() {
-      return $('#buttonWrapper').slideDown(centerDialog);
-    });
-    return $('.formUpload')[0].reset();
+    if ($('#buttonWrapper').css('display') === 'none') {
+      $('.options').slideUp(function() {
+        return $('#buttonWrapper').slideDown(centerDialog);
+      });
+      return $('.formUpload')[0].reset();
+    }
   };
 
   showPrint = function() {
@@ -261,15 +263,11 @@
   wasTicked = false;
 
   $(document).ready(function() {
-    $(document.body).bind("dragover", function(e) {
+    $(document.body).bind("dragover drop", function(e) {
       e.preventDefault();
       return false;
     });
-    $(document.body).bind("drop", function(e) {
-      e.preventDefault();
-      return false;
-    });
-    $('#cloudPath').bind("dragenter", function() {
+    $('#cloudPath').bind("dragenter", function(e) {
       wasTicked = $('#tickPath').css('display') === !'none';
       $('#tickPath').hide();
       $('#arrowPath').css('fill', '#34495e');
@@ -289,13 +287,13 @@
       _results = [];
       for (_i = 0, _len = files.length; _i < _len; _i++) {
         file = files[_i];
-        if (file.type === "application/pdf") {
+        if (file.type === "application/pdf" || file.type === "text/html") {
           _results.push(uploadFile(file));
         }
       }
       return _results;
     });
-    $('#uploadButton').bind("dragenter", function() {
+    $('#uploadButton').bind("dragenter dragover", function() {
       return $(this).addClass('drop');
     });
     $('#uploadButton').bind("dragleave", function() {
@@ -308,7 +306,7 @@
       _results = [];
       for (_i = 0, _len = files.length; _i < _len; _i++) {
         file = files[_i];
-        if (file.type === "application/pdf") {
+        if (file.type === "application/pdf" || file.type === "text/html") {
           _results.push(uploadFile(file));
         }
       }
