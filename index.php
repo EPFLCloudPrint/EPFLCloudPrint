@@ -11,12 +11,26 @@ include("tequila/login.php");
 ?>
 
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta name="viewport" content="width=device-width">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <link rel="icon" type="image/png" href="images/favicon.png" />
-  <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
+  <link rel="shortcut icon" href="images/icons/favicon.ico">
+  <link rel="apple-touch-icon" sizes="57x57" href="images/icons/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="images/icons/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="images/icons/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="images/icons/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="images/icons/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="images/icons/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="images/icons/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="images/icons/apple-touch-icon-152x152.png">
+  <link rel="icon" type="image/png" href="images/icons/favicon-196x196.png" sizes="196x196">
+  <link rel="icon" type="image/png" href="images/icons/favicon-160x160.png" sizes="160x160">
+  <link rel="icon" type="image/png" href="images/icons/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="images/icons/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="images/icons/favicon-32x32.png" sizes="32x32">
+  <meta name="msapplication-TileColor" content="#2b5797">
+  <meta name="msapplication-TileImage" content="images/icons/mstile-144x144.png">
+  <meta name="msapplication-config" content="images/icons/browserconfig.xml">
   <title>EPFLCloudPrint</title>
 </head>
 
@@ -26,7 +40,7 @@ include("tequila/login.php");
 <link rel="stylesheet" type="text/css" href="skeleton/layout.css" />
 <link rel="stylesheet" type="text/css" href="styles.css" />
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" ></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js" ></script>
 <script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="gv048u7pj3hnrec"></script>
 <script type="text/javascript" src="script.js"></script>
 
