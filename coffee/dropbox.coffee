@@ -2,12 +2,13 @@
 $(document).ready ->
   if Dropbox.isBrowserSupported()
     $('#dropboxButton').show().click ->
+      $('#printButton').addClass '_disabled'
       $('#tickPath').hide()
+      updateProgression 5, 100
       Dropbox.choose {
         success: (fs) ->
           if(fs.length > 0)
             showPrint()
-            console.log 'show'
             m = fs.length
             n = fs.length
             fs.forEach (f) ->
@@ -28,9 +29,7 @@ $(document).ready ->
                     $("#tickPath").show()
                     ), 1000
                 else
-                  $('#tickPath').hide()
-                  $('#cloudPath').attr('fill', 'url(#progression)')
-                  $('#progression stop').attr 'offset', (m - n) / m * 100 + "%"
+                  updateProgression m - n, m
 
         linkType: "direct"
         multiselect: true

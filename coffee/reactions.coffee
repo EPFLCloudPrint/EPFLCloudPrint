@@ -14,14 +14,6 @@ centerDialog = ->
   else
     $('#dialog').css('margin-top', 0)
 
-
-$(document).ready ->
-  centerCloud()
-  centerDialog()
-  $(window).resize ->
-    centerCloud()
-    centerDialog()
-
 message = (m) ->
   $('#message').html(m).slideDown 1000, -> setTimeout (-> $('#message').slideUp 1000), 3000
 
@@ -43,13 +35,16 @@ toggleSelection = ->
     $('._radioGroup.selection').slideUp centerDialog
 
 showUpload = ->
-  if $('#buttonWrapper').css('display') == 'none'
-    $('.options').slideUp -> $('#buttonWrapper').slideDown centerDialog
-    $('.formUpload')[0].reset()
+  $('.options').slideUp -> $('#buttonWrapper').slideDown centerDialog
+  $('.formUpload')[0].reset()
 
 showPrint = ->
-  $('#buttonWrapper').slideUp -> $('.options').slideDown centerDialog
+  $('#buttonWrapper').slideUp(-> $('.options').slideDown(centerDialog))
 
+updateProgression = (loaded, total) ->
+  $('#tickPath').hide()
+  $('#cloudPath').attr('fill', 'url(#progression)')
+  $('#progression stop').attr 'offset', loaded / total * 100 + "%"
 
 # DRAG AND DROP
 
@@ -75,7 +70,7 @@ $(document).ready ->
   $('#cloudPath').bind "drop", (e) ->
     $('#cloudPath').trigger('dragleave')
     files = e.originalEvent.target.files || e.originalEvent.dataTransfer.files
-    uploadFile file for file in files when file.type is "application/pdf" or file.type is "text/html"
+    uploadFiles(files.filter (f) -> f.type is "application/pdf")
 
   $('#uploadButton').bind "dragenter dragover", -> $(this).addClass 'drop'
   $('#uploadButton').bind "dragleave", -> $(this).removeClass 'drop'
@@ -83,7 +78,7 @@ $(document).ready ->
   $('#uploadButton').bind "drop", (e) ->
     $('#uploadButton').trigger('dragleave')
     files = e.originalEvent.target.files || e.originalEvent.dataTransfer.files
-    uploadFile file for file in files when file.type is "application/pdf" or file.type is "text/html"
+    uploadFiles(files.filter (f) -> f.type is "application/pdf")
 
 # BINDING ACTIONS AND START
 
@@ -91,8 +86,14 @@ $(document).ready ->
   $('.logout').click -> location.replace 'tequila/logout.php'
   $('#cloudPath').click -> $('.fileInput').click()
   $('#uploadButton').click -> $('.fileInput').click()
-  $('form.formUpload').change -> uploadFile file for file in $(".fileInput")[0].files
+  $('form.formUpload').change -> uploadFiles $(".fileInput")[0].files
   $('.selection._radioGroup').bind 'valueChanged', toggleSelectedOnly
   $('.from').change ->
     $('.to').attr 'min', $('.from').val
     $('.to').check()
+  centerCloud()
+  centerDialog()
+  $(window).resize -> 
+    centerCloud()
+    centerDialog()
+  setTimeout -> $('#cloud, #dialog').css 'transition', 'margin-top 1s'

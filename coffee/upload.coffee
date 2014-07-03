@@ -1,6 +1,6 @@
 files = []
 
-addFile = (file) -> 
+addFile = (file) ->
   files.push file    
   name = if file.file_name.length < 40 then file.file_name else file.file_name[..17] + "..." + file.file_name[-10...]
   $('#fileList').append "<li style='display: none;'>
@@ -13,12 +13,12 @@ addFile = (file) ->
 
 removeFile = ->
   id = $('li').index($(this).parent('li'))
-  f = files.splice id, 1
-  removeFileServer f[0].server_file_name
+  removeFileServer files[id]['server_file_name']
+  files = (file for file, index in files when index isnt id)
   $(this).parent('li').slideUp 'very slow', -> $(this).remove()
   if files.length is 0
-    showUpload()
     $("#tickPath").hide()
+    showUpload()
   else if files.length is 1
     toggleSelection()
 
@@ -30,23 +30,27 @@ clearFileList = ->
   removeFileServer f['server_file_name'] for f in files 
   files = []
 
-uploadFile = (file) ->
+uploadFiles = (files) ->
   $('#printButton').addClass('_disabled')
   fd = new FormData()
-  fd.append 'file', file
+  fd.append 'file[]', f for f in files
   xhr = new XMLHttpRequest()
+  xhr.upload.addEventListener "progress", (e) ->
+    updateProgression(e.loaded, e.total)
   xhr.addEventListener "loadend", (e) -> 
+    $('.formUpload')[0].reset()
     rep = try JSON.parse(e.currentTarget.responseText) catch e then {'error_code' : -1}
-    if rep['error_code'] == 0
-      $("#tickPath").show()
-      addFile {
-        file_name: rep['file_name']
-        server_file_name: rep['server_file_name']
-      }
+    if rep['error_code'] is 0
+      $('#cloudPath').attr('fill', 'white')
+      $('#tickPath').show()
+      for f in rep['files']
+        addFile f if f.file_name isnt null and f.server_file_name isnt ""
       $('#printButton').removeClass('_disabled')
     else
       $("#tickPath").hide()
+      $('#cloudPath').attr('fill', 'white')
       message('An error occured, please retry...')
+      clearFileList()
       showUpload()
 
   xhr.open "POST", "php/upload_file.php"

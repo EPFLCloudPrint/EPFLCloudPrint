@@ -150,9 +150,7 @@ path:not(#cloudPath) {
   pointer-events: none;
 }
 
-#cloud {
-  transition: margin-top 1s;
-}
+#cloud {}
 
 #cloudPicture {
   margin: auto;
@@ -193,7 +191,6 @@ p#message {
 /* DIALOG */
 
 #dialog {
-  transition: margin-top 1s;
   /* no selection */
   -webkit-user-select: none; /* webkit (safari, chrome) browsers */
   -moz-user-select: none; /* mozilla browsers */
