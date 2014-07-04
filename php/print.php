@@ -5,11 +5,23 @@ session_start();
 		* 1 -> printing problem
 		* 2 -> dropbox fetching problem
 		* 3 -> incorrect credentials
+		* 4 -> too many files
+		* 5 -> no files stored in the session
 */
 
 		$answer = array("error_code" => 0);
 		// $answer["comands"] = array();
 		// $answer["files"] = $_SESSION['files'];
+
+		if( ! isset($_SESSION['files']) ) {
+			$answer['error_code'] = 5;
+			goto end;
+		}
+
+		if(sizeof($_SESSION['files']) > 12) {
+			$answer['error_code'] = 4;
+			goto end;
+		}
 
 		foreach ($_SESSION['files'] as $f) {
 
@@ -40,5 +52,4 @@ session_start();
 		}
     
 		echo json_encode($answer);
-		session_destroy();
 ?>

@@ -31,6 +31,9 @@ clearFileList = ->
   files = []
 
 uploadFiles = (fs) ->
+  if fs.length > 12
+    showError('You cannot upload more than 12 documents at the same time')
+    return;
   $('#printButton').addClass('_disabled')
   fd = new FormData()
   fd.append 'file[]', f for f in fs

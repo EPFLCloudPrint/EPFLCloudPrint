@@ -6,7 +6,9 @@ $(document).ready ->
       $('#tickPath').hide()
       Dropbox.choose {
         success: (fs) ->
-          if(fs.length > 0)
+          if(fs.length > 12)
+            showError('You cannot choose more than 12 documents at the same time')
+          else if(fs.length > 0)
             updateProgression 5, 100
             showPrint()
             m = fs.length
