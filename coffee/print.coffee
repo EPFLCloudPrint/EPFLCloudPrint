@@ -1,5 +1,5 @@
 sendPrint = ->
-  if files.length > 12 
+  if files.length > 12
     showError('You cannot print more than 12 documents at the same time')
     return
   form = $('#printForm').validate()
@@ -32,7 +32,7 @@ sendPrint = ->
 $(document).ready ->
   $('#printButton').click sendPrint
 
-showError = (m) -> 
+showError = (m) ->
   $('#tickPath').hide()
   message(m)
   clearFileList();

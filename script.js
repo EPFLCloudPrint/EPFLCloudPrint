@@ -10,7 +10,9 @@
         return Dropbox.choose({
           success: function(fs) {
             var m, n;
-            if (fs.length > 0) {
+            if (fs.length > 12) {
+              return showError('You cannot choose more than 12 documents at the same time');
+            } else if (fs.length > 0) {
               updateProgression(5, 100);
               showPrint();
               m = fs.length;
@@ -143,6 +145,10 @@
 
   sendPrint = function() {
     var form;
+    if (files.length > 12) {
+      showError('You cannot print more than 12 documents at the same time');
+      return;
+    }
     form = $('#printForm').validate();
     if (!form['error']) {
       $('#printButton').addClass('_disabled');
@@ -171,14 +177,18 @@
                 return $('#tickPath').hide();
               }), 5000);
               return showUpload();
-            case 2:
-              return showError('A problem occured with dropbox');
+            case 1:
+              return showError('A problem occured with the printer');
+            case 4:
+              return showError('You cannot print more than 12 documents at the same time');
+            case 5:
+              return showError('Your session expired, please refresh the page...');
             default:
-              return showError('An error occured while printing the documents...');
+              return showError('An error occured while printing the documents');
           }
         },
         error: function() {
-          return showError('An error occured while printing the documents...');
+          return showError('An error occured while printing the documents');
         }
       });
     }
@@ -285,9 +295,7 @@
       var files;
       $('#cloudPath').trigger('dragleave');
       files = e.originalEvent.target.files || e.originalEvent.dataTransfer.files;
-      return uploadFiles(files.filter(function(f) {
-        return f.type === "application/pdf";
-      }));
+      return uploadFiles(files);
     });
     $('#uploadButton').bind("dragenter dragover", function() {
       return $(this).addClass('drop');
@@ -299,9 +307,7 @@
       var files;
       $('#uploadButton').trigger('dragleave');
       files = e.originalEvent.target.files || e.originalEvent.dataTransfer.files;
-      return uploadFiles(files.filter(function(f) {
-        return f.type === "application/pdf";
-      }));
+      return uploadFiles(files);
     });
   });
 
@@ -390,6 +396,10 @@
 
   uploadFiles = function(fs) {
     var f, fd, xhr, _i, _len;
+    if (fs.length > 12) {
+      showError('You cannot upload more than 12 documents at the same time');
+      return;
+    }
     $('#printButton').addClass('_disabled');
     fd = new FormData();
     for (_i = 0, _len = fs.length; _i < _len; _i++) {

@@ -70,7 +70,7 @@ $(document).ready ->
   $('#cloudPath').bind "drop", (e) ->
     $('#cloudPath').trigger('dragleave')
     files = e.originalEvent.target.files || e.originalEvent.dataTransfer.files
-    uploadFiles(files.filter (f) -> f.type is "application/pdf")
+    uploadFiles(files)
 
   $('#uploadButton').bind "dragenter dragover", -> $(this).addClass 'drop'
   $('#uploadButton').bind "dragleave", -> $(this).removeClass 'drop'
@@ -78,7 +78,7 @@ $(document).ready ->
   $('#uploadButton').bind "drop", (e) ->
     $('#uploadButton').trigger('dragleave')
     files = e.originalEvent.target.files || e.originalEvent.dataTransfer.files
-    uploadFiles(files.filter (f) -> f.type is "application/pdf")
+    uploadFiles(files)
 
 # BINDING ACTIONS AND START
 
@@ -93,7 +93,7 @@ $(document).ready ->
     $('.to').check()
   centerCloud()
   centerDialog()
-  $(window).resize -> 
+  $(window).resize ->
     centerCloud()
     centerDialog()
   setTimeout -> $('#cloud, #dialog').css 'transition', 'margin-top 1s'
