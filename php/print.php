@@ -1,5 +1,6 @@
 <?php
 session_start();
+$time_start = microtime(true);
 /*
 ERROR_CODE :
 * 1 -> printing problem
@@ -42,7 +43,7 @@ else{
 		array_push($options, "-T " . escapeshellarg($f['file_name']));
 
 		// PRINT
-		$printer='mainPrinter';
+		$printer = 'mainPrinter';
 		$cmd_print = 'lpr -P ' . escapeshellarg($printer) . ' -U ' . escapeshellarg($_SESSION['username']) . ' ' . join(' ', $options) . ' ' . escapeshellarg('/tmp/CloudPrintUpload/'.$f['server_file_name']) . " 2>&1";
 		if (shell_exec($cmd_print)){
 			$answer['error_code'] = 1;
@@ -50,6 +51,22 @@ else{
 		// array_push($answer['comands'], $cmd_print);
 	}
 }
+$time_stop = microtime(true);
+$bytes = 0;
+foreach ($_SESSION['files'] as $f){
+	 $total_filesize += filesize('/tmp/CloudPrintUpload/'. $f['server_file_name']);
+}
+
+$log_data = array(
+	time      => time(),    // s since Unix epoch
+	dt 	     => round(($time_stop - $time_start)*1000),    // in ms
+	uid	     => hash('md5', $_SESSION['username']),    // hashed for privacy
+	filecount => count($_SESSION['files']),
+	bytes     => $total_filesize,
+	error     => $answer['error_code']
+);
+
+file_put_contents("../stats.csv",  implode(',', $log_data) . "\n", FILE_APPEND);
 
 echo json_encode($answer);
 ?>

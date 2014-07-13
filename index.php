@@ -1,14 +1,11 @@
 <?php
-
 if ($_SERVER['REMOTE_ADDR'] != '127.0.0.1' && $_SERVER['REMOTE_ADDR'] != '::1'){
   if(!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] == ""){
     $redirect = "https://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
     header("Location: $redirect");
   }
 }
-
 include("tequila/login.php");
-
 ?>
 
 <!DOCTYPE html>
