@@ -66,7 +66,7 @@ $log_data = array(
 	error     => $answer['error_code']
 );
 
-file_put_contents("../stats.csv",  implode(',', $log_data) . "\n", FILE_APPEND);
+file_put_contents("../Administration/stats.csv",  implode(',', $log_data) . "\n", FILE_APPEND);
 
 echo json_encode($answer);
 ?>

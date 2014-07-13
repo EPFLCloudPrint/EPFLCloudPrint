@@ -17,7 +17,7 @@ Its uses aren't limited to our university but can be ported to any company or un
 
 ## Statistics
 
-To study performance, some data is logged to `Administration/stats.csv`. Depending on your apache configuration, you might need to manually create the file and give the correct rights with `chown _www Admininstration/stats.csv`. You can see which data gets logged in `php/print.php`.
+To study performance, some data is logged to `Administration/stats.csv`. Depending on your apache configuration, you might need to manually have to give the correct rights with `chown _www Admininstration/stats.csv`. You can see which data gets logged in `php/print.php`.
 
 ======
 This project was originally developed during Facebook Hackathon 2014 organized by Hackers@EPFL (http://hackersatepfl.com).
