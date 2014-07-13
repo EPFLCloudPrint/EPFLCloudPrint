@@ -15,5 +15,9 @@ Its uses aren't limited to our university but can be ported to any company or un
 - start the server with `# apachectl start`,
 - everything should be ok, you can test from `localhost` in your browser.
 
+## Statistics
+
+To study performance, some data is logged to `Administration/stats.csv`. Depending on your apache configuration, you might need to manually create the file and give the correct rights with `chown _www Admininstration/stats.csv`. You can see which data gets logged in `php/print.php`.
+
 ======
 This project was originally developed during Facebook Hackathon 2014 organized by Hackers@EPFL (http://hackersatepfl.com).
