@@ -30,18 +30,18 @@ include("tequila/login.php");
   <meta name="msapplication-TileImage" content="images/icons/mstile-144x144.png">
   <meta name="msapplication-config" content="images/icons/browserconfig.xml">
   <title>EPFLCloudPrint</title>
+
+
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="skeleton/base.css" />
+  <link rel="stylesheet" type="text/css" href="skeleton/skeleton.css" />
+  <link rel="stylesheet" type="text/css" href="skeleton/layout.css" />
+  <link rel="stylesheet" type="text/css" href="styles.css" />
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js" ></script>
+  <script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="gv048u7pj3hnrec"></script>
+  <script type="text/javascript" src="script.js"></script>
 </head>
-
-<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" type="text/css" href="skeleton/base.css" />
-<link rel="stylesheet" type="text/css" href="skeleton/skeleton.css" />
-<link rel="stylesheet" type="text/css" href="skeleton/layout.css" />
-<link rel="stylesheet" type="text/css" href="styles.css" />
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js" ></script>
-<script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="gv048u7pj3hnrec"></script>
-<script type="text/javascript" src="script.js"></script>
-
 <body>
   <noscript><?php include("noscript.html") ?></noscript>
 

@@ -13,11 +13,8 @@ Its uses aren't limited to our university but can be ported to any company or un
 - `wget` the correct printer driver and install it,
 - run `$ Administration/install.sh` to configure the server printer (Mac OSX users might need to add `sudo`),
 - start the server with `# apachectl start`,
+- to study performance, some data is logged to `Administration/stats.csv`.  Depending on your apache configuration, you might need to manually have to give the correct rights with `chown _www Admininstration/stats.csv`. You can see which data gets logged in `php/print.php`.
 - everything should be ok, you can test from `localhost` in your browser.
-
-## Statistics
-
-To study performance, some data is logged to `Administration/stats.csv`. Depending on your apache configuration, you might need to manually have to give the correct rights with `chown _www Admininstration/stats.csv`. You can see which data gets logged in `php/print.php`.
 
 ======
 This project was originally developed during Facebook Hackathon 2014 organized by Hackers@EPFL (http://hackersatepfl.com).
