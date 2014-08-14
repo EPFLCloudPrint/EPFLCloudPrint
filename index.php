@@ -5,6 +5,12 @@ if ($_SERVER['REMOTE_ADDR'] != '127.0.0.1' && $_SERVER['REMOTE_ADDR'] != '::1'){
     header("Location: $redirect");
   }
 }
+
+#Creat folder in /tmp for upload if it doesn't exist
+if(!file_exists("/tmp/CloudPrintUpload/")){
+  mkdir("/tmp/CloudPrintUpload/");
+}
+
 include("tequila/login.php");
 ?>
 
