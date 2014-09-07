@@ -68,5 +68,6 @@ $log_data = array(
 
 file_put_contents("../Administration/stats.csv",  implode(',', $log_data) . "\n", FILE_APPEND);
 
+unset($_SESSION['files']);
 echo json_encode($answer);
 ?>

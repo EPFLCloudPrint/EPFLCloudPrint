@@ -1,4 +1,5 @@
 <?php
+  session_destroy();
   function curServerURL() {
     $pageURL = 'http';
     if ($_SERVER["HTTPS"] == "on") {
