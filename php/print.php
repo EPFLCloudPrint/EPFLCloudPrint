@@ -31,7 +31,7 @@ else{
 		$options = array();
 
 		if($_POST["selection"] === "selectedonly"){
-			array_push($options, escapeshellarg("-o page-ranges=" . $_POST["from"] . "-" . $_POST["to"]));
+			array_push($options, escapeshellarg("-o page-ranges=" . intval($_POST["from"]) . "-" . intval($_POST["to"])));
 		}
 
 		array_push($options, "-# " . escapeshellarg($_POST["numbercopies"]));
