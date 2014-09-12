@@ -4,6 +4,11 @@ $output_dir = "/tmp/CloudPrintUpload/";
 $answer = array();
 $answer['error_code'] = 0;
 
+if(!isset($_SESSION['username'])){
+  $answer['error_code'] = 3;
+  goto end;
+}
+
 if(!isset($_SESSION['files'])){
   $_SESSION['files'] = array();
 }

@@ -5,6 +5,11 @@ $answer = array();
 $answer['error_code'] = 0;
 $answer['files'] = array();
 
+if(! isset($_SESSION['username'])){
+	$answer['error_code'] = 1;
+	goto end;
+}
+
 if(! isset($_FILES["file"])) {
   $answer['error_code'] = 1;
   goto end;

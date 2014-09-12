@@ -2,10 +2,12 @@
 if [ $(uname) = "Linux" ]; then
 	echo "Linux configuaration detected";
 	extension=".gz";
+	user="www-data";
 else
 	if [ $(uname) = "Darwin" ]; then
 		echo "Mac OS configuaration detected";
 		extension="";
+		user="_www"
 	else
 		echo "Unknow Operation System" >&2;
 		exit 1;
@@ -43,3 +45,6 @@ else
 	echo "Failed to move printer, please use `sudo`" >&2;
 	exit 1;
 fi
+
+echo "Changing Owner of EPFLCloudPrint to $user";
+chown -R $user ..;

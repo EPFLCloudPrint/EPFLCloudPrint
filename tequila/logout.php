@@ -1,5 +1,4 @@
 <?php
-  session_destroy();
   function curServerURL() {
     $pageURL = 'http';
     if ($_SERVER["HTTPS"] == "on") {
@@ -14,8 +13,9 @@
     return $pageURL;
   }
 
+  unset($_SESSION['username']);
   require_once("tequila.php");
   $oClient = new TequilaClient();
   $oClient->Authenticate();
-  $oClient->Logout(curServerURL());
+  $oClient->Logout(curServerURL());	//delete the tequila token in cookies
 ?>

@@ -20,6 +20,8 @@ sendPrint = ->
             showUpload()
           when 1
             showError('A problem occured with the printer')
+          when 3
+            showError('Please verify your credentials')
           when 4
             showError('You cannot print more than 12 documents at the same time')
           when 5

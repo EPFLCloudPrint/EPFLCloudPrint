@@ -13,6 +13,10 @@ ERROR_CODE :
 $answer = array("error_code" => 0);
 // $answer["comands"] = array();
 // $answer["files"] = $_SESSION['files'];
+if(!isset($_SESSION['username'])){
+	$answer['error_code'] = 3;
+	goto end;
+}
 
 if( ! isset($_SESSION['files']) ) {
 	$answer['error_code'] = 5;
@@ -44,7 +48,7 @@ else{
 
 		// PRINT
 		$printer = 'mainPrinter';
-		$cmd_print = 'lpr -P ' . escapeshellarg($printer) . ' -U ' . escapeshellarg($_SESSION['username']) . ' ' . join(' ', $options) . ' ' . escapeshellarg('/tmp/CloudPrintUpload/'.$f['server_file_name']) . " 2>&1";
+		$cmd_print = 'lpr -r -P ' . escapeshellarg($printer) . ' -U ' . escapeshellarg($_SESSION['username']) . ' ' . join(' ', $options) . ' ' . escapeshellarg('/tmp/CloudPrintUpload/'.$f['server_file_name']) . " 2>&1";
 		if (shell_exec($cmd_print)){
 			$answer['error_code'] = 1;
 		}
@@ -69,5 +73,6 @@ $log_data = array(
 file_put_contents("../Administration/stats.csv",  implode(',', $log_data) . "\n", FILE_APPEND);
 
 unset($_SESSION['files']);
+end:
 echo json_encode($answer);
 ?>
