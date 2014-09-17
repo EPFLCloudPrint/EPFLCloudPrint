@@ -1,6 +1,6 @@
 <?php
-session_start();
-if(!isset($_SESSION['username'])){
+//session_start();
+//if(!isset($_SESSION['username'])){
 	require_once("tequila.php");
 
 	$oClient = new TequilaClient();
@@ -8,7 +8,9 @@ if(!isset($_SESSION['username'])){
 	$oClient->SetApplicationName('CloudPrint');
 	$oClient->SetWantedAttributes(array('user','name','firstname'));
 
-	$oClient->Authenticate ();
+	$oClient->Authenticate (); // starts the session
+
+if(!isset($_SESSION['username'])){
 
 	$nom = $oClient->getValue('name');
 	$prenom = $oClient->getValue('firstname');
@@ -23,9 +25,10 @@ if(!isset($_SESSION['username'])){
 
 	$user = $oClient->getValue('user');
 	
-	unset($_SESSION['files']);		#for now everytime we reload the page each files are removed
+	//unset($_SESSION['files']);		#for now everytime we reload the page each files are removed
 	
 	$_SESSION['username'] = $user;
 	$_SESSION['files'] = array();
+	$_SESSION['name'] = $name;
 }
 ?>

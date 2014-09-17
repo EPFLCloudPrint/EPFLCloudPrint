@@ -10,6 +10,8 @@ ERROR_CODE :
 * 5 -> no files stored in the session
 */
 
+$total_filesize = 0;
+
 $answer = array("error_code" => 0);
 // $answer["comands"] = array();
 // $answer["files"] = $_SESSION['files'];
@@ -26,6 +28,8 @@ elseif(sizeof($_SESSION['files']) > 12) {
 }
 else{
 	foreach ($_SESSION['files'] as $f) {
+
+		$total_filesize += filesize('../CloudPrintUpload/'. $f['server_file_name']);
 
 		// OPTIONS
 		$options = array();
@@ -48,7 +52,7 @@ else{
 
 		// PRINT
 		$printer = 'mainPrinter';
-		$cmd_print = 'lpr -r -P ' . escapeshellarg($printer) . ' -U ' . escapeshellarg($_SESSION['username']) . ' ' . join(' ', $options) . ' ' . escapeshellarg('/tmp/CloudPrintUpload/'.$f['server_file_name']) . " 2>&1";
+		$cmd_print = 'lpr -r -P ' . escapeshellarg($printer) . ' -U ' . escapeshellarg($_SESSION['username']) . ' ' . join(' ', $options) . ' ' . escapeshellarg('../CloudPrintUpload/'.$f['server_file_name']) . " 2>&1";
 		if (shell_exec($cmd_print)){
 			$answer['error_code'] = 1;
 		}
@@ -56,18 +60,14 @@ else{
 	}
 }
 $time_stop = microtime(true);
-$bytes = 0;
-foreach ($_SESSION['files'] as $f){
-	 $total_filesize += filesize('/tmp/CloudPrintUpload/'. $f['server_file_name']);
-}
 
 $log_data = array(
-	time      => time(),    // s since Unix epoch
-	dt 	     => round(($time_stop - $time_start)*1000),    // in ms
-	uid	     => hash('md5', $_SESSION['username']),    // hashed for privacy
-	filecount => count($_SESSION['files']),
-	bytes     => $total_filesize,
-	error     => $answer['error_code']
+	"time"      => time(),    // s since Unix epoch
+	"dt" 	    => round(($time_stop - $time_start)*1000),    // in ms
+	"uid"	    => hash('md5', $_SESSION['username']),    // hashed for privacy
+	"filecount" => count($_SESSION['files']),
+	"bytes"     => $total_filesize,
+	"error"     => $answer['error_code']
 );
 
 file_put_contents("../Administration/stats.csv",  implode(',', $log_data) . "\n", FILE_APPEND);
