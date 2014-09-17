@@ -15,13 +15,12 @@ else
 fi
 
 echo "create directory CloudPrintUpload for uploading files in /tmp";
-dir="/tmp/CloudPrintUpload";
+dir="../CloudPrintUpload";
 if [ -e $dir ]
 	then
 	rm -rf $dir;
 fi
-#Create a folder that everybody can write in
-mkdir -m o+wr $dir;
+mkdir $dir;
 
 echo "Locating PPD";
 ppd="/usr/share/cups/model/xr_WorkCentre7655R.ppd$extension";
